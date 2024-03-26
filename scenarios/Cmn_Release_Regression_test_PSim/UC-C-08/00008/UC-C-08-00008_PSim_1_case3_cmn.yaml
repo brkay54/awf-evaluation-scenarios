@@ -1,0 +1,277 @@
+ScenarioModifiers:
+  ScenarioModifier: []
+OpenSCENARIO:
+  FileHeader:
+    revMajor: 1
+    revMinor: 1
+    date: '2023-10-19T10:35:33.192Z'
+    description: 'old name : UC-008-0011_PSim_1_case3_v2'
+    author: Berkay Karaman
+  ParameterDeclarations:
+    ParameterDeclaration:
+      - name: __ego_dimensions_length__
+        parameterType: double
+        value: '0'
+      - name: __ego_dimensions_width__
+        parameterType: double
+        value: '0'
+      - name: __ego_dimensions_height__
+        parameterType: double
+        value: '0'
+      - name: __ego_center_x__
+        parameterType: double
+        value: '0'
+      - name: __ego_center_y__
+        parameterType: double
+        value: '0'
+      - name: __ego_center_z__
+        parameterType: double
+        value: '0'
+  CatalogLocations:
+    CatalogLocation: []
+  RoadNetwork:
+    LogicFile:
+      filepath: cicd_virtualmap.osm
+    SceneGraphFile:
+      filepath: cicd_virtualmap.pcd
+    TrafficSignals:
+      TrafficSignalController:
+        - name: Intersection_ego
+          Phase:
+            - name: GoSignal
+              duration: INF
+              TrafficSignalState:
+                - trafficSignalId: '1463'
+                  state: green solidOn circle
+            - name: StopSignal
+              duration: INF
+              TrafficSignalState:
+                - trafficSignalId: '1463'
+                  state: red solidOn circle
+            - name: RightArrow
+              duration: INF
+              TrafficSignalState:
+                - trafficSignalId: '1463'
+                  state: red solidOn circle, green solidOn right
+            - name: LeftArrow
+              duration: INF
+              TrafficSignalState:
+                - trafficSignalId: '1463'
+                  state: red solidOn circle, green solidOn left
+            - name: StraightArrow
+              duration: INF
+              TrafficSignalState:
+                - trafficSignalId: '1463'
+                  state: red solidOn circle, green solidOn up
+            - name: StraightRightArrow
+              duration: INF
+              TrafficSignalState:
+                - trafficSignalId: '1463'
+                  state: red solidOn circle, green solidOn up, green solidOn right
+            - name: StraightLeftArrow
+              duration: INF
+              TrafficSignalState:
+                - trafficSignalId: '1463'
+                  state: red solidOn circle, green solidOn up, green solidOn left
+            - name: StraightRightLeftArrow
+              duration: INF
+              TrafficSignalState:
+                - trafficSignalId: '1463'
+                  state: >-
+                    red solidOn circle, green solidOn up, green solidOn right,
+                    green solidOn left
+  Entities:
+    ScenarioObject:
+      - name: ego
+        Vehicle:
+          name: ''
+          vehicleCategory: car
+          BoundingBox:
+            Center:
+              x: 1.345
+              y: 0
+              z: 1.25
+            Dimensions:
+              length: 4.89
+              width: 2.131
+              height: 2.5
+          Performance:
+            maxSpeed: 50
+            maxAcceleration: INF
+            maxDeceleration: INF
+          Axles:
+            FrontAxle:
+              maxSteering: 0.5236
+              wheelDiameter: 0.766
+              trackWidth: 1.64
+              positionX: 1.445
+              positionZ: 0.383
+            RearAxle:
+              maxSteering: 0.5236
+              wheelDiameter: 0.766
+              trackWidth: 1.64
+              positionX: 0
+              positionZ: 0.383
+          Properties:
+            Property: []
+        ObjectController:
+          Controller:
+            name: ''
+            Properties:
+              Property:
+                - name: isEgo
+                  value: 'true'
+  Storyboard:
+    Init:
+      Actions:
+        GlobalAction:
+          - InfrastructureAction:
+              TrafficSignalAction:
+                TrafficSignalControllerAction:
+                  trafficSignalControllerRef: Intersection_ego
+                  phase: StraightLeftArrow
+        Private:
+          - entityRef: ego
+            PrivateAction:
+              - TeleportAction:
+                  Position:
+                    LanePosition:
+                      roadId: ''
+                      laneId: '206'
+                      s: 15.025
+                      offset: -0.1239
+                      Orientation:
+                        type: relative
+                        h: 0.01
+                        p: -0.0
+                        r: 0
+              - RoutingAction:
+                  AcquirePositionAction:
+                    Position:
+                      LanePosition:
+                        roadId: ''
+                        laneId: '193'
+                        s: 5.0278
+                        offset: 0.0782
+                        Orientation:
+                          type: relative
+                          h: -0.0016
+                          p: 0
+                          r: 0
+    Story:
+      - name: ''
+        Act:
+          - name: _EndCondition
+            ManeuverGroup:
+              - maximumExecutionCount: 1
+                name: ''
+                Actors:
+                  selectTriggeringEntities: false
+                  EntityRef:
+                    - entityRef: ego
+                Maneuver:
+                  - name: ''
+                    Event:
+                      - name: ''
+                        priority: parallel
+                        StartTrigger:
+                          ConditionGroup:
+                            - Condition:
+                                - name: ''
+                                  delay: 0
+                                  conditionEdge: none
+                                  ByEntityCondition:
+                                    TriggeringEntities:
+                                      triggeringEntitiesRule: any
+                                      EntityRef:
+                                        - entityRef: ego
+                                    EntityCondition:
+                                      SpeedCondition:
+                                        rule: lessThan
+                                        value: 0.0001
+                                - name: ''
+                                  delay: 0
+                                  conditionEdge: none
+                                  ByEntityCondition:
+                                    TriggeringEntities:
+                                      triggeringEntitiesRule: any
+                                      EntityRef:
+                                        - entityRef: ego
+                                    EntityCondition:
+                                      ReachPositionCondition:
+                                        Position:
+                                          LanePosition:
+                                            roadId: ''
+                                            laneId: '206'
+                                            s: 26.9094
+                                            offset: -0.0523
+                                            Orientation:
+                                              type: relative
+                                              h: 0.0098
+                                              p: -0.0
+                                              r: 0
+                                        tolerance: 2
+                                - name: Time limit
+                                  delay: 0
+                                  conditionEdge: sticky
+                                  ByValueCondition:
+                                    SimulationTimeCondition:
+                                      value: 30
+                                      rule: greaterThan
+                        Action:
+                          - name: ''
+                            UserDefinedAction:
+                              CustomCommandAction:
+                                type: exitSuccess
+                      - name: ''
+                        priority: parallel
+                        StartTrigger:
+                          ConditionGroup:
+                            - Condition:
+                                - name: ''
+                                  delay: 0
+                                  conditionEdge: sticky
+                                  ByEntityCondition:
+                                    TriggeringEntities:
+                                      triggeringEntitiesRule: any
+                                      EntityRef:
+                                        - entityRef: ego
+                                    EntityCondition:
+                                      ReachPositionCondition:
+                                        Position:
+                                          LanePosition:
+                                            roadId: ''
+                                            laneId: '193'
+                                            s: 5.0278
+                                            offset: 0.0782
+                                            Orientation:
+                                              type: relative
+                                              h: -0.0016
+                                              p: 0
+                                              r: 0
+                                        tolerance: 1
+                            - Condition:
+                                - name: Time limit
+                                  delay: 0
+                                  conditionEdge: sticky
+                                  ByValueCondition:
+                                    SimulationTimeCondition:
+                                      value: 60
+                                      rule: greaterThan
+                        Action:
+                          - name: ''
+                            UserDefinedAction:
+                              CustomCommandAction:
+                                type: exitFailure
+            StartTrigger:
+              ConditionGroup:
+                - Condition:
+                    - name: ''
+                      delay: 0
+                      conditionEdge: none
+                      ByValueCondition:
+                        SimulationTimeCondition:
+                          value: 0
+                          rule: greaterThan
+    StopTrigger:
+      ConditionGroup: []

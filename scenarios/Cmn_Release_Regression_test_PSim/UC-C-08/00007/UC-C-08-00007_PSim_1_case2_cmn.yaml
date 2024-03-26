@@ -1,0 +1,518 @@
+ScenarioModifiers:
+  ScenarioModifier: []
+OpenSCENARIO:
+  FileHeader:
+    revMajor: 1
+    revMinor: 1
+    date: '2023-10-19T10:22:18.616Z'
+    description: 'old name : UC-008-0010_PSim_1_case2_v2'
+    author: Berkay Karaman
+  ParameterDeclarations:
+    ParameterDeclaration:
+      - name: __ego_dimensions_length__
+        parameterType: double
+        value: '0'
+      - name: __ego_dimensions_width__
+        parameterType: double
+        value: '0'
+      - name: __ego_dimensions_height__
+        parameterType: double
+        value: '0'
+      - name: __ego_center_x__
+        parameterType: double
+        value: '0'
+      - name: __ego_center_y__
+        parameterType: double
+        value: '0'
+      - name: __ego_center_z__
+        parameterType: double
+        value: '0'
+  CatalogLocations:
+    CatalogLocation: []
+  RoadNetwork:
+    LogicFile:
+      filepath: cicd_virtualmap.osm
+    SceneGraphFile:
+      filepath: cicd_virtualmap.pcd
+    TrafficSignals:
+      TrafficSignalController:
+        - name: Intersection_ego
+          Phase:
+            - name: GoSignal
+              duration: INF
+              TrafficSignalState:
+                - trafficSignalId: '1463'
+                  state: green solidOn circle
+            - name: StopSignal
+              duration: INF
+              TrafficSignalState:
+                - trafficSignalId: '1463'
+                  state: red solidOn circle
+            - name: RightArrow
+              duration: INF
+              TrafficSignalState:
+                - trafficSignalId: '1463'
+                  state: red solidOn circle, green solidOn right
+            - name: LeftArrow
+              duration: INF
+              TrafficSignalState:
+                - trafficSignalId: '1463'
+                  state: red solidOn circle, green solidOn left
+            - name: StraightArrow
+              duration: INF
+              TrafficSignalState:
+                - trafficSignalId: '1463'
+                  state: red solidOn circle, green solidOn up
+            - name: StraightRightArrow
+              duration: INF
+              TrafficSignalState:
+                - trafficSignalId: '1463'
+                  state: red solidOn circle, green solidOn up, green solidOn right
+            - name: StraightLeftArrow
+              duration: INF
+              TrafficSignalState:
+                - trafficSignalId: '1463'
+                  state: red solidOn circle, green solidOn up, green solidOn left
+            - name: StraightRightLeftArrow
+              duration: INF
+              TrafficSignalState:
+                - trafficSignalId: '1463'
+                  state: >-
+                    red solidOn circle, green solidOn up, green solidOn right,
+                    green solidOn left
+  Entities:
+    ScenarioObject:
+      - name: ego
+        Vehicle:
+          name: ''
+          vehicleCategory: car
+          BoundingBox:
+            Center:
+              x: 1.345
+              y: 0
+              z: 1.25
+            Dimensions:
+              length: 4.89
+              width: 2.131
+              height: 2.5
+          Performance:
+            maxSpeed: 50
+            maxAcceleration: INF
+            maxDeceleration: INF
+          Axles:
+            FrontAxle:
+              maxSteering: 0.5236
+              wheelDiameter: 0.766
+              trackWidth: 1.64
+              positionX: 1.445
+              positionZ: 0.383
+            RearAxle:
+              maxSteering: 0.5236
+              wheelDiameter: 0.766
+              trackWidth: 1.64
+              positionX: 0
+              positionZ: 0.383
+          Properties:
+            Property: []
+        ObjectController:
+          Controller:
+            name: ''
+            Properties:
+              Property:
+                - name: isEgo
+                  value: 'true'
+      - name: PedCrossYoung
+        Pedestrian:
+          name: Pedestrian
+          mass: 60
+          model: ''
+          pedestrianCategory: pedestrian
+          BoundingBox:
+            Center:
+              x: 0
+              y: 0
+              z: 1
+            Dimensions:
+              length: 0.8
+              width: 0.8
+              height: 2
+          Properties:
+            Property: []
+      - name: PedCrossOld
+        Pedestrian:
+          name: Pedestrian
+          mass: 60
+          model: ''
+          pedestrianCategory: pedestrian
+          BoundingBox:
+            Center:
+              x: 0
+              y: 0
+              z: 1
+            Dimensions:
+              length: 0.8
+              width: 0.8
+              height: 2
+          Properties:
+            Property: []
+  Storyboard:
+    Init:
+      Actions:
+        GlobalAction:
+          - InfrastructureAction:
+              TrafficSignalAction:
+                TrafficSignalControllerAction:
+                  trafficSignalControllerRef: Intersection_ego
+                  phase: GoSignal
+        Private:
+          - entityRef: ego
+            PrivateAction:
+              - TeleportAction:
+                  Position:
+                    LanePosition:
+                      roadId: ''
+                      laneId: '206'
+                      s: 10
+                      offset: 0
+                      Orientation:
+                        type: relative
+                        h: 0.01
+                        p: -0.0
+                        r: 0
+              - RoutingAction:
+                  AcquirePositionAction:
+                    Position:
+                      LanePosition:
+                        roadId: ''
+                        laneId: '193'
+                        s: 5.0278
+                        offset: 0.0782
+                        Orientation:
+                          type: relative
+                          h: -0.0016
+                          p: 0
+                          r: 0
+          - entityRef: PedCrossYoung
+            PrivateAction:
+              - TeleportAction:
+                  Position:
+                    LanePosition:
+                      roadId: ''
+                      laneId: '618'
+                      s: 0.2082
+                      offset: 2.4385
+                      Orientation:
+                        type: relative
+                        h: -0.021
+                        p: 0
+                        r: 0
+              - LongitudinalAction:
+                  SpeedAction:
+                    SpeedActionDynamics:
+                      dynamicsDimension: time
+                      value: 0
+                      dynamicsShape: step
+                    SpeedActionTarget:
+                      AbsoluteTargetSpeed:
+                        value: 0
+          - entityRef: PedCrossOld
+            PrivateAction:
+              - TeleportAction:
+                  Position:
+                    LanePosition:
+                      roadId: ''
+                      laneId: '618'
+                      s: 8.2752
+                      offset: -2.1375
+                      Orientation:
+                        type: relative
+                        h: 0
+                        p: -0.0
+                        r: 0
+              - LongitudinalAction:
+                  SpeedAction:
+                    SpeedActionDynamics:
+                      dynamicsDimension: time
+                      value: 0
+                      dynamicsShape: step
+                    SpeedActionTarget:
+                      AbsoluteTargetSpeed:
+                        value: 0.4167
+    Story:
+      - name: ''
+        Act:
+          - name: act_sig_change
+            ManeuverGroup:
+              - maximumExecutionCount: 1
+                name: act_sig_change
+                Actors:
+                  selectTriggeringEntities: false
+                  EntityRef:
+                    - entityRef: ego
+                Maneuver:
+                  - name: ''
+                    Event:
+                      - name: StraightRightArrow
+                        priority: parallel
+                        Action:
+                          - name: ''
+                            GlobalAction:
+                              InfrastructureAction:
+                                TrafficSignalAction:
+                                  TrafficSignalControllerAction:
+                                    trafficSignalControllerRef: Intersection_ego
+                                    phase: StraightRightArrow
+                        StartTrigger:
+                          ConditionGroup:
+                            - Condition:
+                                - name: ''
+                                  delay: 0
+                                  conditionEdge: none
+                                  ByValueCondition:
+                                    SimulationTimeCondition:
+                                      value: 2
+                                      rule: greaterThan
+            StartTrigger:
+              ConditionGroup:
+                - Condition:
+                    - name: ''
+                      delay: 0
+                      conditionEdge: none
+                      ByValueCondition:
+                        SimulationTimeCondition:
+                          value: 0
+                          rule: greaterThan
+          - name: PedCrossYoung-Go
+            ManeuverGroup:
+              - maximumExecutionCount: 1
+                name: PedCrossYoung-Go
+                Actors:
+                  selectTriggeringEntities: false
+                  EntityRef:
+                    - entityRef: PedCrossYoung
+                Maneuver:
+                  - name: ''
+                    Event:
+                      - name: Set-PedCrossYoung-Speed
+                        priority: parallel
+                        Action:
+                          - name: ''
+                            PrivateAction:
+                              LongitudinalAction:
+                                SpeedAction:
+                                  SpeedActionDynamics:
+                                    dynamicsDimension: time
+                                    value: 0
+                                    dynamicsShape: step
+                                  SpeedActionTarget:
+                                    AbsoluteTargetSpeed:
+                                      value: 2.2222
+                          - name: ''
+                            UserDefinedAction:
+                              CustomCommandAction:
+                                type: WalkStraightAction
+                        StartTrigger:
+                          ConditionGroup:
+                            - Condition:
+                                - name: AlwaysTrue
+                                  delay: 0
+                                  conditionEdge: none
+                                  ByValueCondition:
+                                    SimulationTimeCondition:
+                                      value: 0
+                                      rule: greaterThan
+            StartTrigger:
+              ConditionGroup:
+                - Condition:
+                    - name: ''
+                      delay: 0
+                      conditionEdge: sticky
+                      ByEntityCondition:
+                        TriggeringEntities:
+                          triggeringEntitiesRule: any
+                          EntityRef:
+                            - entityRef: ego
+                        EntityCondition:
+                          ReachPositionCondition:
+                            Position:
+                              LanePosition:
+                                roadId: ''
+                                laneId: '502'
+                                s: 34.5403
+                                offset: 0.0827
+                                Orientation:
+                                  type: relative
+                                  h: 0.3169
+                                  p: -0.0
+                                  r: 0
+                            tolerance: 1
+          - name: ego-Stop-SpecificPoint
+            ManeuverGroup:
+              - maximumExecutionCount: 1
+                name: ego-Stop-SpecificPoint
+                Actors:
+                  selectTriggeringEntities: false
+                  EntityRef: []
+                Maneuver:
+                  - name: ''
+                    Event:
+                      - name: ego-Stop
+                        priority: parallel
+                        Action:
+                          - name: ''
+                            UserDefinedAction:
+                              CustomCommandAction:
+                                type: ':'
+                        StartTrigger:
+                          ConditionGroup:
+                            - Condition:
+                                - name: AlwaysTrue
+                                  delay: 0
+                                  conditionEdge: none
+                                  ByValueCondition:
+                                    SimulationTimeCondition:
+                                      value: 0
+                                      rule: greaterThan
+            StartTrigger:
+              ConditionGroup:
+                - Condition:
+                    - name: ''
+                      delay: 0
+                      conditionEdge: none
+                      ByEntityCondition:
+                        TriggeringEntities:
+                          triggeringEntitiesRule: any
+                          EntityRef:
+                            - entityRef: ego
+                        EntityCondition:
+                          SpeedCondition:
+                            rule: lessThan
+                            value: 0.0001
+                    - name: ''
+                      delay: 0
+                      conditionEdge: none
+                      ByEntityCondition:
+                        TriggeringEntities:
+                          triggeringEntitiesRule: any
+                          EntityRef:
+                            - entityRef: ego
+                        EntityCondition:
+                          ReachPositionCondition:
+                            Position:
+                              LanePosition:
+                                roadId: ''
+                                laneId: '502'
+                                s: 36.9228
+                                offset: 0.0989
+                                Orientation:
+                                  type: relative
+                                  h: 0.161
+                                  p: -0.0
+                                  r: 0
+                            tolerance: 2
+          - name: _EndCondition
+            ManeuverGroup:
+              - maximumExecutionCount: 1
+                name: ''
+                Actors:
+                  selectTriggeringEntities: false
+                  EntityRef:
+                    - entityRef: ego
+                Maneuver:
+                  - name: ''
+                    Event:
+                      - name: ''
+                        priority: parallel
+                        StartTrigger:
+                          ConditionGroup:
+                            - Condition:
+                                - name: ''
+                                  delay: 0
+                                  conditionEdge: none
+                                  ByEntityCondition:
+                                    TriggeringEntities:
+                                      triggeringEntitiesRule: any
+                                      EntityRef:
+                                        - entityRef: ego
+                                    EntityCondition:
+                                      ReachPositionCondition:
+                                        Position:
+                                          LanePosition:
+                                            roadId: ''
+                                            laneId: '193'
+                                            s: 5.0278
+                                            offset: 0.0782
+                                            Orientation:
+                                              type: relative
+                                              h: -0.0016
+                                              p: 0
+                                              r: 0
+                                        tolerance: 1
+                                - name: ''
+                                  delay: 0
+                                  conditionEdge: none
+                                  ByValueCondition:
+                                    StoryboardElementStateCondition:
+                                      state: completeState
+                                      storyboardElementType: act
+                                      storyboardElementRef: ego-Stop-SpecificPoint
+                        Action:
+                          - name: ''
+                            UserDefinedAction:
+                              CustomCommandAction:
+                                type: exitSuccess
+                      - name: ''
+                        priority: parallel
+                        StartTrigger:
+                          ConditionGroup:
+                            - Condition:
+                                - name: CBE-PecCrossYoung
+                                  delay: 0
+                                  conditionEdge: sticky
+                                  ByEntityCondition:
+                                    TriggeringEntities:
+                                      triggeringEntitiesRule: any
+                                      EntityRef:
+                                        - entityRef: ego
+                                    EntityCondition:
+                                      CollisionCondition:
+                                        EntityRef:
+                                          entityRef: PedCrossYoung
+                            - Condition:
+                                - name: CBE-PecCrossOld
+                                  delay: 0
+                                  conditionEdge: sticky
+                                  ByEntityCondition:
+                                    TriggeringEntities:
+                                      triggeringEntitiesRule: any
+                                      EntityRef:
+                                        - entityRef: ego
+                                    EntityCondition:
+                                      CollisionCondition:
+                                        EntityRef:
+                                          entityRef: PedCrossOld
+                            - Condition:
+                                - name: Time limit
+                                  delay: 0
+                                  conditionEdge: sticky
+                                  ByValueCondition:
+                                    SimulationTimeCondition:
+                                      value: 60
+                                      rule: greaterThan
+                        Action:
+                          - name: ''
+                            UserDefinedAction:
+                              CustomCommandAction:
+                                type: exitFailure
+            StartTrigger:
+              ConditionGroup:
+                - Condition:
+                    - name: ''
+                      delay: 0
+                      conditionEdge: none
+                      ByValueCondition:
+                        SimulationTimeCondition:
+                          value: 0
+                          rule: greaterThan
+    StopTrigger:
+      ConditionGroup: []
