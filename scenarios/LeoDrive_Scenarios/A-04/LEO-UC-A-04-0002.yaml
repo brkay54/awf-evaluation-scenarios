@@ -1,0 +1,822 @@
+ScenarioModifiers:
+  ScenarioModifier:
+    - name: __tier4_modifier_Ve
+      list:
+        - 2.77778
+        - 5.55556
+        - 8.33333
+OpenSCENARIO:
+  FileHeader:
+    revMajor: 1
+    revMinor: 1
+    date: '2023-11-24T10:02:52.649Z'
+    description: ''
+    author: 'Berkay Karaman (last modified by: Berkay Karaman)'
+  ParameterDeclarations:
+    ParameterDeclaration:
+      - name: __ego_dimensions_length__
+        parameterType: double
+        value: '0'
+      - name: __ego_dimensions_width__
+        parameterType: double
+        value: '0'
+      - name: __ego_dimensions_height__
+        parameterType: double
+        value: '0'
+      - name: __ego_center_x__
+        parameterType: double
+        value: '0'
+      - name: __ego_center_y__
+        parameterType: double
+        value: '0'
+      - name: __ego_center_z__
+        parameterType: double
+        value: '0'
+      - name: Ve
+        parameterType: double
+        value: __tier4_modifier_Ve
+  CatalogLocations:
+    CatalogLocation: []
+  RoadNetwork:
+    LogicFile:
+      filepath: /home/berkay/projects/remap-tier4/leo_maps_updated/LEO-VM-00013/lanelet2_map.osm
+    SceneGraphFile:
+      filepath: /home/berkay/projects/remap-tier4/leo_maps_updated/LEO-VM-00013/pointcloud_map.pcd
+    TrafficSignals:
+      TrafficSignalController: []
+  Entities:
+    ScenarioObject:
+      - name: ego
+        Vehicle:
+          name: ''
+          vehicleCategory: car
+          BoundingBox:
+            Center:
+              x: 1.355
+              y: 0
+              z: 1.25
+            Dimensions:
+              length: 4.77
+              width: 1.83
+              height: 2.5
+          Performance:
+            maxSpeed: 50
+            maxAcceleration: INF
+            maxDeceleration: INF
+          Axles:
+            FrontAxle:
+              maxSteering: 0.5236
+              wheelDiameter: 0.78
+              trackWidth: 1.63
+              positionX: 1.385
+              positionZ: 0.39
+            RearAxle:
+              maxSteering: 0.5236
+              wheelDiameter: 0.78
+              trackWidth: 1.63
+              positionX: 0
+              positionZ: 0.39
+          Properties:
+            Property: []
+        ObjectController:
+          Controller:
+            name: ''
+            Properties:
+              Property:
+                - name: isEgo
+                  value: 'true'
+      - name: Bus0
+        Vehicle:
+          name: ''
+          vehicleCategory: bus
+          BoundingBox:
+            Center:
+              x: 0
+              y: 0
+              z: 1.25
+            Dimensions:
+              length: 12
+              width: 2.5
+              height: 2.5
+          Performance:
+            maxSpeed: 50
+            maxAcceleration: INF
+            maxDeceleration: INF
+          Axles:
+            FrontAxle:
+              maxSteering: 0.5236
+              wheelDiameter: 0.6
+              trackWidth: 2.5
+              positionX: 6
+              positionZ: 0.3
+            RearAxle:
+              maxSteering: 0.5236
+              wheelDiameter: 0.6
+              trackWidth: 2.5
+              positionX: 0
+              positionZ: 0.3
+          Properties:
+            Property: []
+        ObjectController:
+          Controller:
+            name: ''
+            Properties:
+              Property: []
+      - name: Bus1
+        Vehicle:
+          name: ''
+          vehicleCategory: bus
+          BoundingBox:
+            Center:
+              x: 0
+              y: 0
+              z: 1.25
+            Dimensions:
+              length: 12
+              width: 2.5
+              height: 2.5
+          Performance:
+            maxSpeed: 50
+            maxAcceleration: INF
+            maxDeceleration: INF
+          Axles:
+            FrontAxle:
+              maxSteering: 0.5236
+              wheelDiameter: 0.6
+              trackWidth: 2.5
+              positionX: 6
+              positionZ: 0.3
+            RearAxle:
+              maxSteering: 0.5236
+              wheelDiameter: 0.6
+              trackWidth: 2.5
+              positionX: 0
+              positionZ: 0.3
+          Properties:
+            Property: []
+        ObjectController:
+          Controller:
+            name: ''
+            Properties:
+              Property: []
+      - name: Bus2
+        Vehicle:
+          name: ''
+          vehicleCategory: bus
+          BoundingBox:
+            Center:
+              x: 0
+              y: 0
+              z: 1.25
+            Dimensions:
+              length: 12
+              width: 2.5
+              height: 2.5
+          Performance:
+            maxSpeed: 50
+            maxAcceleration: INF
+            maxDeceleration: INF
+          Axles:
+            FrontAxle:
+              maxSteering: 0.5236
+              wheelDiameter: 0.6
+              trackWidth: 2.5
+              positionX: 6
+              positionZ: 0.3
+            RearAxle:
+              maxSteering: 0.5236
+              wheelDiameter: 0.6
+              trackWidth: 2.5
+              positionX: 0
+              positionZ: 0.3
+          Properties:
+            Property: []
+        ObjectController:
+          Controller:
+            name: ''
+            Properties:
+              Property: []
+      - name: Misc2
+        MiscObject:
+          name: Misc
+          mass: 1
+          miscObjectCategory: obstacle
+          BoundingBox:
+            Center:
+              x: 0
+              y: 0
+              z: 0
+            Dimensions:
+              length: 1.2
+              width: 1
+              height: 5
+          Properties:
+            Property: []
+      - name: Misc3
+        MiscObject:
+          name: Misc
+          mass: 1
+          miscObjectCategory: obstacle
+          BoundingBox:
+            Center:
+              x: 0
+              y: 0
+              z: 0
+            Dimensions:
+              length: 1.2
+              width: 1
+              height: 5
+          Properties:
+            Property: []
+      - name: Misc4
+        MiscObject:
+          name: Misc
+          mass: 1
+          miscObjectCategory: obstacle
+          BoundingBox:
+            Center:
+              x: 0
+              y: 0
+              z: 0
+            Dimensions:
+              length: 1.2
+              width: 1
+              height: 5
+          Properties:
+            Property: []
+      - name: Misc5
+        MiscObject:
+          name: Misc
+          mass: 1
+          miscObjectCategory: obstacle
+          BoundingBox:
+            Center:
+              x: 0
+              y: 0
+              z: 0
+            Dimensions:
+              length: 1.2
+              width: 1
+              height: 5
+          Properties:
+            Property: []
+      - name: Misc6
+        MiscObject:
+          name: Misc
+          mass: 1
+          miscObjectCategory: obstacle
+          BoundingBox:
+            Center:
+              x: 0
+              y: 0
+              z: 0
+            Dimensions:
+              length: 1.2
+              width: 1
+              height: 5
+          Properties:
+            Property: []
+      - name: Misc7
+        MiscObject:
+          name: Misc
+          mass: 1
+          miscObjectCategory: obstacle
+          BoundingBox:
+            Center:
+              x: 0
+              y: 0
+              z: 0
+            Dimensions:
+              length: 1.2
+              width: 1
+              height: 5
+          Properties:
+            Property: []
+      - name: Misc8
+        MiscObject:
+          name: Misc
+          mass: 1
+          miscObjectCategory: obstacle
+          BoundingBox:
+            Center:
+              x: 0
+              y: 0
+              z: 0
+            Dimensions:
+              length: 1.2
+              width: 1
+              height: 5
+          Properties:
+            Property: []
+  Storyboard:
+    Init:
+      Actions:
+        Private:
+          - entityRef: ego
+            PrivateAction:
+              - TeleportAction:
+                  Position:
+                    LanePosition:
+                      roadId: ''
+                      laneId: '298'
+                      s: 5
+                      offset: 0
+                      Orientation:
+                        type: relative
+                        h: 0
+                        p: -0.0
+                        r: 0
+              - RoutingAction:
+                  AcquirePositionAction:
+                    Position:
+                      LanePosition:
+                        roadId: ''
+                        laneId: '298'
+                        s: 150
+                        offset: 0
+                        Orientation:
+                          type: relative
+                          h: 0
+                          p: -0.0
+                          r: 0
+              - ControllerAction:
+                  AssignControllerAction:
+                    Controller:
+                      name: ''
+                      Properties:
+                        Property:
+                          - name: maxSpeed
+                            value: $Ve
+          - entityRef: Bus0
+            PrivateAction:
+              - TeleportAction:
+                  Position:
+                    LanePosition:
+                      roadId: ''
+                      laneId: '298'
+                      s: 110
+                      offset: 0
+                      Orientation:
+                        type: relative
+                        h: 0
+                        p: -0.0
+                        r: 0
+              - LongitudinalAction:
+                  SpeedAction:
+                    SpeedActionDynamics:
+                      dynamicsDimension: time
+                      value: 0
+                      dynamicsShape: step
+                    SpeedActionTarget:
+                      AbsoluteTargetSpeed:
+                        value: 0
+              - ControllerAction:
+                  AssignControllerAction:
+                    Controller:
+                      name: ''
+                      Properties:
+                        Property:
+                          - name: maxSpeed
+                            value: '0'
+          - entityRef: Bus1
+            PrivateAction:
+              - TeleportAction:
+                  Position:
+                    LanePosition:
+                      roadId: ''
+                      laneId: '1356'
+                      s: 110
+                      offset: -0.1
+                      Orientation:
+                        type: relative
+                        h: 0
+                        p: -0.0
+                        r: 0
+              - LongitudinalAction:
+                  SpeedAction:
+                    SpeedActionDynamics:
+                      dynamicsDimension: time
+                      value: 0
+                      dynamicsShape: step
+                    SpeedActionTarget:
+                      AbsoluteTargetSpeed:
+                        value: 0
+              - ControllerAction:
+                  AssignControllerAction:
+                    Controller:
+                      name: ''
+                      Properties:
+                        Property:
+                          - name: maxSpeed
+                            value: '0'
+          - entityRef: Bus2
+            PrivateAction:
+              - TeleportAction:
+                  Position:
+                    LanePosition:
+                      roadId: ''
+                      laneId: '1356'
+                      s: 125
+                      offset: 0
+                      Orientation:
+                        type: relative
+                        h: 0
+                        p: -0.0
+                        r: 0
+              - LongitudinalAction:
+                  SpeedAction:
+                    SpeedActionDynamics:
+                      dynamicsDimension: time
+                      value: 0
+                      dynamicsShape: step
+                    SpeedActionTarget:
+                      AbsoluteTargetSpeed:
+                        value: 0
+              - ControllerAction:
+                  AssignControllerAction:
+                    Controller:
+                      name: ''
+                      Properties:
+                        Property:
+                          - name: maxSpeed
+                            value: '0'
+          - entityRef: Misc2
+            PrivateAction:
+              - TeleportAction:
+                  Position:
+                    LanePosition:
+                      roadId: ''
+                      laneId: '297'
+                      s: 96
+                      offset: 1.6
+                      Orientation:
+                        type: relative
+                        h: -1.5708
+                        p: 0
+                        r: 0
+          - entityRef: Misc3
+            PrivateAction:
+              - TeleportAction:
+                  Position:
+                    LanePosition:
+                      roadId: ''
+                      laneId: '297'
+                      s: 100
+                      offset: 1.7
+                      Orientation:
+                        type: relative
+                        h: -1.5708
+                        p: 0
+                        r: 0
+          - entityRef: Misc4
+            PrivateAction:
+              - TeleportAction:
+                  Position:
+                    LanePosition:
+                      roadId: ''
+                      laneId: '297'
+                      s: 105
+                      offset: 1.9
+                      Orientation:
+                        type: relative
+                        h: -1.5708
+                        p: 0
+                        r: 0
+          - entityRef: Misc5
+            PrivateAction:
+              - TeleportAction:
+                  Position:
+                    LanePosition:
+                      roadId: ''
+                      laneId: '297'
+                      s: 110
+                      offset: 2.0
+                      Orientation:
+                        type: relative
+                        h: -1.5708
+                        p: 0
+                        r: 0
+          - entityRef: Misc6
+            PrivateAction:
+              - TeleportAction:
+                  Position:
+                    LanePosition:
+                      roadId: ''
+                      laneId: '297'
+                      s: 115
+                      offset: 1.9
+                      Orientation:
+                        type: relative
+                        h: -1.5708
+                        p: 0
+                        r: 0
+          - entityRef: Misc7
+            PrivateAction:
+              - TeleportAction:
+                  Position:
+                    LanePosition:
+                      roadId: ''
+                      laneId: '297'
+                      s: 120
+                      offset: 1.8
+                      Orientation:
+                        type: relative
+                        h: -1.5708
+                        p: 0
+                        r: 0
+          - entityRef: Misc8
+            PrivateAction:
+              - TeleportAction:
+                  Position:
+                    LanePosition:
+                      roadId: ''
+                      laneId: '297'
+                      s: 125
+                      offset: 1.0
+                      Orientation:
+                        type: relative
+                        h: -1.5708
+                        p: 0
+                        r: 0
+    Story:
+      - name: ''
+        Act:
+          - name: act_check_ld
+            ManeuverGroup:
+              - maximumExecutionCount: 1
+                name: act_check_ld
+                Actors:
+                  selectTriggeringEntities: false
+                  EntityRef: []
+                Maneuver:
+                  - name: ''
+                    Event:
+                      - name: dummy_event
+                        priority: parallel
+                        Action:
+                          - name: ''
+                            UserDefinedAction:
+                              CustomCommandAction:
+                                type: ' '
+                        StartTrigger:
+                          ConditionGroup:
+                            - Condition:
+                                - name: ''
+                                  delay: 0
+                                  conditionEdge: none
+                                  ByValueCondition:
+                                    SimulationTimeCondition:
+                                      value: 0
+                                      rule: lessOrEqual
+            StartTrigger:
+              ConditionGroup:
+                - Condition:
+                    - name: ''
+                      delay: 0
+                      conditionEdge: none
+                      ByEntityCondition:
+                        TriggeringEntities:
+                          triggeringEntitiesRule: any
+                          EntityRef:
+                            - entityRef: ego
+                        EntityCondition:
+                          ReachPositionCondition:
+                            Position:
+                              LanePosition:
+                                roadId: ''
+                                laneId: '297'
+                                s: 110
+                                offset: 0
+                                Orientation:
+                                  type: relative
+                                  h: 0
+                                  p: -0.0
+                                  r: 0
+                            tolerance: 1
+                    - name: ''
+                      delay: 0
+                      conditionEdge: none
+                      ByEntityCondition:
+                        TriggeringEntities:
+                          triggeringEntitiesRule: any
+                          EntityRef:
+                            - entityRef: ego
+                        EntityCondition:
+                          RelativeDistanceCondition:
+                            entityRef: Bus0
+                            relativeDistanceType: lateral
+                            coordinateSystem: entity
+                            value: 1
+                            freespace: true
+                            rule: lessThan
+          - name: _EndCondition
+            ManeuverGroup:
+              - maximumExecutionCount: 1
+                name: ''
+                Actors:
+                  selectTriggeringEntities: false
+                  EntityRef:
+                    - entityRef: ego
+                Maneuver:
+                  - name: ''
+                    Event:
+                      - name: ''
+                        priority: parallel
+                        StartTrigger:
+                          ConditionGroup:
+                            - Condition:
+                                - name: ''
+                                  delay: 0
+                                  conditionEdge: none
+                                  ByEntityCondition:
+                                    TriggeringEntities:
+                                      triggeringEntitiesRule: any
+                                      EntityRef:
+                                        - entityRef: ego
+                                    EntityCondition:
+                                      ReachPositionCondition:
+                                        Position:
+                                          LanePosition:
+                                            roadId: ''
+                                            laneId: '298'
+                                            s: 150
+                                            offset: 0
+                                            Orientation:
+                                              type: relative
+                                              h: 0
+                                              p: -0.0
+                                              r: 0
+                                        tolerance: 1
+                        Action:
+                          - name: ''
+                            UserDefinedAction:
+                              CustomCommandAction:
+                                type: exitSuccess
+                      - name: ''
+                        priority: parallel
+                        StartTrigger:
+                          ConditionGroup:
+                            - Condition:
+                                - name: ''
+                                  delay: 0
+                                  conditionEdge: none
+                                  ByValueCondition:
+                                    SimulationTimeCondition:
+                                      value: 180
+                                      rule: greaterThan
+                            - Condition:
+                                - name: ''
+                                  delay: 0
+                                  conditionEdge: none
+                                  ByValueCondition:
+                                    StoryboardElementStateCondition:
+                                      state: runningState
+                                      storyboardElementType: act
+                                      storyboardElementRef: act_check_ld
+                            - Condition:
+                                - name: ''
+                                  delay: 0
+                                  conditionEdge: none
+                                  ByEntityCondition:
+                                    TriggeringEntities:
+                                      triggeringEntitiesRule: any
+                                      EntityRef:
+                                        - entityRef: ego
+                                    EntityCondition:
+                                      CollisionCondition:
+                                        EntityRef:
+                                          entityRef: Bus0
+                            - Condition:
+                                - name: ''
+                                  delay: 0
+                                  conditionEdge: none
+                                  ByEntityCondition:
+                                    TriggeringEntities:
+                                      triggeringEntitiesRule: any
+                                      EntityRef:
+                                        - entityRef: ego
+                                    EntityCondition:
+                                      CollisionCondition:
+                                        EntityRef:
+                                          entityRef: Bus1
+                            - Condition:
+                                - name: ''
+                                  delay: 0
+                                  conditionEdge: none
+                                  ByEntityCondition:
+                                    TriggeringEntities:
+                                      triggeringEntitiesRule: any
+                                      EntityRef:
+                                        - entityRef: ego
+                                    EntityCondition:
+                                      CollisionCondition:
+                                        EntityRef:
+                                          entityRef: Bus2
+                            - Condition:
+                                - name: ''
+                                  delay: 0
+                                  conditionEdge: none
+                                  ByEntityCondition:
+                                    TriggeringEntities:
+                                      triggeringEntitiesRule: any
+                                      EntityRef:
+                                        - entityRef: ego
+                                    EntityCondition:
+                                      CollisionCondition:
+                                        EntityRef:
+                                          entityRef: Misc2
+                            - Condition:
+                                - name: ''
+                                  delay: 0
+                                  conditionEdge: none
+                                  ByEntityCondition:
+                                    TriggeringEntities:
+                                      triggeringEntitiesRule: any
+                                      EntityRef:
+                                        - entityRef: ego
+                                    EntityCondition:
+                                      CollisionCondition:
+                                        EntityRef:
+                                          entityRef: Misc3
+                            - Condition:
+                                - name: ''
+                                  delay: 0
+                                  conditionEdge: none
+                                  ByEntityCondition:
+                                    TriggeringEntities:
+                                      triggeringEntitiesRule: any
+                                      EntityRef:
+                                        - entityRef: ego
+                                    EntityCondition:
+                                      CollisionCondition:
+                                        EntityRef:
+                                          entityRef: Misc4
+                            - Condition:
+                                - name: ''
+                                  delay: 0
+                                  conditionEdge: none
+                                  ByEntityCondition:
+                                    TriggeringEntities:
+                                      triggeringEntitiesRule: any
+                                      EntityRef:
+                                        - entityRef: ego
+                                    EntityCondition:
+                                      CollisionCondition:
+                                        EntityRef:
+                                          entityRef: Misc5
+                            - Condition:
+                                - name: ''
+                                  delay: 0
+                                  conditionEdge: none
+                                  ByEntityCondition:
+                                    TriggeringEntities:
+                                      triggeringEntitiesRule: any
+                                      EntityRef:
+                                        - entityRef: ego
+                                    EntityCondition:
+                                      CollisionCondition:
+                                        EntityRef:
+                                          entityRef: Misc6
+                            - Condition:
+                                - name: ''
+                                  delay: 0
+                                  conditionEdge: none
+                                  ByEntityCondition:
+                                    TriggeringEntities:
+                                      triggeringEntitiesRule: any
+                                      EntityRef:
+                                        - entityRef: ego
+                                    EntityCondition:
+                                      CollisionCondition:
+                                        EntityRef:
+                                          entityRef: Misc7
+                            - Condition:
+                                - name: ''
+                                  delay: 0
+                                  conditionEdge: none
+                                  ByEntityCondition:
+                                    TriggeringEntities:
+                                      triggeringEntitiesRule: any
+                                      EntityRef:
+                                        - entityRef: ego
+                                    EntityCondition:
+                                      CollisionCondition:
+                                        EntityRef:
+                                          entityRef: Misc8
+                        Action:
+                          - name: ''
+                            UserDefinedAction:
+                              CustomCommandAction:
+                                type: exitFailure
+            StartTrigger:
+              ConditionGroup:
+                - Condition:
+                    - name: ''
+                      delay: 0
+                      conditionEdge: none
+                      ByValueCondition:
+                        SimulationTimeCondition:
+                          value: 0
+                          rule: greaterThan
+    StopTrigger:
+      ConditionGroup: []

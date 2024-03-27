@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<osm generator="VMB">
+  <MetaInfo format_version="1" map_version="4"/>
+  <node id="1" lat="35.23809675040932" lon="139.90098104321464">
+    <tag k="mgrs_code" v="54SVE000000"/>
+    <tag k="local_x" v="2"/>
+    <tag k="local_y" v="1"/>
+    <tag k="ele" v="100"/>
+  </node>
+  <node id="21" lat="35.24711216652047" lon="139.90085938741302">
+    <tag k="mgrs_code" v="54SVE000010"/>
+    <tag k="local_x" v="2"/>
+    <tag k="local_y" v="1001"/>
+    <tag k="ele" v="100"/>
+  </node>
+  <node id="23" lat="35.23809709966239" lon="139.90101950334545">
+    <tag k="mgrs_code" v="54SVE000000"/>
+    <tag k="local_x" v="5.5"/>
+    <tag k="local_y" v="1"/>
+    <tag k="ele" v="100"/>
+  </node>
+  <node id="43" lat="35.24711251588949" lon="139.90089785179913">
+    <tag k="mgrs_code" v="54SVE000010"/>
+    <tag k="local_x" v="5.5"/>
+    <tag k="local_y" v="1001"/>
+    <tag k="ele" v="100"/>
+  </node>
+  <node id="46" lat="35.24241508654909" lon="139.90091728223095">
+    <tag k="mgrs_code" v="54SVE000004"/>
+    <tag k="local_x" v="1.5"/>
+    <tag k="local_y" v="480"/>
+    <tag k="ele" v="100"/>
+  </node>
+  <node id="47" lat="35.24241553566017" lon="139.9009667335909">
+    <tag k="mgrs_code" v="54SVE000004"/>
+    <tag k="local_x" v="6"/>
+    <tag k="local_y" v="480"/>
+    <tag k="ele" v="100"/>
+  </node>
+  <node id="49" lat="35.24239750482706" lon="139.90096697689043">
+    <tag k="mgrs_code" v="54SVE000004"/>
+    <tag k="local_x" v="6"/>
+    <tag k="local_y" v="478"/>
+    <tag k="ele" v="100"/>
+  </node>
+  <node id="50" lat="35.24239721889533" lon="139.90091752333944">
+    <tag k="mgrs_code" v="54SVE000004"/>
+    <tag k="local_x" v="1.5"/>
+    <tag k="local_y" v="478.0181"/>
+    <tag k="ele" v="100"/>
+  </node>
+  <way id="22">
+    <nd ref="1"/>
+    <nd ref="21"/>
+    <tag k="type" v="line_thin"/>
+    <tag k="subtype" v="solid"/>
+    <tag k="color" v="white"/>
+  </way>
+  <way id="44">
+    <nd ref="23"/>
+    <nd ref="43"/>
+    <tag k="type" v="line_thin"/>
+    <tag k="subtype" v="solid"/>
+    <tag k="color" v="white"/>
+  </way>
+  <way id="51">
+    <nd ref="46"/>
+    <nd ref="47"/>
+    <nd ref="49"/>
+    <nd ref="50"/>
+    <tag k="type" v="speed_bump"/>
+    <tag k="area" v="yes"/>
+    <tag k="height" v="0.20"/>
+  </way>
+  <relation id="45">
+    <member type="way" role="left" ref="22"/>
+    <member type="way" role="right" ref="44"/>
+    <member type="relation" role="regulatory_element" ref="52"/>
+    <tag k="type" v="lanelet"/>
+    <tag k="subtype" v="road"/>
+    <tag k="speed_limit" v="30.00"/>
+    <tag k="location" v="urban"/>
+    <tag k="one_way" v="yes"/>
+    <tag k="participant:vehicle" v="yes"/>
+  </relation>
+  <relation id="52">
+    <member type="way" role="refers" ref="51"/>
+    <tag k="type" v="regulatory_element"/>
+    <tag k="subtype" v="speed_bump"/>
+  </relation>
+</osm>

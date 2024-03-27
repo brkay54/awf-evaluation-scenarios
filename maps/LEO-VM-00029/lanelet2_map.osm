@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<osm generator="VMB">
+  <MetaInfo format_version="1" map_version="14"/>
+  <node id="289" lat="35.22313544665014" lon="138.80254045742967">
+    <tag k="mgrs_code" v="54SUE000000"/>
+    <tag k="local_x" v="7.5"/>
+    <tag k="local_y" v="1"/>
+    <tag k="ele" v="100"/>
+  </node>
+  <node id="290" lat="35.23214589738166" lon="138.8022973887251">
+    <tag k="mgrs_code" v="54SUE000010"/>
+    <tag k="local_x" v="7.5"/>
+    <tag k="local_y" v="1001"/>
+    <tag k="ele" v="100"/>
+  </node>
+  <node id="1347" lat="35.22313474869306" lon="138.8025020256314">
+    <tag k="mgrs_code" v="54SUE000000"/>
+    <tag k="local_x" v="4"/>
+    <tag k="local_y" v="1"/>
+    <tag k="ele" v="100"/>
+  </node>
+  <node id="1348" lat="35.232145199193" lon="138.8022589526841">
+    <tag k="mgrs_code" v="54SUE000010"/>
+    <tag k="local_x" v="4"/>
+    <tag k="local_y" v="1001"/>
+    <tag k="ele" v="100"/>
+  </node>
+  <node id="1352" lat="35.22313604488937" lon="138.8025733989721">
+    <tag k="mgrs_code" v="54SUE000000"/>
+    <tag k="local_x" v="10.5"/>
+    <tag k="local_y" v="1"/>
+    <tag k="ele" v="100"/>
+  </node>
+  <node id="1353" lat="35.23214649581939" lon="138.80233033390414">
+    <tag k="mgrs_code" v="54SUE000010"/>
+    <tag k="local_x" v="10.5"/>
+    <tag k="local_y" v="1001"/>
+    <tag k="ele" v="100"/>
+  </node>
+  <way id="294">
+    <nd ref="289"/>
+    <nd ref="290"/>
+    <tag k="type" v="line_thin"/>
+    <tag k="subtype" v="solid"/>
+  </way>
+  <way id="1349">
+    <nd ref="1347"/>
+    <nd ref="1348"/>
+    <tag k="type" v="line_thin"/>
+    <tag k="subtype" v="solid"/>
+    <tag k="lane_change" v="yes"/>
+  </way>
+  <way id="1355">
+    <nd ref="1352"/>
+    <nd ref="1353"/>
+    <tag k="type" v="line_thin"/>
+    <tag k="subtype" v="solid"/>
+  </way>
+  <relation id="298">
+    <member type="way" role="left" ref="1349"/>
+    <member type="way" role="right" ref="294"/>
+    <tag k="type" v="lanelet"/>
+    <tag k="subtype" v="road"/>
+    <tag k="speed_limit" v="30"/>
+    <tag k="location" v="urban"/>
+    <tag k="one_way" v="yes"/>
+  </relation>
+  <relation id="1356">
+    <member type="way" role="left" ref="294"/>
+    <member type="way" role="right" ref="1355"/>
+    <tag k="type" v="lanelet"/>
+    <tag k="subtype" v="road_shoulder"/>
+    <tag k="speed_limit" v="30"/>
+    <tag k="location" v="urban"/>
+    <tag k="one_way" v="yes"/>
+  </relation>
+</osm>
