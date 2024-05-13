@@ -1,3 +1,0 @@
-x_resolution: 2000.0
-y_resolution: 2000.0
-pointcloud_map.pcd: [58400, 42400] # -> 58400 < x < 60400, 42400 < y < 46400
