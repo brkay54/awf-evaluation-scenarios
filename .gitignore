@@ -2,3 +2,5 @@
 *.pcd
 
 .idea/
+
+capture/
