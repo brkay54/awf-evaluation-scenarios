@@ -2,20 +2,21 @@ ScenarioModifiers:
   ScenarioModifier:
     - name: __tier4_modifier_Vn
       list:
-        - 1.25
-        - 1.75
-        - 2.25
+        - 2
     - name: __tier4_modifier_D
       list:
-        - 30
+        - 2
     - name: __tier4_modifier_dist_npc
       list:
-        - 1
+        - 7
+    - name: __tier4_modifier_npc_trigger_vel
+      list:
+        - 0.5
 OpenSCENARIO:
   FileHeader:
     revMajor: 1
     revMinor: 1
-    date: '2024-05-15T12:39:43.488Z'
+    date: '2024-05-16T13:20:21.247Z'
     description: ''
     author: 'Berkay Karaman (last modified by: Berkay Karaman)'
   ParameterDeclarations:
@@ -47,6 +48,9 @@ OpenSCENARIO:
       - name: dist_npc
         parameterType: double
         value: __tier4_modifier_dist_npc
+      - name: npc_trigger_vel
+        parameterType: double
+        value: __tier4_modifier_npc_trigger_vel
   CatalogLocations:
     CatalogLocation: []
   RoadNetwork:
@@ -144,9 +148,9 @@ OpenSCENARIO:
                   Position:
                     LanePosition:
                       roadId: ''
-                      laneId: '16590'
-                      s: 200
-                      offset: 0
+                      laneId: '16583'
+                      s: $D
+                      offset: -0.0001
                       Orientation:
                         type: relative
                         h: 0
@@ -171,8 +175,8 @@ OpenSCENARIO:
                   Position:
                     LanePosition:
                       roadId: ''
-                      laneId: '16600'
-                      s: ${148.99 - $dist_npc}
+                      laneId: '16588'
+                      s: $dist_npc
                       offset: 0
                       Orientation:
                         type: relative
@@ -238,19 +242,8 @@ OpenSCENARIO:
                                             - Position:
                                                 LanePosition:
                                                   roadId: ''
-                                                  laneId: '16600'
-                                                  s: ${148.99 - $dist_npc}
-                                                  offset: 0
-                                                  Orientation:
-                                                    type: relative
-                                                    h: 0
-                                                    p: -0.0
-                                                    r: 0
-                                            - Position:
-                                                LanePosition:
-                                                  roadId: ''
-                                                  laneId: '16600'
-                                                  s: 148.99
+                                                  laneId: '16588'
+                                                  s: $dist_npc
                                                   offset: 0
                                                   Orientation:
                                                     type: relative
@@ -261,7 +254,7 @@ OpenSCENARIO:
                                                 LanePosition:
                                                   roadId: ''
                                                   laneId: '16588'
-                                                  s: 5.0211
+                                                  s: 8
                                                   offset: -0.0177
                                                   Orientation:
                                                     type: relative
@@ -316,7 +309,7 @@ OpenSCENARIO:
                                                 LanePosition:
                                                   roadId: ''
                                                   laneId: '16591'
-                                                  s: 24.8879
+                                                  s: 15
                                                   offset: 0.0657
                                                   Orientation:
                                                     type: relative
@@ -335,23 +328,9 @@ OpenSCENARIO:
                                       EntityRef:
                                         - entityRef: ego
                                     EntityCondition:
-                                      DistanceCondition:
-                                        Position:
-                                          LanePosition:
-                                            roadId: ''
-                                            laneId: '16590'
-                                            s: ${284.4413-$D}
-                                            offset: 0
-                                            Orientation:
-                                              type: relative
-                                              h: 0
-                                              p: -0.0
-                                              r: 0
-                                        value: 0.1
-                                        freespace: true
-                                        relativeDistanceType: longitudinal
-                                        coordinateSystem: entity
-                                        rule: lessOrEqual
+                                      SpeedCondition:
+                                        rule: greaterThan
+                                        value: $npc_trigger_vel
             StartTrigger:
               ConditionGroup:
                 - Condition:

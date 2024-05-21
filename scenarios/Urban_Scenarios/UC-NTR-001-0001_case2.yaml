@@ -2,9 +2,9 @@ ScenarioModifiers:
   ScenarioModifier:
     - name: __tier4_modifier_Vn
       list:
-        - 2.777778
-        - 4.166667
         - 5.555556
+        - 8.333333
+        - 11.11111
     - name: __tier4_modifier_min_acc
       list:
         - -1.5
@@ -12,7 +12,7 @@ OpenSCENARIO:
   FileHeader:
     revMajor: 1
     revMinor: 1
-    date: '2024-05-08T14:51:19.991Z'
+    date: '2024-05-21T21:01:39.539Z'
     description: ''
     author: ''
   ParameterDeclarations:
@@ -161,7 +161,7 @@ OpenSCENARIO:
                       LanePosition:
                         roadId: ''
                         laneId: '45'
-                        s: 50
+                        s: 60
                         offset: 0
                         Orientation:
                           type: relative
@@ -205,7 +205,7 @@ OpenSCENARIO:
                 Maneuver:
                   - name: ''
                     Event:
-                      - name: dummy_event0
+                      - name: follow_trajectory
                         priority: parallel
                         Action:
                           - name: ''
@@ -254,10 +254,10 @@ OpenSCENARIO:
                                                   roadId: ''
                                                   laneId: '45'
                                                   s: 30
-                                                  offset: ${-$overtake_offset}
+                                                  offset: $overtake_offset
                                                   Orientation:
                                                     type: relative
-                                                    h: 0.0
+                                                    h: 0
                                                     p: -0.0
                                                     r: 0
                                             - Position:
@@ -265,10 +265,10 @@ OpenSCENARIO:
                                                   roadId: ''
                                                   laneId: '45'
                                                   s: ${30+$__ego_dimensions_length__}
-                                                  offset: ${-$overtake_offset}
+                                                  offset: $overtake_offset
                                                   Orientation:
                                                     type: relative
-                                                    h: 0.0
+                                                    h: 0
                                                     p: -0.0
                                                     r: 0
                                             - Position:
@@ -279,14 +279,14 @@ OpenSCENARIO:
                                                   offset: 0
                                                   Orientation:
                                                     type: relative
-                                                    h: 0.0
+                                                    h: 0
                                                     p: -0.0
                                                     r: 0
                                             - Position:
                                                 LanePosition:
                                                   roadId: ''
                                                   laneId: '45'
-                                                  s: 60
+                                                  s: 100
                                                   offset: 0
                                                   Orientation:
                                                     type: relative
@@ -313,6 +313,81 @@ OpenSCENARIO:
                         SimulationTimeCondition:
                           value: 0
                           rule: greaterThan
+          - name: act_check_ego_not_moved_when_overtake_over
+            ManeuverGroup:
+              - maximumExecutionCount: 1
+                name: act_check_ego_not_moved_when_overtake_over
+                Actors:
+                  selectTriggeringEntities: false
+                  EntityRef: []
+                Maneuver:
+                  - name: ''
+                    Event:
+                      - name: check_ego_not_moved
+                        priority: parallel
+                        Action:
+                          - name: ''
+                            UserDefinedAction:
+                              CustomCommandAction:
+                                type: ':'
+                        StartTrigger:
+                          ConditionGroup:
+                            - Condition:
+                                - name: ''
+                                  delay: 0
+                                  conditionEdge: none
+                                  ByEntityCondition:
+                                    TriggeringEntities:
+                                      triggeringEntitiesRule: any
+                                      EntityRef:
+                                        - entityRef: ego
+                                    EntityCondition:
+                                      DistanceCondition:
+                                        Position:
+                                          LanePosition:
+                                            roadId: ''
+                                            laneId: '45'
+                                            s: 30
+                                            offset: 0
+                                            Orientation:
+                                              type: relative
+                                              h: 0
+                                              p: -0.0
+                                              r: 0
+                                        value: 0.1
+                                        freespace: true
+                                        relativeDistanceType: euclidianDistance
+                                        coordinateSystem: entity
+                                        rule: lessThan
+            StartTrigger:
+              ConditionGroup:
+                - Condition:
+                    - name: ''
+                      delay: 0
+                      conditionEdge: none
+                      ByEntityCondition:
+                        TriggeringEntities:
+                          triggeringEntitiesRule: any
+                          EntityRef:
+                            - entityRef: Npc1
+                        EntityCondition:
+                          DistanceCondition:
+                            Position:
+                              LanePosition:
+                                roadId: ''
+                                laneId: '45'
+                                s: 38
+                                offset: 0
+                                Orientation:
+                                  type: relative
+                                  h: 0
+                                  p: -0.0
+                                  r: 0
+                            value: 0
+                            freespace: true
+                            relativeDistanceType: longitudinal
+                            coordinateSystem: lane
+                            rule: lessOrEqual
           - name: _EndCondition
             ManeuverGroup:
               - maximumExecutionCount: 1
@@ -343,7 +418,7 @@ OpenSCENARIO:
                                           LanePosition:
                                             roadId: ''
                                             laneId: '45'
-                                            s: 50
+                                            s: 60
                                             offset: 0
                                             Orientation:
                                               type: relative
@@ -351,6 +426,15 @@ OpenSCENARIO:
                                               p: -0.0
                                               r: 0
                                         tolerance: 1
+                                - name: ''
+                                  delay: 0
+                                  conditionEdge: none
+                                  ByValueCondition:
+                                    StoryboardElementStateCondition:
+                                      state: completeState
+                                      storyboardElementType: act
+                                      storyboardElementRef: >-
+                                        act_check_ego_not_moved_when_overtake_over
                         Action:
                           - name: ''
                             UserDefinedAction:
@@ -366,7 +450,7 @@ OpenSCENARIO:
                                   conditionEdge: none
                                   ByValueCondition:
                                     SimulationTimeCondition:
-                                      value: 60
+                                      value: 30
                                       rule: greaterThan
                             - Condition:
                                 - name: ''
