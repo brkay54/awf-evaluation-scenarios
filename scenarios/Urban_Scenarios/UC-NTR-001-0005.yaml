@@ -1,52 +1,62 @@
 ScenarioModifiers:
   ScenarioModifier:
-    - name: __tier4_modifier_npc_speed
-      start: 4
-      step: 1
-      stop: 6
+    - name: __tier4_modifier_Vn
+      list:
+        - 5.555556
+        - 8.333333
+        - 11.11111
+    - name: __tier4_modifier_min_acc
+      list:
+        - -1.5
 OpenSCENARIO:
   FileHeader:
     revMajor: 1
     revMinor: 1
-    date: '2024-04-24T15:23:03.353Z'
+    date: '2024-05-26T17:04:14.518Z'
     description: ''
-    author: Berkay Karaman
+    author: ''
   ParameterDeclarations:
     ParameterDeclaration:
       - name: __ego_dimensions_length__
         parameterType: double
-        value: '4.44'
+        value: '4.89'
       - name: __ego_dimensions_width__
         parameterType: double
-        value: '2.03'
+        value: '1.896'
       - name: __ego_dimensions_height__
         parameterType: double
-        value: '1.86'
+        value: '2.5'
       - name: __ego_center_x__
         parameterType: double
-        value: '1.41'
+        value: '1.345'
       - name: __ego_center_y__
         parameterType: double
         value: '0'
       - name: __ego_center_z__
         parameterType: double
-        value: '0.93'
-      - name: wheel_base
+        value: '1.25'
+      - name: Vn
         parameterType: double
-        value: '4.76'
-      - name: front_overhang
+        value: __tier4_modifier_Vn
+      - name: min_acc
         parameterType: double
-        value: '0.9154'
-      - name: npc_speed
+        value: __tier4_modifier_min_acc
+      - name: Dr
         parameterType: double
-        value: __tier4_modifier_npc_speed
+        value: '7.0'
+      - name: Df
+        parameterType: double
+        value: '5.0'
+      - name: overtake_offset
+        parameterType: double
+        value: '2.5'
   CatalogLocations:
     CatalogLocation: []
   RoadNetwork:
     LogicFile:
-      filepath: /home/berkay/Downloads/maps/YTU_HDMap/lanelet2_map.osm
+      filepath: /home/berkay/projects/awf-evaluation-scenarios/maps/LEO-VM-00010/lanelet2_map.osm
     SceneGraphFile:
-      filepath: /home/berkay/Downloads/maps/YTU_HDMap/pointcloud_map.pcd
+      filepath: /home/berkay/projects/awf-evaluation-scenarios/maps/LEO-VM-00010/pointcloud_map.pcd
     TrafficSignals:
       TrafficSignalController: []
   Entities:
@@ -71,16 +81,16 @@ OpenSCENARIO:
           Axles:
             FrontAxle:
               maxSteering: 0.5236
-              wheelDiameter: 0.63
-              trackWidth: 1.75
-              positionX: 1.23
-              positionZ: 0.315
+              wheelDiameter: 0.766
+              trackWidth: 1.64
+              positionX: 1.445
+              positionZ: 0.383
             RearAxle:
               maxSteering: 0.5236
-              wheelDiameter: 0.63
-              trackWidth: 1.75
+              wheelDiameter: 0.766
+              trackWidth: 1.64
               positionX: 0
-              positionZ: 0.315
+              positionZ: 0.383
           Properties:
             Property: []
         ObjectController:
@@ -137,8 +147,8 @@ OpenSCENARIO:
                   Position:
                     LanePosition:
                       roadId: ''
-                      laneId: '1709'
-                      s: 5
+                      laneId: '298'
+                      s: 30
                       offset: 0
                       Orientation:
                         type: relative
@@ -150,8 +160,8 @@ OpenSCENARIO:
                     Position:
                       LanePosition:
                         roadId: ''
-                        laneId: '2077'
-                        s: 20
+                        laneId: '298'
+                        s: 60
                         offset: 0
                         Orientation:
                           type: relative
@@ -164,13 +174,13 @@ OpenSCENARIO:
                   Position:
                     LanePosition:
                       roadId: ''
-                      laneId: '1748'
-                      s: 9
-                      offset: 2
+                      laneId: '298'
+                      s: ${30 - $Dr}
+                      offset: 0
                       Orientation:
                         type: relative
-                        h: -3.1242
-                        p: 0
+                        h: 0.5235
+                        p: -0.0
                         r: 0
               - LongitudinalAction:
                   SpeedAction:
@@ -184,10 +194,10 @@ OpenSCENARIO:
     Story:
       - name: ''
         Act:
-          - name: act_npc_start
+          - name: act_start_npc0
             ManeuverGroup:
               - maximumExecutionCount: 1
-                name: act_npc_start
+                name: act_start_npc0
                 Actors:
                   selectTriggeringEntities: false
                   EntityRef:
@@ -195,9 +205,20 @@ OpenSCENARIO:
                 Maneuver:
                   - name: ''
                     Event:
-                      - name: npc_start
+                      - name: follow_trajectory
                         priority: parallel
                         Action:
+                          - name: ''
+                            PrivateAction:
+                              LongitudinalAction:
+                                SpeedAction:
+                                  SpeedActionDynamics:
+                                    dynamicsDimension: time
+                                    value: 0
+                                    dynamicsShape: step
+                                  SpeedActionTarget:
+                                    AbsoluteTargetSpeed:
+                                      value: $Vn
                           - name: ''
                             PrivateAction:
                               RoutingAction:
@@ -220,28 +241,20 @@ OpenSCENARIO:
                                             - Position:
                                                 LanePosition:
                                                   roadId: ''
-                                                  laneId: '1778'
-                                                  s: 10
-                                                  offset: 2.5
+                                                  laneId: '298'
+                                                  s: ${30 - $Dr}
+                                                  offset: 0
                                                   Orientation:
                                                     type: relative
-                                                    h: 2.9147
+                                                    h: 0.5235
                                                     p: -0.0
                                                     r: 0
                                             - Position:
-                                                WorldPosition:
-                                                  x: 58632.9287
-                                                  y: 43235.6842
-                                                  z: 75.7698
-                                                  h: 0.7679
-                                                  p: -0.0
-                                                  r: 0
-                                            - Position:
                                                 LanePosition:
                                                   roadId: ''
-                                                  laneId: '11543'
-                                                  s: 20.5323
-                                                  offset: 1.9253
+                                                  laneId: '298'
+                                                  s: 30
+                                                  offset: $overtake_offset
                                                   Orientation:
                                                     type: relative
                                                     h: 0
@@ -250,9 +263,9 @@ OpenSCENARIO:
                                             - Position:
                                                 LanePosition:
                                                   roadId: ''
-                                                  laneId: '11543'
-                                                  s: 29.175
-                                                  offset: 1.336
+                                                  laneId: '298'
+                                                  s: ${30+$__ego_dimensions_length__}
+                                                  offset: $overtake_offset
                                                   Orientation:
                                                     type: relative
                                                     h: 0
@@ -261,9 +274,9 @@ OpenSCENARIO:
                                             - Position:
                                                 LanePosition:
                                                   roadId: ''
-                                                  laneId: '11458'
-                                                  s: 12.8253
-                                                  offset: 0.038
+                                                  laneId: '298'
+                                                  s: ${30+$__ego_dimensions_length__+$Df}
+                                                  offset: 0
                                                   Orientation:
                                                     type: relative
                                                     h: 0
@@ -272,25 +285,51 @@ OpenSCENARIO:
                                             - Position:
                                                 LanePosition:
                                                   roadId: ''
-                                                  laneId: '11438'
-                                                  s: 30.4962
-                                                  offset: -0.3093
+                                                  laneId: '298'
+                                                  s: 100
+                                                  offset: 0
                                                   Orientation:
                                                     type: relative
                                                     h: 0
                                                     p: -0.0
                                                     r: 0
+                        StartTrigger:
+                          ConditionGroup:
+                            - Condition:
+                                - name: ''
+                                  delay: 0
+                                  conditionEdge: none
+                                  ByValueCondition:
+                                    SimulationTimeCondition:
+                                      value: 0
+                                      rule: greaterThan
+            StartTrigger:
+              ConditionGroup:
+                - Condition:
+                    - name: ''
+                      delay: 0
+                      conditionEdge: none
+                      ByValueCondition:
+                        SimulationTimeCondition:
+                          value: 0
+                          rule: greaterThan
+          - name: act_check_ego_not_moved_when_overtake_over
+            ManeuverGroup:
+              - maximumExecutionCount: 1
+                name: act_check_ego_not_moved_when_overtake_over
+                Actors:
+                  selectTriggeringEntities: false
+                  EntityRef: []
+                Maneuver:
+                  - name: ''
+                    Event:
+                      - name: check_ego_not_moved
+                        priority: parallel
+                        Action:
                           - name: ''
-                            PrivateAction:
-                              LongitudinalAction:
-                                SpeedAction:
-                                  SpeedActionDynamics:
-                                    dynamicsDimension: rate
-                                    value: 1
-                                    dynamicsShape: linear
-                                  SpeedActionTarget:
-                                    AbsoluteTargetSpeed:
-                                      value: $npc_speed
+                            UserDefinedAction:
+                              CustomCommandAction:
+                                type: ':'
                         StartTrigger:
                           ConditionGroup:
                             - Condition:
@@ -303,9 +342,23 @@ OpenSCENARIO:
                                       EntityRef:
                                         - entityRef: ego
                                     EntityCondition:
-                                      SpeedCondition:
-                                        rule: greaterThan
-                                        value: 0.5
+                                      DistanceCondition:
+                                        Position:
+                                          LanePosition:
+                                            roadId: ''
+                                            laneId: '298'
+                                            s: 30
+                                            offset: 0
+                                            Orientation:
+                                              type: relative
+                                              h: 0
+                                              p: -0.0
+                                              r: 0
+                                        value: 0.1
+                                        freespace: true
+                                        relativeDistanceType: euclidianDistance
+                                        coordinateSystem: entity
+                                        rule: lessThan
             StartTrigger:
               ConditionGroup:
                 - Condition:
@@ -316,21 +369,25 @@ OpenSCENARIO:
                         TriggeringEntities:
                           triggeringEntitiesRule: any
                           EntityRef:
-                            - entityRef: ego
+                            - entityRef: Npc1
                         EntityCondition:
-                          ReachPositionCondition:
+                          DistanceCondition:
                             Position:
                               LanePosition:
                                 roadId: ''
-                                laneId: '1763'
-                                s: 0
+                                laneId: '298'
+                                s: 38
                                 offset: 0
                                 Orientation:
                                   type: relative
                                   h: 0
                                   p: -0.0
                                   r: 0
-                            tolerance: 0.5
+                            value: 0
+                            freespace: true
+                            relativeDistanceType: longitudinal
+                            coordinateSystem: lane
+                            rule: lessOrEqual
           - name: _EndCondition
             ManeuverGroup:
               - maximumExecutionCount: 1
@@ -360,8 +417,8 @@ OpenSCENARIO:
                                         Position:
                                           LanePosition:
                                             roadId: ''
-                                            laneId: '2077'
-                                            s: 20
+                                            laneId: '298'
+                                            s: 60
                                             offset: 0
                                             Orientation:
                                               type: relative
@@ -376,7 +433,8 @@ OpenSCENARIO:
                                     StoryboardElementStateCondition:
                                       state: completeState
                                       storyboardElementType: act
-                                      storyboardElementRef: act_npc_start
+                                      storyboardElementRef: >-
+                                        act_check_ego_not_moved_when_overtake_over
                         Action:
                           - name: ''
                             UserDefinedAction:
@@ -392,7 +450,7 @@ OpenSCENARIO:
                                   conditionEdge: none
                                   ByValueCondition:
                                     SimulationTimeCondition:
-                                      value: 180
+                                      value: 30
                                       rule: greaterThan
                             - Condition:
                                 - name: ''
@@ -407,6 +465,19 @@ OpenSCENARIO:
                                       CollisionCondition:
                                         EntityRef:
                                           entityRef: Npc1
+                            - Condition:
+                                - name: ''
+                                  delay: 0
+                                  conditionEdge: none
+                                  ByEntityCondition:
+                                    TriggeringEntities:
+                                      triggeringEntitiesRule: any
+                                      EntityRef:
+                                        - entityRef: ego
+                                    EntityCondition:
+                                      AccelerationCondition:
+                                        rule: lessThan
+                                        value: $min_acc
                         Action:
                           - name: ''
                             UserDefinedAction:

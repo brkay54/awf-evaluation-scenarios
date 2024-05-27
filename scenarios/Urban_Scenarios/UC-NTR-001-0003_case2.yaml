@@ -12,7 +12,7 @@ OpenSCENARIO:
   FileHeader:
     revMajor: 1
     revMinor: 1
-    date: '2024-05-21T21:01:39.539Z'
+    date: '2024-05-26T17:04:14.518Z'
     description: ''
     author: ''
   ParameterDeclarations:
@@ -54,9 +54,9 @@ OpenSCENARIO:
     CatalogLocation: []
   RoadNetwork:
     LogicFile:
-      filepath: /home/berkay/projects/awf-evaluation-scenarios/maps/LEO-VM-00001/lanelet2_map.osm
+      filepath: /home/berkay/projects/awf-evaluation-scenarios/maps/LEO-VM-00009/lanelet2_map.osm
     SceneGraphFile:
-      filepath: /home/berkay/projects/awf-evaluation-scenarios/maps/LEO-VM-00001/pointcloud_map.pcd
+      filepath: /home/berkay/projects/awf-evaluation-scenarios/maps/LEO-VM-00009/pointcloud_map.pcd
     TrafficSignals:
       TrafficSignalController: []
   Entities:
@@ -147,7 +147,7 @@ OpenSCENARIO:
                   Position:
                     LanePosition:
                       roadId: ''
-                      laneId: '45'
+                      laneId: '297'
                       s: 30
                       offset: 0
                       Orientation:
@@ -160,7 +160,7 @@ OpenSCENARIO:
                     Position:
                       LanePosition:
                         roadId: ''
-                        laneId: '45'
+                        laneId: '297'
                         s: 60
                         offset: 0
                         Orientation:
@@ -174,7 +174,7 @@ OpenSCENARIO:
                   Position:
                     LanePosition:
                       roadId: ''
-                      laneId: '45'
+                      laneId: '297'
                       s: ${30 - $Dr}
                       offset: 0
                       Orientation:
@@ -241,7 +241,7 @@ OpenSCENARIO:
                                             - Position:
                                                 LanePosition:
                                                   roadId: ''
-                                                  laneId: '45'
+                                                  laneId: '297'
                                                   s: ${30 - $Dr}
                                                   offset: 0
                                                   Orientation:
@@ -252,7 +252,7 @@ OpenSCENARIO:
                                             - Position:
                                                 LanePosition:
                                                   roadId: ''
-                                                  laneId: '45'
+                                                  laneId: '297'
                                                   s: 30
                                                   offset: ${-$overtake_offset}
                                                   Orientation:
@@ -263,7 +263,7 @@ OpenSCENARIO:
                                             - Position:
                                                 LanePosition:
                                                   roadId: ''
-                                                  laneId: '45'
+                                                  laneId: '297'
                                                   s: ${30+$__ego_dimensions_length__}
                                                   offset: ${-$overtake_offset}
                                                   Orientation:
@@ -274,7 +274,7 @@ OpenSCENARIO:
                                             - Position:
                                                 LanePosition:
                                                   roadId: ''
-                                                  laneId: '45'
+                                                  laneId: '297'
                                                   s: ${30+$__ego_dimensions_length__+$Df}
                                                   offset: 0
                                                   Orientation:
@@ -285,7 +285,7 @@ OpenSCENARIO:
                                             - Position:
                                                 LanePosition:
                                                   roadId: ''
-                                                  laneId: '45'
+                                                  laneId: '297'
                                                   s: 100
                                                   offset: 0
                                                   Orientation:
@@ -346,7 +346,7 @@ OpenSCENARIO:
                                         Position:
                                           LanePosition:
                                             roadId: ''
-                                            laneId: '45'
+                                            laneId: '297'
                                             s: 30
                                             offset: 0
                                             Orientation:
@@ -375,7 +375,7 @@ OpenSCENARIO:
                             Position:
                               LanePosition:
                                 roadId: ''
-                                laneId: '45'
+                                laneId: '297'
                                 s: 38
                                 offset: 0
                                 Orientation:
@@ -417,7 +417,7 @@ OpenSCENARIO:
                                         Position:
                                           LanePosition:
                                             roadId: ''
-                                            laneId: '45'
+                                            laneId: '297'
                                             s: 60
                                             offset: 0
                                             Orientation:

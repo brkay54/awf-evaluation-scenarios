@@ -2,9 +2,7 @@ ScenarioModifiers:
   ScenarioModifier:
     - name: __tier4_modifier_Vn
       list:
-        - 5.555556
-        - 8.333333
-        - 11.11111
+        - 1.388889
     - name: __tier4_modifier_min_acc
       list:
         - -1.5
@@ -12,7 +10,7 @@ OpenSCENARIO:
   FileHeader:
     revMajor: 1
     revMinor: 1
-    date: '2024-05-21T21:01:39.539Z'
+    date: '2024-05-26T17:04:14.518Z'
     description: ''
     author: ''
   ParameterDeclarations:
@@ -54,9 +52,9 @@ OpenSCENARIO:
     CatalogLocation: []
   RoadNetwork:
     LogicFile:
-      filepath: /home/berkay/projects/awf-evaluation-scenarios/maps/LEO-VM-00001/lanelet2_map.osm
+      filepath: /home/berkay/projects/awf-evaluation-scenarios/maps/LEO-VM-00010/lanelet2_map.osm
     SceneGraphFile:
-      filepath: /home/berkay/projects/awf-evaluation-scenarios/maps/LEO-VM-00001/pointcloud_map.pcd
+      filepath: /home/berkay/projects/awf-evaluation-scenarios/maps/LEO-VM-00010/pointcloud_map.pcd
     TrafficSignals:
       TrafficSignalController: []
   Entities:
@@ -147,7 +145,7 @@ OpenSCENARIO:
                   Position:
                     LanePosition:
                       roadId: ''
-                      laneId: '45'
+                      laneId: '298'
                       s: 30
                       offset: 0
                       Orientation:
@@ -160,7 +158,7 @@ OpenSCENARIO:
                     Position:
                       LanePosition:
                         roadId: ''
-                        laneId: '45'
+                        laneId: '298'
                         s: 60
                         offset: 0
                         Orientation:
@@ -174,12 +172,12 @@ OpenSCENARIO:
                   Position:
                     LanePosition:
                       roadId: ''
-                      laneId: '45'
+                      laneId: '298'
                       s: ${30 - $Dr}
                       offset: 0
                       Orientation:
                         type: relative
-                        h: -0.5235
+                        h: 0.5235
                         p: -0.0
                         r: 0
               - LongitudinalAction:
@@ -241,20 +239,20 @@ OpenSCENARIO:
                                             - Position:
                                                 LanePosition:
                                                   roadId: ''
-                                                  laneId: '45'
+                                                  laneId: '298'
                                                   s: ${30 - $Dr}
                                                   offset: 0
                                                   Orientation:
                                                     type: relative
-                                                    h: -0.5235
+                                                    h: 0.5235
                                                     p: -0.0
                                                     r: 0
                                             - Position:
                                                 LanePosition:
                                                   roadId: ''
-                                                  laneId: '45'
+                                                  laneId: '298'
                                                   s: 30
-                                                  offset: ${-$overtake_offset}
+                                                  offset: $overtake_offset
                                                   Orientation:
                                                     type: relative
                                                     h: 0
@@ -263,9 +261,9 @@ OpenSCENARIO:
                                             - Position:
                                                 LanePosition:
                                                   roadId: ''
-                                                  laneId: '45'
+                                                  laneId: '298'
                                                   s: ${30+$__ego_dimensions_length__}
-                                                  offset: ${-$overtake_offset}
+                                                  offset: $overtake_offset
                                                   Orientation:
                                                     type: relative
                                                     h: 0
@@ -274,7 +272,7 @@ OpenSCENARIO:
                                             - Position:
                                                 LanePosition:
                                                   roadId: ''
-                                                  laneId: '45'
+                                                  laneId: '298'
                                                   s: ${30+$__ego_dimensions_length__+$Df}
                                                   offset: 0
                                                   Orientation:
@@ -285,7 +283,7 @@ OpenSCENARIO:
                                             - Position:
                                                 LanePosition:
                                                   roadId: ''
-                                                  laneId: '45'
+                                                  laneId: '298'
                                                   s: 100
                                                   offset: 0
                                                   Orientation:
@@ -313,17 +311,17 @@ OpenSCENARIO:
                         SimulationTimeCondition:
                           value: 0
                           rule: greaterThan
-          - name: act_check_ego_not_moved_when_overtake_over
+          - name: act_check_ego_moved_when_overtake_over
             ManeuverGroup:
               - maximumExecutionCount: 1
-                name: act_check_ego_not_moved_when_overtake_over
+                name: act_check_ego_moved_when_overtake_over
                 Actors:
                   selectTriggeringEntities: false
                   EntityRef: []
                 Maneuver:
                   - name: ''
                     Event:
-                      - name: check_ego_not_moved
+                      - name: check_ego_moved
                         priority: parallel
                         Action:
                           - name: ''
@@ -346,7 +344,7 @@ OpenSCENARIO:
                                         Position:
                                           LanePosition:
                                             roadId: ''
-                                            laneId: '45'
+                                            laneId: '298'
                                             s: 30
                                             offset: 0
                                             Orientation:
@@ -355,10 +353,10 @@ OpenSCENARIO:
                                               p: -0.0
                                               r: 0
                                         value: 0.1
-                                        freespace: true
+                                        freespace: false
                                         relativeDistanceType: euclidianDistance
                                         coordinateSystem: entity
-                                        rule: lessThan
+                                        rule: greaterThan
             StartTrigger:
               ConditionGroup:
                 - Condition:
@@ -375,7 +373,7 @@ OpenSCENARIO:
                             Position:
                               LanePosition:
                                 roadId: ''
-                                laneId: '45'
+                                laneId: '298'
                                 s: 38
                                 offset: 0
                                 Orientation:
@@ -383,7 +381,7 @@ OpenSCENARIO:
                                   h: 0
                                   p: -0.0
                                   r: 0
-                            value: 0
+                            value: 0.5
                             freespace: true
                             relativeDistanceType: longitudinal
                             coordinateSystem: lane
@@ -417,7 +415,7 @@ OpenSCENARIO:
                                         Position:
                                           LanePosition:
                                             roadId: ''
-                                            laneId: '45'
+                                            laneId: '298'
                                             s: 60
                                             offset: 0
                                             Orientation:
@@ -425,7 +423,7 @@ OpenSCENARIO:
                                               h: 0
                                               p: -0.0
                                               r: 0
-                                        tolerance: 1
+                                        tolerance: 0.1
                                 - name: ''
                                   delay: 0
                                   conditionEdge: none
@@ -433,8 +431,7 @@ OpenSCENARIO:
                                     StoryboardElementStateCondition:
                                       state: completeState
                                       storyboardElementType: act
-                                      storyboardElementRef: >-
-                                        act_check_ego_not_moved_when_overtake_over
+                                      storyboardElementRef: act_check_ego_moved_when_overtake_over
                         Action:
                           - name: ''
                             UserDefinedAction:
