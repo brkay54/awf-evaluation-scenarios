@@ -1,10 +1,5 @@
 ScenarioModifiers:
   ScenarioModifier:
-    - name: __tier4_modifier_Vn
-      list:
-        - 1.388889
-        - 2.777778
-        - 4.166667
     - name: __tier4_modifier_min_acc
       list:
         - -1.5
@@ -12,7 +7,7 @@ OpenSCENARIO:
   FileHeader:
     revMajor: 1
     revMinor: 1
-    date: '2024-05-10T11:12:10.732Z'
+    date: '2024-05-28T11:01:35.843Z'
     description: ''
     author: ''
   ParameterDeclarations:
@@ -35,18 +30,12 @@ OpenSCENARIO:
       - name: __ego_center_z__
         parameterType: double
         value: '1.25'
-      - name: Vn
-        parameterType: double
-        value: __tier4_modifier_Vn
       - name: min_acc
         parameterType: double
         value: __tier4_modifier_min_acc
       - name: parking_offset
         parameterType: double
-        value: '1.8'
-      - name: act_start_dist
-        parameterType: double
-        value: '10'
+        value: '2.1'
       - name: D
         parameterType: double
         value: '25'
@@ -185,7 +174,7 @@ OpenSCENARIO:
                     LanePosition:
                       roadId: ''
                       laneId: '45'
-                      s: 30
+                      s: 20
                       offset: 0
                       Orientation:
                         type: relative
@@ -254,82 +243,64 @@ OpenSCENARIO:
     Story:
       - name: ''
         Act:
-          - name: act_start_npc2
+          - name: act_check_ego_stopped
             ManeuverGroup:
               - maximumExecutionCount: 1
-                name: act_start_npc2
+                name: act_check_ego_stopped
                 Actors:
                   selectTriggeringEntities: false
-                  EntityRef:
-                    - entityRef: Npc2
+                  EntityRef: []
                 Maneuver:
                   - name: ''
                     Event:
-                      - name: dummy_event0
+                      - name: check_stopped_bw_npcs
                         priority: parallel
                         Action:
                           - name: ''
-                            PrivateAction:
-                              LongitudinalAction:
-                                SpeedAction:
-                                  SpeedActionDynamics:
-                                    dynamicsDimension: time
-                                    value: 0
-                                    dynamicsShape: step
-                                  SpeedActionTarget:
-                                    AbsoluteTargetSpeed:
-                                      value: $Vn
-                          - name: ''
-                            PrivateAction:
-                              RoutingAction:
-                                FollowTrajectoryAction:
-                                  initialDistanceOffset: 1
-                                  TimeReference:
-                                    Timing:
-                                      domainAbsoluteRelative: relative
-                                      offset: 0
-                                      scale: 1
-                                  TrajectoryFollowingMode:
-                                    followingMode: position
-                                  TrajectoryRef:
-                                    Trajectory:
-                                      closed: false
-                                      name: npc_free
-                                      Shape:
-                                        Polyline:
-                                          Vertex:
-                                            - Position:
-                                                LanePosition:
-                                                  roadId: ''
-                                                  laneId: '45'
-                                                  s: ${60+$D}
-                                                  offset: $parking_offset
-                                                  Orientation:
-                                                    type: relative
-                                                    h: 3.1416
-                                                    p: -0.0
-                                                    r: 0
-                                            - Position:
-                                                LanePosition:
-                                                  roadId: ''
-                                                  laneId: '45'
-                                                  s: 0
-                                                  offset: $parking_offset
-                                                  Orientation:
-                                                    type: relative
-                                                    h: 3.1416
-                                                    p: 0
-                                                    r: 0
+                            UserDefinedAction:
+                              CustomCommandAction:
+                                type: ':'
                         StartTrigger:
                           ConditionGroup:
                             - Condition:
                                 - name: ''
                                   delay: 0
                                   conditionEdge: none
-                                  ByValueCondition:
-                                    SimulationTimeCondition:
-                                      value: 0
-                                      rule: greaterThan
+                                  ByEntityCondition:
+                                    TriggeringEntities:
+                                      triggeringEntitiesRule: any
+                                      EntityRef:
+                                        - entityRef: ego
+                                    EntityCondition:
+                                      SpeedCondition:
+                                        rule: lessOrEqual
+                                        value: 0.5
+                                - name: ''
+                                  delay: 0
+                                  conditionEdge: none
+                                  ByEntityCondition:
+                                    TriggeringEntities:
+                                      triggeringEntitiesRule: any
+                                      EntityRef:
+                                        - entityRef: ego
+                                    EntityCondition:
+                                      DistanceCondition:
+                                        Position:
+                                          LanePosition:
+                                            roadId: ''
+                                            laneId: '45'
+                                            s: 20
+                                            offset: 0
+                                            Orientation:
+                                              type: relative
+                                              h: 0
+                                              p: -0.0
+                                              r: 0
+                                        value: $D
+                                        freespace: true
+                                        relativeDistanceType: longitudinal
+                                        coordinateSystem: lane
+                                        rule: lessOrEqual
             StartTrigger:
               ConditionGroup:
                 - Condition:
@@ -347,8 +318,8 @@ OpenSCENARIO:
                               LanePosition:
                                 roadId: ''
                                 laneId: '45'
-                                s: ${60-$act_start_dist}
-                                offset: 0
+                                s: 60
+                                offset: ${-$parking_offset}
                                 Orientation:
                                   type: relative
                                   h: 0
@@ -453,6 +424,15 @@ OpenSCENARIO:
                                       CollisionCondition:
                                         EntityRef:
                                           entityRef: Npc2
+                            - Condition:
+                                - name: ''
+                                  delay: 0
+                                  conditionEdge: none
+                                  ByValueCondition:
+                                    StoryboardElementStateCondition:
+                                      state: completeState
+                                      storyboardElementType: act
+                                      storyboardElementRef: act_check_ego_stopped
                         Action:
                           - name: ''
                             UserDefinedAction:
