@@ -491,15 +491,15 @@ OpenSCENARIO:
                                       AccelerationCondition:
                                         rule: lessThan
                                         value: $min_acc
-                            - Condition:
-                                - name: ''
-                                  delay: 0
-                                  conditionEdge: none
-                                  ByValueCondition:
-                                    StoryboardElementStateCondition:
-                                      state: completeState
-                                      storyboardElementType: act
-                                      storyboardElementRef: act_check_ego_speed
+#                            - Condition:
+#                                - name: ''
+#                                  delay: 0
+#                                  conditionEdge: none
+#                                  ByValueCondition:
+#                                    StoryboardElementStateCondition:
+#                                      state: completeState
+#                                      storyboardElementType: act
+#                                      storyboardElementRef: act_check_ego_speed
                         Action:
                           - name: ''
                             UserDefinedAction:

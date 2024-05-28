@@ -5,11 +5,10 @@ ScenarioModifiers:
         - 5.555556
     - name: __tier4_modifier_an
       list:
-        - 2
+        - 1.5
     - name: __tier4_modifier_D
       list:
         - 5
-        - 10
     - name: __tier4_modifier_min_acc
       list:
         - -1.5
@@ -413,19 +412,19 @@ OpenSCENARIO:
                                       CollisionCondition:
                                         EntityRef:
                                           entityRef: Npc1
-                            - Condition:
-                                - name: ''
-                                  delay: 0
-                                  conditionEdge: none
-                                  ByEntityCondition:
-                                    TriggeringEntities:
-                                      triggeringEntitiesRule: any
-                                      EntityRef:
-                                        - entityRef: ego
-                                    EntityCondition:
-                                      AccelerationCondition:
-                                        rule: lessThan
-                                        value: $min_acc
+#                            - Condition:
+#                                - name: ''
+#                                  delay: 0
+#                                  conditionEdge: none
+#                                  ByEntityCondition:
+#                                    TriggeringEntities:
+#                                      triggeringEntitiesRule: any
+#                                      EntityRef:
+#                                        - entityRef: ego
+#                                    EntityCondition:
+#                                      AccelerationCondition:
+#                                        rule: lessThan
+#                                        value: $min_acc
                         Action:
                           - name: ''
                             UserDefinedAction:
