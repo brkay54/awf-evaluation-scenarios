@@ -1,56 +1,44 @@
 ScenarioModifiers:
   ScenarioModifier:
+    - name: __tier4_modifier_trigger_dist
+      list:
+        - 10
     - name: __tier4_modifier_Vn
       list:
         - 5.555556
-    - name: __tier4_modifier_an
-      list:
-        - 1.5
-    - name: __tier4_modifier_D
-      list:
-        - 5
-    - name: __tier4_modifier_min_acc
-      list:
-        - -1.5
 OpenSCENARIO:
   FileHeader:
     revMajor: 1
     revMinor: 1
-    date: '2024-05-10T14:19:51.897Z'
+    date: '2024-05-30T12:19:10.713Z'
     description: ''
     author: Berkay Karaman
   ParameterDeclarations:
     ParameterDeclaration:
       - name: __ego_dimensions_length__
         parameterType: double
-        value: '4.89'
+        value: '0'
       - name: __ego_dimensions_width__
         parameterType: double
-        value: '1.896'
+        value: '0'
       - name: __ego_dimensions_height__
         parameterType: double
-        value: '2.5'
+        value: '0'
       - name: __ego_center_x__
         parameterType: double
-        value: '1.345'
+        value: '0'
       - name: __ego_center_y__
         parameterType: double
         value: '0'
       - name: __ego_center_z__
         parameterType: double
-        value: '1.25'
+        value: '0'
+      - name: trigger_dist
+        parameterType: double
+        value: __tier4_modifier_trigger_dist
       - name: Vn
         parameterType: double
         value: __tier4_modifier_Vn
-      - name: an
-        parameterType: double
-        value: __tier4_modifier_an
-      - name: D
-        parameterType: double
-        value: __tier4_modifier_D
-      - name: min_acc
-        parameterType: double
-        value: __tier4_modifier_min_acc
   CatalogLocations:
     CatalogLocation: []
   RoadNetwork:
@@ -68,13 +56,13 @@ OpenSCENARIO:
           vehicleCategory: car
           BoundingBox:
             Center:
-              x: $__ego_center_x__
-              y: $__ego_center_y__
-              z: $__ego_center_z__
+              x: 1.355
+              y: 0
+              z: 1.25
             Dimensions:
-              length: $__ego_dimensions_length__
-              width: $__ego_dimensions_width__
-              height: $__ego_dimensions_height__
+              length: 4.77
+              width: 1.83
+              height: 2.5
           Performance:
             maxSpeed: 50
             maxAcceleration: INF
@@ -82,16 +70,16 @@ OpenSCENARIO:
           Axles:
             FrontAxle:
               maxSteering: 0.5236
-              wheelDiameter: 0.766
-              trackWidth: 1.64
-              positionX: 1.445
-              positionZ: 0.383
+              wheelDiameter: 0.78
+              trackWidth: 1.63
+              positionX: 1.385
+              positionZ: 0.39
             RearAxle:
               maxSteering: 0.5236
-              wheelDiameter: 0.766
-              trackWidth: 1.64
+              wheelDiameter: 0.78
+              trackWidth: 1.63
               positionX: 0
-              positionZ: 0.383
+              positionZ: 0.39
           Properties:
             Property: []
         ObjectController:
@@ -148,8 +136,8 @@ OpenSCENARIO:
                   Position:
                     LanePosition:
                       roadId: ''
-                      laneId: '65'
-                      s: 15
+                      laneId: '225'
+                      s: 5
                       offset: 0
                       Orientation:
                         type: relative
@@ -161,8 +149,8 @@ OpenSCENARIO:
                     Position:
                       LanePosition:
                         roadId: ''
-                        laneId: '78'
-                        s: 10
+                        laneId: '228'
+                        s: 5
                         offset: 0
                         Orientation:
                           type: relative
@@ -175,8 +163,8 @@ OpenSCENARIO:
                   Position:
                     LanePosition:
                       roadId: ''
-                      laneId: '3001097'
-                      s: 15
+                      laneId: '3002164'
+                      s: 20
                       offset: 0
                       Orientation:
                         type: relative
@@ -195,10 +183,10 @@ OpenSCENARIO:
     Story:
       - name: ''
         Act:
-          - name: act_npc1_start
+          - name: act_start_npc
             ManeuverGroup:
               - maximumExecutionCount: 1
-                name: act_npc1_start
+                name: act_start_npc
                 Actors:
                   selectTriggeringEntities: false
                   EntityRef:
@@ -206,7 +194,7 @@ OpenSCENARIO:
                 Maneuver:
                   - name: ''
                     Event:
-                      - name: start_npc1
+                      - name: dummy_event
                         priority: parallel
                         Action:
                           - name: ''
@@ -214,136 +202,51 @@ OpenSCENARIO:
                               LongitudinalAction:
                                 SpeedAction:
                                   SpeedActionDynamics:
-                                    dynamicsDimension: rate
-                                    value: $an
-                                    dynamicsShape: linear
+                                    dynamicsDimension: time
+                                    value: 0
+                                    dynamicsShape: step
                                   SpeedActionTarget:
                                     AbsoluteTargetSpeed:
                                       value: $Vn
-                          - name: ''
-                            PrivateAction:
-                              RoutingAction:
-                                FollowTrajectoryAction:
-                                  initialDistanceOffset: 1
-                                  TimeReference:
-                                    Timing:
-                                      domainAbsoluteRelative: relative
-                                      offset: 0
-                                      scale: 1
-                                  TrajectoryFollowingMode:
-                                    followingMode: position
-                                  TrajectoryRef:
-                                    Trajectory:
-                                      closed: false
-                                      name: npc_free
-                                      Shape:
-                                        Polyline:
-                                          Vertex:
-                                            - Position:
-                                                LanePosition:
-                                                  roadId: ''
-                                                  laneId: '3001097'
-                                                  s: 15
-                                                  offset: 0
-                                                  Orientation:
-                                                    type: relative
-                                                    h: 0
-                                                    p: -0.0
-                                                    r: 0
-                                            - Position:
-                                                LanePosition:
-                                                  roadId: ''
-                                                  laneId: '319'
-                                                  s: 10.0211
-                                                  offset: -0.0177
-                                                  Orientation:
-                                                    type: relative
-                                                    h: 0
-                                                    p: -0.0
-                                                    r: 0
-                                            - Position:
-                                                LanePosition:
-                                                  roadId: ''
-                                                  laneId: '319'
-                                                  s: 17.3774
-                                                  offset: 0.2078
-                                                  Orientation:
-                                                    type: relative
-                                                    h: 0
-                                                    p: -0.0
-                                                    r: 0
-                                            - Position:
-                                                LanePosition:
-                                                  roadId: ''
-                                                  laneId: '319'
-                                                  s: 24.1853
-                                                  offset: 0.3071
-                                                  Orientation:
-                                                    type: relative
-                                                    h: 0
-                                                    p: -0.0
-                                                    r: 0
-                                            - Position:
-                                                LanePosition:
-                                                  roadId: ''
-                                                  laneId: '319'
-                                                  s: 34.7659
-                                                  offset: 0.3092
-                                                  Orientation:
-                                                    type: relative
-                                                    h: 0
-                                                    p: -0.0
-                                                    r: 0
-                                            - Position:
-                                                LanePosition:
-                                                  roadId: ''
-                                                  laneId: '120'
-                                                  s: 25.8879
-                                                  offset: 0.0657
-                                                  Orientation:
-                                                    type: relative
-                                                    h: 0
-                                                    p: -0.0
-                                                    r: 0
                         StartTrigger:
                           ConditionGroup:
                             - Condition:
                                 - name: ''
                                   delay: 0
                                   conditionEdge: none
-                                  ByEntityCondition:
-                                    TriggeringEntities:
-                                      triggeringEntitiesRule: any
-                                      EntityRef:
-                                        - entityRef: ego
-                                    EntityCondition:
-                                      DistanceCondition:
-                                        Position:
-                                          LanePosition:
-                                            roadId: ''
-                                            laneId: '68'
-                                            s: ${30-$D}
-                                            offset: 0
-                                            Orientation:
-                                              type: relative
-                                              h: 0
-                                              p: -0.0
-                                              r: 0
-                                        value: 0.1
-                                        freespace: true
-                                        relativeDistanceType: longitudinal
-                                        coordinateSystem: entity
-                                        rule: lessOrEqual
+                                  ByValueCondition:
+                                    SimulationTimeCondition:
+                                      value: 0
+                                      rule: greaterThan
             StartTrigger:
               ConditionGroup:
                 - Condition:
                     - name: ''
                       delay: 0
                       conditionEdge: none
-                      ByValueCondition:
-                        SimulationTimeCondition:
-                          value: 0
-                          rule: greaterThan
+                      ByEntityCondition:
+                        TriggeringEntities:
+                          triggeringEntitiesRule: any
+                          EntityRef:
+                            - entityRef: ego
+                        EntityCondition:
+                          DistanceCondition:
+                            Position:
+                              LanePosition:
+                                roadId: ''
+                                laneId: '225'
+                                s: 48.0233
+                                offset: -0.2333
+                                Orientation:
+                                  type: relative
+                                  h: 0
+                                  p: -0.0
+                                  r: 0
+                            value: 0.5
+                            freespace: true
+                            relativeDistanceType: longitudinal
+                            coordinateSystem: lane
+                            rule: lessOrEqual
           - name: _EndCondition
             ManeuverGroup:
               - maximumExecutionCount: 1
@@ -373,8 +276,8 @@ OpenSCENARIO:
                                         Position:
                                           LanePosition:
                                             roadId: ''
-                                            laneId: '78'
-                                            s: 10
+                                            laneId: '228'
+                                            s: 5
                                             offset: 0
                                             Orientation:
                                               type: relative
@@ -412,19 +315,6 @@ OpenSCENARIO:
                                       CollisionCondition:
                                         EntityRef:
                                           entityRef: Npc1
-                            - Condition:
-                                - name: ''
-                                  delay: 0
-                                  conditionEdge: none
-                                  ByEntityCondition:
-                                    TriggeringEntities:
-                                      triggeringEntitiesRule: any
-                                      EntityRef:
-                                        - entityRef: ego
-                                    EntityCondition:
-                                      AccelerationCondition:
-                                        rule: lessThan
-                                        value: $min_acc
                         Action:
                           - name: ''
                             UserDefinedAction:
