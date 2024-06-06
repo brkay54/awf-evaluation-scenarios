@@ -3,15 +3,16 @@ ScenarioModifiers:
     - name: __tier4_modifier_Vn
       list:
         - 2.222222
+        - 3.33333
     - name: __tier4_modifier_D
       list:
-        - 15
+        - 7
     - name: __tier4_modifier_max_negative_acc
       list:
         - -1.5
     - name: __tier4_modifier_bicycle_side_offset
       list:
-        - 2.0
+        - 1.6
     - name: __tier4_modifier_lateral_slip
       list:
         - 0.5

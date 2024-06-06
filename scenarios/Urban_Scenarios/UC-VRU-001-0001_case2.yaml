@@ -504,6 +504,93 @@ OpenSCENARIO:
                           state: startTransition
                           storyboardElementType: act
                           storyboardElementRef: act_start_ped_group1
+          - name: act_check_ego_stopped_in_overtaking
+            ManeuverGroup:
+              - maximumExecutionCount: 1
+                name: act_check_ego_stopped_in_overtaking
+                Actors:
+                  selectTriggeringEntities: false
+                  EntityRef: []
+                Maneuver:
+                  - name: ''
+                    Event:
+                      - name: check_stopped
+                        priority: parallel
+                        Action:
+                          - name: ''
+                            UserDefinedAction:
+                              CustomCommandAction:
+                                type: ':'
+                        StartTrigger:
+                          ConditionGroup:
+                            - Condition:
+                                - name: ''
+                                  delay: 0
+                                  conditionEdge: none
+                                  ByEntityCondition:
+                                    TriggeringEntities:
+                                      triggeringEntitiesRule: any
+                                      EntityRef:
+                                        - entityRef: ego
+                                    EntityCondition:
+                                      DistanceCondition:
+                                        Position:
+                                          LanePosition:
+                                            roadId: ''
+                                            laneId: '45'
+                                            s: ${25+$D}
+                                            offset: ${-$offset+0.3}
+                                            Orientation:
+                                              type: relative
+                                              h: 3.1416
+                                              p: -0.0
+                                              r: 0
+                                        value: 0
+                                        freespace: true
+                                        relativeDistanceType: longitudinal
+                                        coordinateSystem: lane
+                                        rule: greaterThan
+                                - name: ''
+                                  delay: 0
+                                  conditionEdge: none
+                                  ByEntityCondition:
+                                    TriggeringEntities:
+                                      triggeringEntitiesRule: any
+                                      EntityRef:
+                                        - entityRef: ego
+                                    EntityCondition:
+                                      SpeedCondition:
+                                        rule: lessOrEqual
+                                        value: 0.1
+            StartTrigger:
+              ConditionGroup:
+                - Condition:
+                    - name: ''
+                      delay: 0
+                      conditionEdge: none
+                      ByEntityCondition:
+                        TriggeringEntities:
+                          triggeringEntitiesRule: any
+                          EntityRef:
+                            - entityRef: ego
+                        EntityCondition:
+                          DistanceCondition:
+                            Position:
+                              LanePosition:
+                                roadId: ''
+                                laneId: '45'
+                                s: 25
+                                offset: ${$offset-0.3}
+                                Orientation:
+                                  type: relative
+                                  h: 0
+                                  p: -0.0
+                                  r: 0
+                            value: 0
+                            freespace: true
+                            relativeDistanceType: longitudinal
+                            coordinateSystem: lane
+                            rule: lessOrEqual
           - name: _EndCondition
             ManeuverGroup:
               - maximumExecutionCount: 1

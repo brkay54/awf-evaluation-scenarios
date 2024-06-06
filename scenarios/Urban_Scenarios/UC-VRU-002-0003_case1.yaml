@@ -3,15 +3,16 @@ ScenarioModifiers:
     - name: __tier4_modifier_Vn
       list:
         - 2.222222
+        - 3.33333
     - name: __tier4_modifier_D
       list:
-        - 15
+        - 7
     - name: __tier4_modifier_max_negative_acc
       list:
         - -1.5
     - name: __tier4_modifier_bicycle_side_offset
       list:
-        - 2
+        - 1.5
     - name: __tier4_modifier_lateral_slip
       list:
         - 0.5
@@ -61,9 +62,9 @@ OpenSCENARIO:
     CatalogLocation: []
   RoadNetwork:
     LogicFile:
-      filepath: lanelet2_map.osm
+      filepath: /home/berkay/projects/awf-evaluation-scenarios/maps/LEO-VM-00008/lanelet2_map.osm
     SceneGraphFile:
-      filepath: lanelet2_map.pcd
+      filepath: /home/berkay/projects/awf-evaluation-scenarios/maps/LEO-VM-00008/pointcloud_map.pcd
     TrafficSignals:
       TrafficSignalController: []
   Entities:

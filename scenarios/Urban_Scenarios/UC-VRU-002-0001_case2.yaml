@@ -57,9 +57,9 @@ OpenSCENARIO:
     CatalogLocation: []
   RoadNetwork:
     LogicFile:
-      filepath: lanelet2_map.osm
+      filepath: /home/berkay/projects/awf-evaluation-scenarios/maps/LEO-VM-00008/lanelet2_map.osm
     SceneGraphFile:
-      filepath: lanelet2_map.pcd
+      filepath: /home/berkay/projects/awf-evaluation-scenarios/maps/LEO-VM-00008/pointcloud_map.pcd
     TrafficSignals:
       TrafficSignalController: []
   Entities:

@@ -5,21 +5,15 @@ ScenarioModifiers:
         - 2.222222
     - name: __tier4_modifier_D
       list:
-        - 7
+        - 12
     - name: __tier4_modifier_max_negative_acc
       list:
         - -1.5
-    - name: __tier4_modifier_bicycle_side_offset
-      list:
-        - 1.7
-    - name: __tier4_modifier_lateral_slip
-      list:
-        - 0.5
 OpenSCENARIO:
   FileHeader:
     revMajor: 1
     revMinor: 1
-    date: '2024-05-13T10:16:13.405Z'
+    date: '2024-06-05T13:10:56.381Z'
     description: ''
     author: ''
   ParameterDeclarations:
@@ -51,19 +45,13 @@ OpenSCENARIO:
       - name: max_negative_acc
         parameterType: double
         value: __tier4_modifier_max_negative_acc
-      - name: bicycle_side_offset
-        parameterType: double
-        value: __tier4_modifier_bicycle_side_offset
-      - name: lateral_slip
-        parameterType: double
-        value: __tier4_modifier_lateral_slip
   CatalogLocations:
     CatalogLocation: []
   RoadNetwork:
     LogicFile:
-      filepath: /home/berkay/projects/awf-evaluation-scenarios/maps/LEO-VM-00001/lanelet2_map.osm
+      filepath: /home/berkay/projects/awf-evaluation-scenarios/maps/LEO-VM-00008/lanelet2_map.osm
     SceneGraphFile:
-      filepath: /home/berkay/projects/awf-evaluation-scenarios/maps/LEO-VM-00001/pointcloud_map.pcd
+      filepath: /home/berkay/projects/awf-evaluation-scenarios/maps/LEO-VM-00008/pointcloud_map.pcd
     TrafficSignals:
       TrafficSignalController: []
   Entities:
@@ -182,11 +170,11 @@ OpenSCENARIO:
                     LanePosition:
                       roadId: ''
                       laneId: '45'
-                      s: 35
-                      offset: $bicycle_side_offset
+                      s: 45
+                      offset: 10
                       Orientation:
                         type: relative
-                        h: 0
+                        h: -0.7854
                         p: -0.0
                         r: 0
               - LongitudinalAction:
@@ -249,11 +237,11 @@ OpenSCENARIO:
                                                 LanePosition:
                                                   roadId: ''
                                                   laneId: '45'
-                                                  s: 35
-                                                  offset: $bicycle_side_offset
+                                                  s: 45
+                                                  offset: 10
                                                   Orientation:
                                                     type: relative
-                                                    h: 0
+                                                    h: -0.7854
                                                     p: -0.0
                                                     r: 0
                                             - Position:
@@ -261,7 +249,7 @@ OpenSCENARIO:
                                                   roadId: ''
                                                   laneId: '45'
                                                   s: 55
-                                                  offset: ${$bicycle_side_offset-$lateral_slip}
+                                                  offset: -1.5
                                                   Orientation:
                                                     type: relative
                                                     h: 0
@@ -271,19 +259,8 @@ OpenSCENARIO:
                                                 LanePosition:
                                                   roadId: ''
                                                   laneId: '45'
-                                                  s: 65
-                                                  offset: ${$bicycle_side_offset-$lateral_slip}
-                                                  Orientation:
-                                                    type: relative
-                                                    h: 0
-                                                    p: -0.0
-                                                    r: 0
-                                            - Position:
-                                                LanePosition:
-                                                  roadId: ''
-                                                  laneId: '45'
-                                                  s: 85
-                                                  offset: $bicycle_side_offset
+                                                  s: 100
+                                                  offset: -1.5
                                                   Orientation:
                                                     type: relative
                                                     h: 0

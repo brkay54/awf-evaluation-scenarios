@@ -1,39 +1,68 @@
 ScenarioModifiers:
-  ScenarioModifier: []
+  ScenarioModifier:
+    - name: __tier4_modifier_min_acc
+      list:
+        - -1.5
+    - name: __tier4_modifier_D
+      list:
+        - 25
+    - name: __tier4_modifier_Vn2
+      list:
+        - 1.38889
+        - 2.77778
+        - 4.16667
+    - name: __tier4_modifier_trigger_dist
+      list:
+        - 7
 OpenSCENARIO:
   FileHeader:
     revMajor: 1
     revMinor: 1
-    date: '2024-06-03T12:31:21.613Z'
+    date: '2024-06-04T10:21:11.857Z'
     description: ''
     author: Berkay Karaman
   ParameterDeclarations:
     ParameterDeclaration:
       - name: __ego_dimensions_length__
         parameterType: double
-        value: '0'
+        value: '4.89'
       - name: __ego_dimensions_width__
         parameterType: double
-        value: '0'
+        value: '1.896'
       - name: __ego_dimensions_height__
         parameterType: double
-        value: '0'
+        value: '2.5'
       - name: __ego_center_x__
         parameterType: double
-        value: '0'
+        value: '1.345'
       - name: __ego_center_y__
         parameterType: double
         value: '0'
       - name: __ego_center_z__
         parameterType: double
-        value: '0'
+        value: '1.25'
+      - name: min_acc
+        parameterType: double
+        value: __tier4_modifier_min_acc
+      - name: parking_offset
+        parameterType: double
+        value: '1.8'
+      - name: D
+        parameterType: double
+        value: __tier4_modifier_D
+      - name: Vn2
+        parameterType: double
+        value: __tier4_modifier_Vn2
+      - name: trigger_dist
+        parameterType: double
+        value: __tier4_modifier_trigger_dist
   CatalogLocations:
     CatalogLocation: []
   RoadNetwork:
     LogicFile:
-      filepath: /home/berkay/projects/awf-evaluation-scenarios/maps/LEO-VM-00080/lanelet2_map.osm
+      filepath: /home/berkay/projects/awf-evaluation-scenarios/maps/LEO-VM-00008/lanelet2_map.osm
     SceneGraphFile:
-      filepath: /home/berkay/projects/awf-evaluation-scenarios/maps/LEO-VM-00080/pointcloud_map.pcd
+      filepath: /home/berkay/projects/awf-evaluation-scenarios/maps/LEO-VM-00008/pointcloud_map.pcd
     TrafficSignals:
       TrafficSignalController: []
   Entities:
@@ -44,13 +73,13 @@ OpenSCENARIO:
           vehicleCategory: car
           BoundingBox:
             Center:
-              x: 1.355
-              y: 0
-              z: 1.25
+              x: $__ego_center_x__
+              y: $__ego_center_y__
+              z: $__ego_center_z__
             Dimensions:
-              length: 4.77
-              width: 1.83
-              height: 2.5
+              length: $__ego_dimensions_length__
+              width: $__ego_dimensions_width__
+              height: $__ego_dimensions_height__
           Performance:
             maxSpeed: 50
             maxAcceleration: INF
@@ -58,16 +87,16 @@ OpenSCENARIO:
           Axles:
             FrontAxle:
               maxSteering: 0.5236
-              wheelDiameter: 0.78
-              trackWidth: 1.63
-              positionX: 1.385
-              positionZ: 0.39
+              wheelDiameter: 0.766
+              trackWidth: 1.64
+              positionX: 1.445
+              positionZ: 0.383
             RearAxle:
               maxSteering: 0.5236
-              wheelDiameter: 0.78
-              trackWidth: 1.63
+              wheelDiameter: 0.766
+              trackWidth: 1.64
               positionX: 0
-              positionZ: 0.39
+              positionZ: 0.383
           Properties:
             Property: []
         ObjectController:
@@ -77,80 +106,6 @@ OpenSCENARIO:
               Property:
                 - name: isEgo
                   value: 'true'
-      - name: Bicycle0
-        Vehicle:
-          name: ''
-          vehicleCategory: bicycle
-          BoundingBox:
-            Center:
-              x: 0
-              y: 0
-              z: 1.25
-            Dimensions:
-              length: 2
-              width: 0.8
-              height: 2.5
-          Performance:
-            maxSpeed: 50
-            maxAcceleration: INF
-            maxDeceleration: INF
-          Axles:
-            FrontAxle:
-              maxSteering: 0.5236
-              wheelDiameter: 0.6
-              trackWidth: 0.8
-              positionX: 1
-              positionZ: 0.3
-            RearAxle:
-              maxSteering: 0.5236
-              wheelDiameter: 0.6
-              trackWidth: 0.8
-              positionX: 0
-              positionZ: 0.3
-          Properties:
-            Property: []
-        ObjectController:
-          Controller:
-            name: ''
-            Properties:
-              Property: []
-      - name: Bicycle1
-        Vehicle:
-          name: ''
-          vehicleCategory: bicycle
-          BoundingBox:
-            Center:
-              x: 0
-              y: 0
-              z: 1.25
-            Dimensions:
-              length: 2
-              width: 0.8
-              height: 2.5
-          Performance:
-            maxSpeed: 50
-            maxAcceleration: INF
-            maxDeceleration: INF
-          Axles:
-            FrontAxle:
-              maxSteering: 0.5236
-              wheelDiameter: 0.6
-              trackWidth: 0.8
-              positionX: 1
-              positionZ: 0.3
-            RearAxle:
-              maxSteering: 0.5236
-              wheelDiameter: 0.6
-              trackWidth: 0.8
-              positionX: 0
-              positionZ: 0.3
-          Properties:
-            Property: []
-        ObjectController:
-          Controller:
-            name: ''
-            Properties:
-              Property: []
       - name: Npc1
         Vehicle:
           name: ''
@@ -236,8 +191,8 @@ OpenSCENARIO:
                     LanePosition:
                       roadId: ''
                       laneId: '45'
-                      s: 5
-                      offset: -2
+                      s: 20
+                      offset: 0
                       Orientation:
                         type: relative
                         h: 0
@@ -249,68 +204,22 @@ OpenSCENARIO:
                       LanePosition:
                         roadId: ''
                         laneId: '45'
-                        s: 200
-                        offset: -2
+                        s: 100
+                        offset: 0
                         Orientation:
                           type: relative
                           h: 0
                           p: -0.0
                           r: 0
-          - entityRef: Bicycle0
-            PrivateAction:
-              - TeleportAction:
-                  Position:
-                    LanePosition:
-                      roadId: ''
-                      laneId: '45'
-                      s: 50
-                      offset: -3
-                      Orientation:
-                        type: relative
-                        h: 0
-                        p: -0.0
-                        r: 0
-              - LongitudinalAction:
-                  SpeedAction:
-                    SpeedActionDynamics:
-                      dynamicsDimension: time
-                      value: 0
-                      dynamicsShape: step
-                    SpeedActionTarget:
-                      AbsoluteTargetSpeed:
-                        value: 0
-          - entityRef: Bicycle1
-            PrivateAction:
-              - TeleportAction:
-                  Position:
-                    LanePosition:
-                      roadId: ''
-                      laneId: '45'
-                      s: 51
-                      offset: -2.5
-                      Orientation:
-                        type: relative
-                        h: 0
-                        p: -0.0
-                        r: 0
-              - LongitudinalAction:
-                  SpeedAction:
-                    SpeedActionDynamics:
-                      dynamicsDimension: time
-                      value: 0
-                      dynamicsShape: step
-                    SpeedActionTarget:
-                      AbsoluteTargetSpeed:
-                        value: 0
           - entityRef: Npc1
             PrivateAction:
               - TeleportAction:
                   Position:
                     LanePosition:
                       roadId: ''
-                      laneId: '52'
-                      s: 900
-                      offset: -2
+                      laneId: '45'
+                      s: 60
+                      offset: $parking_offset
                       Orientation:
                         type: relative
                         h: 0
@@ -331,12 +240,12 @@ OpenSCENARIO:
                   Position:
                     LanePosition:
                       roadId: ''
-                      laneId: '52'
-                      s: 880
-                      offset: -2
+                      laneId: '45'
+                      s: ${60+$D}
+                      offset: ${-$parking_offset}
                       Orientation:
                         type: relative
-                        h: 0
+                        h: 3.1416
                         p: -0.0
                         r: 0
               - LongitudinalAction:
@@ -351,74 +260,18 @@ OpenSCENARIO:
     Story:
       - name: ''
         Act:
-          - name: act_start_bicycle
+          - name: act_start_npc2
             ManeuverGroup:
               - maximumExecutionCount: 1
-                name: act_start_bicycle
+                name: act_start_npc2
                 Actors:
                   selectTriggeringEntities: false
                   EntityRef:
-                    - entityRef: Bicycle1
-                    - entityRef: Bicycle0
-                Maneuver:
-                  - name: ''
-                    Event:
-                      - name: dummy_event
-                        priority: parallel
-                        Action:
-                          - name: ''
-                            PrivateAction:
-                              LongitudinalAction:
-                                SpeedAction:
-                                  SpeedActionDynamics:
-                                    dynamicsDimension: time
-                                    value: 0
-                                    dynamicsShape: step
-                                  SpeedActionTarget:
-                                    AbsoluteTargetSpeed:
-                                      value: 2.77778
-                        StartTrigger:
-                          ConditionGroup:
-                            - Condition:
-                                - name: ''
-                                  delay: 0
-                                  conditionEdge: none
-                                  ByValueCondition:
-                                    SimulationTimeCondition:
-                                      value: 0
-                                      rule: greaterThan
-            StartTrigger:
-              ConditionGroup:
-                - Condition:
-                    - name: ''
-                      delay: 0
-                      conditionEdge: none
-                      ByEntityCondition:
-                        TriggeringEntities:
-                          triggeringEntitiesRule: any
-                          EntityRef:
-                            - entityRef: ego
-                        EntityCondition:
-                          RelativeDistanceCondition:
-                            entityRef: Bicycle0
-                            relativeDistanceType: longitudinal
-                            coordinateSystem: lane
-                            value: 15
-                            freespace: true
-                            rule: lessOrEqual
-          - name: act_start_npcs
-            ManeuverGroup:
-              - maximumExecutionCount: 1
-                name: act_start_npcs
-                Actors:
-                  selectTriggeringEntities: false
-                  EntityRef:
-                    - entityRef: Npc1
                     - entityRef: Npc2
                 Maneuver:
                   - name: ''
                     Event:
-                      - name: dummy_event1
+                      - name: dummy_event0
                         priority: parallel
                         Action:
                           - name: ''
@@ -431,7 +284,7 @@ OpenSCENARIO:
                                     dynamicsShape: step
                                   SpeedActionTarget:
                                     AbsoluteTargetSpeed:
-                                      value: 4.16667
+                                      value: ${-$Vn2}
                         StartTrigger:
                           ConditionGroup:
                             - Condition:
@@ -454,12 +307,22 @@ OpenSCENARIO:
                           EntityRef:
                             - entityRef: ego
                         EntityCondition:
-                          RelativeDistanceCondition:
-                            entityRef: Bicycle0
+                          DistanceCondition:
+                            Position:
+                              LanePosition:
+                                roadId: ''
+                                laneId: '45'
+                                s: 60
+                                offset: ${-$parking_offset}
+                                Orientation:
+                                  type: relative
+                                  h: 0
+                                  p: -0.0
+                                  r: 0
+                            value: $trigger_dist
+                            freespace: true
                             relativeDistanceType: longitudinal
                             coordinateSystem: lane
-                            value: 10
-                            freespace: true
                             rule: lessOrEqual
           - name: _EndCondition
             ManeuverGroup:
@@ -491,8 +354,8 @@ OpenSCENARIO:
                                           LanePosition:
                                             roadId: ''
                                             laneId: '45'
-                                            s: 200
-                                            offset: -2
+                                            s: 100
+                                            offset: 0
                                             Orientation:
                                               type: relative
                                               h: 0
@@ -514,7 +377,7 @@ OpenSCENARIO:
                                   conditionEdge: none
                                   ByValueCondition:
                                     SimulationTimeCondition:
-                                      value: 180
+                                      value: 60
                                       rule: greaterThan
                             - Condition:
                                 - name: ''
@@ -528,33 +391,20 @@ OpenSCENARIO:
                                     EntityCondition:
                                       CollisionCondition:
                                         EntityRef:
-                                          entityRef: Bicycle0
-                            - Condition:
-                                - name: ''
-                                  delay: 0
-                                  conditionEdge: none
-                                  ByEntityCondition:
-                                    TriggeringEntities:
-                                      triggeringEntitiesRule: any
-                                      EntityRef:
-                                        - entityRef: ego
-                                    EntityCondition:
-                                      CollisionCondition:
-                                        EntityRef:
-                                          entityRef: Bicycle1
-                            - Condition:
-                                - name: ''
-                                  delay: 0
-                                  conditionEdge: none
-                                  ByEntityCondition:
-                                    TriggeringEntities:
-                                      triggeringEntitiesRule: any
-                                      EntityRef:
-                                        - entityRef: ego
-                                    EntityCondition:
-                                      CollisionCondition:
-                                        EntityRef:
                                           entityRef: Npc1
+                            - Condition:
+                                - name: ''
+                                  delay: 0
+                                  conditionEdge: none
+                                  ByEntityCondition:
+                                    TriggeringEntities:
+                                      triggeringEntitiesRule: any
+                                      EntityRef:
+                                        - entityRef: ego
+                                    EntityCondition:
+                                      AccelerationCondition:
+                                        rule: lessThan
+                                        value: $min_acc
                             - Condition:
                                 - name: ''
                                   delay: 0

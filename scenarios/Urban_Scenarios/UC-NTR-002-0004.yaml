@@ -1,25 +1,19 @@
 ScenarioModifiers:
   ScenarioModifier:
-    - name: __tier4_modifier_Vn
+    - name: __tier4_modifier_trigger_dist
       list:
-        - 2.222222
-    - name: __tier4_modifier_D
+        - 30
+    - name: __tier4_modifier_Vn2
       list:
-        - 7
-    - name: __tier4_modifier_max_negative_acc
+        - 4.16667
+    - name: __tier4_modifier_min_acc
       list:
         - -1.5
-    - name: __tier4_modifier_bicycle_side_offset
-      list:
-        - 1.7
-    - name: __tier4_modifier_lateral_slip
-      list:
-        - 0.5
 OpenSCENARIO:
   FileHeader:
     revMajor: 1
     revMinor: 1
-    date: '2024-05-13T10:16:13.405Z'
+    date: '2024-06-04T12:22:04.461Z'
     description: ''
     author: ''
   ParameterDeclarations:
@@ -42,28 +36,22 @@ OpenSCENARIO:
       - name: __ego_center_z__
         parameterType: double
         value: '0'
-      - name: Vn
+      - name: trigger_dist
         parameterType: double
-        value: __tier4_modifier_Vn
-      - name: D
+        value: __tier4_modifier_trigger_dist
+      - name: Vn2
         parameterType: double
-        value: __tier4_modifier_D
-      - name: max_negative_acc
+        value: __tier4_modifier_Vn2
+      - name: min_acc
         parameterType: double
-        value: __tier4_modifier_max_negative_acc
-      - name: bicycle_side_offset
-        parameterType: double
-        value: __tier4_modifier_bicycle_side_offset
-      - name: lateral_slip
-        parameterType: double
-        value: __tier4_modifier_lateral_slip
+        value: __tier4_modifier_min_acc
   CatalogLocations:
     CatalogLocation: []
   RoadNetwork:
     LogicFile:
-      filepath: /home/berkay/projects/awf-evaluation-scenarios/maps/LEO-VM-00001/lanelet2_map.osm
+      filepath: /home/berkay/projects/awf-evaluation-scenarios/maps/LEO-VM-00010/lanelet2_map.osm
     SceneGraphFile:
-      filepath: /home/berkay/projects/awf-evaluation-scenarios/maps/LEO-VM-00001/pointcloud_map.pcd
+      filepath: /home/berkay/projects/awf-evaluation-scenarios/maps/LEO-VM-00010/pointcloud_map.pcd
     TrafficSignals:
       TrafficSignalController: []
   Entities:
@@ -107,18 +95,18 @@ OpenSCENARIO:
               Property:
                 - name: isEgo
                   value: 'true'
-      - name: Bicycle0
+      - name: Npc1
         Vehicle:
           name: ''
-          vehicleCategory: bicycle
+          vehicleCategory: car
           BoundingBox:
             Center:
               x: 0
               y: 0
               z: 1.25
             Dimensions:
-              length: 2
-              width: 0.8
+              length: 4
+              width: 1.8
               height: 2.5
           Performance:
             maxSpeed: 50
@@ -128,13 +116,50 @@ OpenSCENARIO:
             FrontAxle:
               maxSteering: 0.5236
               wheelDiameter: 0.6
-              trackWidth: 0.8
-              positionX: 1
+              trackWidth: 1.8
+              positionX: 2
               positionZ: 0.3
             RearAxle:
               maxSteering: 0.5236
               wheelDiameter: 0.6
-              trackWidth: 0.8
+              trackWidth: 1.8
+              positionX: 0
+              positionZ: 0.3
+          Properties:
+            Property: []
+        ObjectController:
+          Controller:
+            name: ''
+            Properties:
+              Property: []
+      - name: Npc2
+        Vehicle:
+          name: ''
+          vehicleCategory: car
+          BoundingBox:
+            Center:
+              x: 0
+              y: 0
+              z: 1.25
+            Dimensions:
+              length: 4
+              width: 1.8
+              height: 2.5
+          Performance:
+            maxSpeed: 50
+            maxAcceleration: INF
+            maxDeceleration: INF
+          Axles:
+            FrontAxle:
+              maxSteering: 0.5236
+              wheelDiameter: 0.6
+              trackWidth: 1.8
+              positionX: 2
+              positionZ: 0.3
+            RearAxle:
+              maxSteering: 0.5236
+              wheelDiameter: 0.6
+              trackWidth: 1.8
               positionX: 0
               positionZ: 0.3
           Properties:
@@ -154,7 +179,7 @@ OpenSCENARIO:
                   Position:
                     LanePosition:
                       roadId: ''
-                      laneId: '45'
+                      laneId: '298'
                       s: 5
                       offset: 0
                       Orientation:
@@ -167,23 +192,46 @@ OpenSCENARIO:
                     Position:
                       LanePosition:
                         roadId: ''
-                        laneId: '45'
-                        s: 125
+                        laneId: '298'
+                        s: 130
                         offset: 0
                         Orientation:
                           type: relative
                           h: 0
                           p: -0.0
                           r: 0
-          - entityRef: Bicycle0
+          - entityRef: Npc1
             PrivateAction:
               - TeleportAction:
                   Position:
                     LanePosition:
                       roadId: ''
-                      laneId: '45'
-                      s: 35
-                      offset: $bicycle_side_offset
+                      laneId: '297'
+                      s: 920
+                      offset: -1
+                      Orientation:
+                        type: relative
+                        h: 0
+                        p: -0.0
+                        r: 0
+              - LongitudinalAction:
+                  SpeedAction:
+                    SpeedActionDynamics:
+                      dynamicsDimension: time
+                      value: 0
+                      dynamicsShape: step
+                    SpeedActionTarget:
+                      AbsoluteTargetSpeed:
+                        value: 0
+          - entityRef: Npc2
+            PrivateAction:
+              - TeleportAction:
+                  Position:
+                    LanePosition:
+                      roadId: ''
+                      laneId: '297'
+                      s: 910
+                      offset: 0
                       Orientation:
                         type: relative
                         h: 0
@@ -201,18 +249,18 @@ OpenSCENARIO:
     Story:
       - name: ''
         Act:
-          - name: act_start_bicycle
+          - name: act_start_npc2
             ManeuverGroup:
               - maximumExecutionCount: 1
-                name: act_start_bicycle
+                name: act_start_npc2
                 Actors:
                   selectTriggeringEntities: false
                   EntityRef:
-                    - entityRef: Bicycle0
+                    - entityRef: Npc2
                 Maneuver:
                   - name: ''
                     Event:
-                      - name: dummy_event
+                      - name: start_npc2
                         priority: parallel
                         Action:
                           - name: ''
@@ -220,12 +268,12 @@ OpenSCENARIO:
                               LongitudinalAction:
                                 SpeedAction:
                                   SpeedActionDynamics:
-                                    dynamicsDimension: time
-                                    value: 0
-                                    dynamicsShape: step
+                                    dynamicsDimension: rate
+                                    value: 1
+                                    dynamicsShape: linear
                                   SpeedActionTarget:
                                     AbsoluteTargetSpeed:
-                                      value: $Vn
+                                      value: $Vn2
                           - name: ''
                             PrivateAction:
                               RoutingAction:
@@ -248,9 +296,9 @@ OpenSCENARIO:
                                             - Position:
                                                 LanePosition:
                                                   roadId: ''
-                                                  laneId: '45'
-                                                  s: 35
-                                                  offset: $bicycle_side_offset
+                                                  laneId: '297'
+                                                  s: 910
+                                                  offset: 0
                                                   Orientation:
                                                     type: relative
                                                     h: 0
@@ -259,9 +307,9 @@ OpenSCENARIO:
                                             - Position:
                                                 LanePosition:
                                                   roadId: ''
-                                                  laneId: '45'
-                                                  s: 55
-                                                  offset: ${$bicycle_side_offset-$lateral_slip}
+                                                  laneId: '297'
+                                                  s: 915
+                                                  offset: 0
                                                   Orientation:
                                                     type: relative
                                                     h: 0
@@ -270,9 +318,9 @@ OpenSCENARIO:
                                             - Position:
                                                 LanePosition:
                                                   roadId: ''
-                                                  laneId: '45'
-                                                  s: 65
-                                                  offset: ${$bicycle_side_offset-$lateral_slip}
+                                                  laneId: '297'
+                                                  s: 920
+                                                  offset: 2
                                                   Orientation:
                                                     type: relative
                                                     h: 0
@@ -281,9 +329,31 @@ OpenSCENARIO:
                                             - Position:
                                                 LanePosition:
                                                   roadId: ''
-                                                  laneId: '45'
-                                                  s: 85
-                                                  offset: $bicycle_side_offset
+                                                  laneId: '297'
+                                                  s: 924
+                                                  offset: 2
+                                                  Orientation:
+                                                    type: relative
+                                                    h: 0
+                                                    p: -0.0
+                                                    r: 0
+                                            - Position:
+                                                LanePosition:
+                                                  roadId: ''
+                                                  laneId: '297'
+                                                  s: 930
+                                                  offset: 0
+                                                  Orientation:
+                                                    type: relative
+                                                    h: 0
+                                                    p: -0.0
+                                                    r: 0
+                                            - Position:
+                                                LanePosition:
+                                                  roadId: ''
+                                                  laneId: '297'
+                                                  s: 950
+                                                  offset: 0
                                                   Orientation:
                                                     type: relative
                                                     h: 0
@@ -312,10 +382,10 @@ OpenSCENARIO:
                             - entityRef: ego
                         EntityCondition:
                           RelativeDistanceCondition:
-                            entityRef: Bicycle0
+                            entityRef: Npc1
                             relativeDistanceType: longitudinal
                             coordinateSystem: entity
-                            value: $D
+                            value: $trigger_dist
                             freespace: true
                             rule: lessOrEqual
           - name: _EndCondition
@@ -347,8 +417,8 @@ OpenSCENARIO:
                                         Position:
                                           LanePosition:
                                             roadId: ''
-                                            laneId: '45'
-                                            s: 125
+                                            laneId: '298'
+                                            s: 130
                                             offset: 0
                                             Orientation:
                                               type: relative
@@ -385,7 +455,20 @@ OpenSCENARIO:
                                     EntityCondition:
                                       CollisionCondition:
                                         EntityRef:
-                                          entityRef: Bicycle0
+                                          entityRef: Npc1
+                            - Condition:
+                                - name: ''
+                                  delay: 0
+                                  conditionEdge: none
+                                  ByEntityCondition:
+                                    TriggeringEntities:
+                                      triggeringEntitiesRule: any
+                                      EntityRef:
+                                        - entityRef: ego
+                                    EntityCondition:
+                                      CollisionCondition:
+                                        EntityRef:
+                                          entityRef: Npc2
                             - Condition:
                                 - name: ''
                                   delay: 0
@@ -397,8 +480,8 @@ OpenSCENARIO:
                                         - entityRef: ego
                                     EntityCondition:
                                       AccelerationCondition:
-                                        rule: lessOrEqual
-                                        value: $max_negative_acc
+                                        rule: lessThan
+                                        value: $min_acc
                         Action:
                           - name: ''
                             UserDefinedAction:

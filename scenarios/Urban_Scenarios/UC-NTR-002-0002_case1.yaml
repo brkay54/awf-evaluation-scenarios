@@ -3,11 +3,16 @@ ScenarioModifiers:
     - name: __tier4_modifier_min_acc
       list:
         - -1.5
+    - name: __tier4_modifier_D
+      list:
+        - 25
+        - 20
+        - 15
 OpenSCENARIO:
   FileHeader:
     revMajor: 1
     revMinor: 1
-    date: '2024-05-28T11:01:35.843Z'
+    date: '2024-06-04T09:11:53.380Z'
     description: ''
     author: ''
   ParameterDeclarations:
@@ -38,7 +43,7 @@ OpenSCENARIO:
         value: '2.1'
       - name: D
         parameterType: double
-        value: '25'
+        value: __tier4_modifier_D
   CatalogLocations:
     CatalogLocation: []
   RoadNetwork:

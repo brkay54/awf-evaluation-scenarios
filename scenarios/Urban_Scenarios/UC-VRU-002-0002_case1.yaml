@@ -5,7 +5,7 @@ ScenarioModifiers:
         - 2.222222
     - name: __tier4_modifier_D
       list:
-        - 15
+        - 7
     - name: __tier4_modifier_max_negative_acc
       list:
         - -1.5

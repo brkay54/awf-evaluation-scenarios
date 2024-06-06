@@ -20,7 +20,7 @@ OpenSCENARIO:
   FileHeader:
     revMajor: 1
     revMinor: 1
-    date: '2024-05-13T08:39:11.016Z'
+    date: '2024-06-05T08:33:07.367Z'
     description: ''
     author: ''
   ParameterDeclarations:
@@ -234,7 +234,7 @@ OpenSCENARIO:
                       LanePosition:
                         roadId: ''
                         laneId: '45'
-                        s: 70
+                        s: 80
                         offset: 0
                         Orientation:
                           type: relative
@@ -504,6 +504,93 @@ OpenSCENARIO:
                           state: startTransition
                           storyboardElementType: act
                           storyboardElementRef: act_start_ped_group1
+          - name: act_check_ego_stopped_in_overtaking
+            ManeuverGroup:
+              - maximumExecutionCount: 1
+                name: act_check_ego_stopped_in_overtaking
+                Actors:
+                  selectTriggeringEntities: false
+                  EntityRef: []
+                Maneuver:
+                  - name: ''
+                    Event:
+                      - name: check_stopped
+                        priority: parallel
+                        Action:
+                          - name: ''
+                            UserDefinedAction:
+                              CustomCommandAction:
+                                type: ':'
+                        StartTrigger:
+                          ConditionGroup:
+                            - Condition:
+                                - name: ''
+                                  delay: 0
+                                  conditionEdge: none
+                                  ByEntityCondition:
+                                    TriggeringEntities:
+                                      triggeringEntitiesRule: any
+                                      EntityRef:
+                                        - entityRef: ego
+                                    EntityCondition:
+                                      DistanceCondition:
+                                        Position:
+                                          LanePosition:
+                                            roadId: ''
+                                            laneId: '45'
+                                            s: ${25+$D}
+                                            offset: ${-$offset+0.3}
+                                            Orientation:
+                                              type: relative
+                                              h: 3.1416
+                                              p: -0.0
+                                              r: 0
+                                        value: 0
+                                        freespace: true
+                                        relativeDistanceType: longitudinal
+                                        coordinateSystem: lane
+                                        rule: greaterThan
+                                - name: ''
+                                  delay: 0
+                                  conditionEdge: none
+                                  ByEntityCondition:
+                                    TriggeringEntities:
+                                      triggeringEntitiesRule: any
+                                      EntityRef:
+                                        - entityRef: ego
+                                    EntityCondition:
+                                      SpeedCondition:
+                                        rule: lessOrEqual
+                                        value: 0.1
+            StartTrigger:
+              ConditionGroup:
+                - Condition:
+                    - name: ''
+                      delay: 0
+                      conditionEdge: none
+                      ByEntityCondition:
+                        TriggeringEntities:
+                          triggeringEntitiesRule: any
+                          EntityRef:
+                            - entityRef: ego
+                        EntityCondition:
+                          DistanceCondition:
+                            Position:
+                              LanePosition:
+                                roadId: ''
+                                laneId: '45'
+                                s: 25
+                                offset: ${$offset-0.3}
+                                Orientation:
+                                  type: relative
+                                  h: 0
+                                  p: -0.0
+                                  r: 0
+                            value: 0
+                            freespace: true
+                            relativeDistanceType: longitudinal
+                            coordinateSystem: lane
+                            rule: lessOrEqual
           - name: _EndCondition
             ManeuverGroup:
               - maximumExecutionCount: 1
@@ -534,7 +621,7 @@ OpenSCENARIO:
                                           LanePosition:
                                             roadId: ''
                                             laneId: '45'
-                                            s: 70
+                                            s: 80
                                             offset: 0
                                             Orientation:
                                               type: relative
@@ -650,6 +737,15 @@ OpenSCENARIO:
                                       AccelerationCondition:
                                         rule: lessThan
                                         value: $min_acc
+                            - Condition:
+                                - name: ''
+                                  delay: 0
+                                  conditionEdge: none
+                                  ByValueCondition:
+                                    StoryboardElementStateCondition:
+                                      state: completeState
+                                      storyboardElementType: act
+                                      storyboardElementRef: act_check_ego_stopped_in_overtaking
                         Action:
                           - name: ''
                             UserDefinedAction:
