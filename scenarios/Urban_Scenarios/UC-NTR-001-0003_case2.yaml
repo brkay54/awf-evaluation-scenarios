@@ -354,7 +354,7 @@ OpenSCENARIO:
                                               h: 0
                                               p: -0.0
                                               r: 0
-                                        value: 0.1
+                                        value: 0.001
                                         freespace: true
                                         relativeDistanceType: euclidianDistance
                                         coordinateSystem: entity
@@ -387,7 +387,7 @@ OpenSCENARIO:
                             freespace: true
                             relativeDistanceType: longitudinal
                             coordinateSystem: lane
-                            rule: lessOrEqual
+                            rule: greaterOrEqual
           - name: _EndCondition
             ManeuverGroup:
               - maximumExecutionCount: 1

@@ -9,7 +9,7 @@ ScenarioModifiers:
         - -1.5
     - name: __tier4_modifier_npc_lc_dist
       list:
-        - 2
+        - 1
 OpenSCENARIO:
   FileHeader:
     revMajor: 1
