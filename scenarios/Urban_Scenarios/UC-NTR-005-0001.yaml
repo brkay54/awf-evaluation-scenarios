@@ -275,7 +275,7 @@ OpenSCENARIO:
                                         entityRef: Npc1
                                         relativeDistanceType: longitudinal
                                         coordinateSystem: lane
-                                        value: 8.5
+                                        value: 12.5
                                         freespace: true
                                         rule: lessOrEqual
             StartTrigger:
