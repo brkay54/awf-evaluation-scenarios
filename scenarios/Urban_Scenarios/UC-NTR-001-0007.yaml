@@ -6,7 +6,7 @@ ScenarioModifiers:
         - 5.555556
     - name: __tier4_modifier_min_acc
       list:
-        - -1.5
+        - -2.45
     - name: __tier4_modifier_npc_lc_dist
       list:
         - 1
