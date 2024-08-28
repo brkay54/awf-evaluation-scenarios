@@ -1,0 +1,1009 @@
+OpenSCENARIO:
+  CatalogLocations:
+    CatalogLocation: []
+  Entities:
+    ScenarioObject:
+      - ObjectController:
+          Controller:
+            Properties:
+              Property:
+                - name: isEgo
+                  value: 'true'
+            name: ''
+        Vehicle:
+          Axles:
+            FrontAxle:
+              maxSteering: 0.5236
+              positionX: 1.4
+              positionZ: 0.31
+              trackWidth: 1.485
+              wheelDiameter: 0.62
+            RearAxle:
+              maxSteering: 0.5236
+              positionX: 0
+              positionZ: 0.31
+              trackWidth: 1.485
+              wheelDiameter: 0.62
+          BoundingBox:
+            Center:
+              x: $__ego_center_x__
+              y: $__ego_center_y__
+              z: $__ego_center_z__
+            Dimensions:
+              height: $__ego_dimensions_height__
+              length: $__ego_dimensions_length__
+              width: $__ego_dimensions_width__
+          Performance:
+            maxAcceleration: INF
+            maxDeceleration: INF
+            maxSpeed: 50
+          Properties:
+            Property: []
+          name: ''
+          vehicleCategory: car
+        name: ego
+      - ObjectController:
+          Controller:
+            Properties:
+              Property: []
+            name: ''
+        Vehicle:
+          Axles:
+            FrontAxle:
+              maxSteering: 0.5236
+              positionX: 1
+              positionZ: 0.3
+              trackWidth: 0.8
+              wheelDiameter: 0.6
+            RearAxle:
+              maxSteering: 0.5236
+              positionX: 0
+              positionZ: 0.3
+              trackWidth: 0.8
+              wheelDiameter: 0.6
+          BoundingBox:
+            Center:
+              x: 0
+              y: 0
+              z: 1.25
+            Dimensions:
+              height: 2.5
+              length: 2
+              width: 0.8
+          Performance:
+            maxAcceleration: INF
+            maxDeceleration: INF
+            maxSpeed: 50
+          Properties:
+            Property: []
+          name: ''
+          vehicleCategory: bicycle
+        name: Bicycle0
+      - Pedestrian:
+          BoundingBox:
+            Center:
+              x: 0
+              y: 0
+              z: 1
+            Dimensions:
+              height: 2
+              length: 0.8
+              width: 0.8
+          Properties:
+            Property: []
+          mass: 60
+          model: ''
+          name: Pedestrian
+          pedestrianCategory: pedestrian
+        name: Pedestrian2
+      - Pedestrian:
+          BoundingBox:
+            Center:
+              x: 0
+              y: 0
+              z: 1
+            Dimensions:
+              height: 2
+              length: 0.8
+              width: 0.8
+          Properties:
+            Property: []
+          mass: 60
+          model: ''
+          name: Pedestrian
+          pedestrianCategory: pedestrian
+        name: Pedestrian1
+  FileHeader:
+    author: 'SHUHEI TSUNODA (last modified by: Masaharu Takano)'
+    date: '2024-01-25T05:23:28.753Z'
+    description: >-
+      交差点直進／信号あり（青）／出口横断歩道近づく（左右）
+
+      https://github.com/tier4/AutonomousDrivingScenarios/tree/master/common/scenario/UC-D-01_横断歩道_経路追従/UC-v2-D-01-00004_004/
+    revMajor: 1
+    revMinor: 1
+  ParameterDeclarations:
+    ParameterDeclaration:
+      - name: ego_speed
+        parameterType: double
+        value: __tier4_modifier_ego_speed
+      - name: __ego_dimensions_length__
+        parameterType: double
+        value: '4.4'
+      - name: __ego_dimensions_width__
+        parameterType: double
+        value: '1.695'
+      - name: __ego_dimensions_height__
+        parameterType: double
+        value: '2.5'
+      - name: __ego_center_x__
+        parameterType: double
+        value: '1.35'
+      - name: __ego_center_y__
+        parameterType: double
+        value: '0'
+      - name: __ego_center_z__
+        parameterType: double
+        value: '1.25'
+  RoadNetwork:
+    LogicFile:
+      filepath: /home/berkay/projects/awf-evaluation-scenarios/maps/awf_cicd_virtual_E_dev/lanelet2_map.osm
+    SceneGraphFile:
+      filepath: /home/berkay/projects/awf-evaluation-scenarios/maps/awf_cicd_virtual_E_dev/pointcloud_map.pcd
+    TrafficSignals:
+      TrafficSignalController:
+        - Phase:
+            - TrafficSignalState:
+                - state: red solidOn circle
+                  trafficSignalId: '10001'
+                - state: green solidOn circle
+                  trafficSignalId: '10011'
+                - state: green solidOn circle
+                  trafficSignalId: '10010'
+              duration: INF
+              name: RED
+            - TrafficSignalState:
+                - state: green solidOn circle
+                  trafficSignalId: '10001'
+                - state: red solidOn circle
+                  trafficSignalId: '10011'
+                - state: red solidOn circle
+                  trafficSignalId: '10010'
+              duration: INF
+              name: GREEN
+          name: CrossRoadSignal
+  Storyboard:
+    Init:
+      Actions:
+        GlobalAction:
+          - InfrastructureAction:
+              TrafficSignalAction:
+                TrafficSignalControllerAction:
+                  phase: GREEN
+                  trafficSignalControllerRef: CrossRoadSignal
+        Private:
+          - PrivateAction:
+              - TeleportAction:
+                  Position:
+                    LanePosition:
+                      Orientation:
+                        h: 0
+                        p: 0
+                        r: 0
+                        type: relative
+                      laneId: '3840'
+                      offset: 0
+                      roadId: ''
+                      s: ${260-$ego_speed*20}
+              - RoutingAction:
+                  AcquirePositionAction:
+                    Position:
+                      LanePosition:
+                        Orientation:
+                          h: 0
+                          p: 0
+                          r: 0
+                          type: relative
+                        laneId: '3842'
+                        offset: 0
+                        roadId: ''
+                        s: ${$ego_speed*12}
+              - ControllerAction:
+                  AssignControllerAction:
+                    Controller:
+                      Properties:
+                        Property:
+                          - name: maxSpeed
+                            value: $ego_speed
+                      name: ''
+            entityRef: ego
+          - PrivateAction:
+              - TeleportAction:
+                  Position:
+                    LanePosition:
+                      Orientation:
+                        h: -1.5505
+                        p: 0
+                        r: 0
+                        type: relative
+                      laneId: '3829'
+                      offset: 4.5
+                      roadId: ''
+                      s: 22
+              - LongitudinalAction:
+                  SpeedAction:
+                    SpeedActionDynamics:
+                      dynamicsDimension: time
+                      dynamicsShape: step
+                      value: 0
+                    SpeedActionTarget:
+                      AbsoluteTargetSpeed:
+                        value: 0
+            entityRef: Bicycle0
+          - PrivateAction:
+              - TeleportAction:
+                  Position:
+                    LanePosition:
+                      Orientation:
+                        h: -1.5688
+                        p: 0
+                        r: 0
+                        type: relative
+                      laneId: '3829'
+                      offset: 8
+                      roadId: ''
+                      s: 24
+              - LongitudinalAction:
+                  SpeedAction:
+                    SpeedActionDynamics:
+                      dynamicsDimension: time
+                      dynamicsShape: step
+                      value: 0
+                    SpeedActionTarget:
+                      AbsoluteTargetSpeed:
+                        value: 0
+            entityRef: Pedestrian2
+          - PrivateAction:
+              - TeleportAction:
+                  Position:
+                    LanePosition:
+                      Orientation:
+                        h: -1.5708
+                        p: 0
+                        r: 0
+                        type: relative
+                      laneId: '3832'
+                      offset: 9
+                      roadId: ''
+                      s: 6
+              - LongitudinalAction:
+                  SpeedAction:
+                    SpeedActionDynamics:
+                      dynamicsDimension: time
+                      dynamicsShape: step
+                      value: 0
+                    SpeedActionTarget:
+                      AbsoluteTargetSpeed:
+                        value: 0
+            entityRef: Pedestrian1
+    StopTrigger:
+      ConditionGroup: []
+    Story:
+      - Act:
+          - ManeuverGroup:
+              - Actors:
+                  EntityRef:
+                    - entityRef: ego
+                  selectTriggeringEntities: false
+                Maneuver:
+                  - Event:
+                      - Action:
+                          - GlobalAction:
+                              InfrastructureAction:
+                                TrafficSignalAction:
+                                  TrafficSignalControllerAction:
+                                    phase: GREEN
+                                    trafficSignalControllerRef: CrossRoadSignal
+                            name: ''
+                        StartTrigger:
+                          ConditionGroup:
+                            - Condition:
+                                - ByEntityCondition:
+                                    EntityCondition:
+                                      SpeedCondition:
+                                        rule: greaterThan
+                                        value: 0.0001
+                                    TriggeringEntities:
+                                      EntityRef:
+                                        - entityRef: ego
+                                      triggeringEntitiesRule: any
+                                  conditionEdge: none
+                                  delay: 0
+                                  name: ''
+                        name: signal_change
+                        priority: parallel
+                    name: ''
+                maximumExecutionCount: 1
+                name: act_signal_change
+            StartTrigger:
+              ConditionGroup:
+                - Condition:
+                    - ByValueCondition:
+                        SimulationTimeCondition:
+                          rule: greaterThan
+                          value: 0
+                      conditionEdge: none
+                      delay: 0
+                      name: ''
+            name: act_signal_change
+          - ManeuverGroup:
+              - Actors:
+                  EntityRef:
+                    - entityRef: Pedestrian2
+                    - entityRef: Pedestrian1
+                  selectTriggeringEntities: false
+                Maneuver:
+                  - Event:
+                      - Action:
+                          - UserDefinedAction:
+                              CustomCommandAction:
+                                type: WalkStraightAction
+                            name: ''
+                          - PrivateAction:
+                              LongitudinalAction:
+                                SpeedAction:
+                                  SpeedActionDynamics:
+                                    dynamicsDimension: time
+                                    dynamicsShape: step
+                                    value: 0
+                                  SpeedActionTarget:
+                                    AbsoluteTargetSpeed:
+                                      value: 0.8333
+                            name: ''
+                        StartTrigger:
+                          ConditionGroup:
+                            - Condition:
+                                - ByEntityCondition:
+                                    EntityCondition:
+                                      ReachPositionCondition:
+                                        Position:
+                                          LanePosition:
+                                            Orientation:
+                                              h: 0
+                                              p: 0
+                                              r: 0
+                                              type: relative
+                                            laneId: '3840'
+                                            offset: 0
+                                            roadId: ''
+                                            s: 260
+                                        tolerance: 1
+                                    TriggeringEntities:
+                                      EntityRef:
+                                        - entityRef: ego
+                                      triggeringEntitiesRule: any
+                                  conditionEdge: none
+                                  delay: 0
+                                  name: ''
+                        name: ped_start
+                        priority: parallel
+                    name: ''
+                maximumExecutionCount: 1
+                name: act_ped_start
+            StartTrigger:
+              ConditionGroup:
+                - Condition:
+                    - ByValueCondition:
+                        SimulationTimeCondition:
+                          rule: greaterThan
+                          value: 0
+                      conditionEdge: none
+                      delay: 0
+                      name: ''
+            name: act_ped_start
+          - ManeuverGroup:
+              - Actors:
+                  EntityRef:
+                    - entityRef: ego
+                  selectTriggeringEntities: false
+                Maneuver:
+                  - Event:
+                      - Action:
+                          - UserDefinedAction:
+                              CustomCommandAction:
+                                type: ':'
+                            name: ''
+                        StartTrigger:
+                          ConditionGroup:
+                            - Condition:
+                                - ByEntityCondition:
+                                    EntityCondition:
+                                      DistanceCondition:
+                                        Position:
+                                          LanePosition:
+                                            Orientation:
+                                              h: 0
+                                              p: 0
+                                              r: 0
+                                              type: relative
+                                            laneId: '3829'
+                                            offset: 0
+                                            roadId: ''
+                                            s: 25
+                                        coordinateSystem: lane
+                                        freespace: false
+                                        relativeDistanceType: longitudinal
+                                        rule: greaterThan
+                                        value: 0
+                                    TriggeringEntities:
+                                      EntityRef:
+                                        - entityRef: ego
+                                      triggeringEntitiesRule: any
+                                  conditionEdge: none
+                                  delay: 0
+                                  name: ''
+                                - ByEntityCondition:
+                                    EntityCondition:
+                                      DistanceCondition:
+                                        Position:
+                                          LanePosition:
+                                            Orientation:
+                                              h: 0
+                                              p: 0
+                                              r: 0
+                                              type: relative
+                                            laneId: '3829'
+                                            offset: 0
+                                            roadId: ''
+                                            s: 25
+                                        coordinateSystem: lane
+                                        freespace: false
+                                        relativeDistanceType: longitudinal
+                                        rule: lessThan
+                                        value: 30
+                                    TriggeringEntities:
+                                      EntityRef:
+                                        - entityRef: ego
+                                      triggeringEntitiesRule: any
+                                  conditionEdge: none
+                                  delay: 0
+                                  name: ''
+                                - ByEntityCondition:
+                                    EntityCondition:
+                                      AccelerationCondition:
+                                        rule: lessThan
+                                        value: -0.05
+                                    TriggeringEntities:
+                                      EntityRef:
+                                        - entityRef: ego
+                                      triggeringEntitiesRule: any
+                                  conditionEdge: none
+                                  delay: 0
+                                  name: ''
+                        name: check_ego_decel
+                        priority: parallel
+                    name: ''
+                maximumExecutionCount: 1
+                name: act_check_ego_decel
+            StartTrigger:
+              ConditionGroup:
+                - Condition:
+                    - ByValueCondition:
+                        SimulationTimeCondition:
+                          rule: greaterThan
+                          value: 0
+                      conditionEdge: none
+                      delay: 0
+                      name: ''
+            name: act_check_ego_decel
+          - ManeuverGroup:
+              - Actors:
+                  EntityRef:
+                    - entityRef: Pedestrian2
+                    - entityRef: Pedestrian1
+                  selectTriggeringEntities: false
+                Maneuver:
+                  - Event:
+                      - Action:
+                          - UserDefinedAction:
+                              CustomCommandAction:
+                                type: WalkStraightAction
+                            name: ''
+                          - PrivateAction:
+                              LongitudinalAction:
+                                SpeedAction:
+                                  SpeedActionDynamics:
+                                    dynamicsDimension: time
+                                    dynamicsShape: step
+                                    value: 0
+                                  SpeedActionTarget:
+                                    AbsoluteTargetSpeed:
+                                      value: 0
+                            name: ''
+                        StartTrigger:
+                          ConditionGroup:
+                            - Condition:
+                                - ByEntityCondition:
+                                    EntityCondition:
+                                      ReachPositionCondition:
+                                        Position:
+                                          LanePosition:
+                                            Orientation:
+                                              h: -1.6976
+                                              p: 0
+                                              r: 0
+                                              type: relative
+                                            laneId: '3832'
+                                            offset: 4
+                                            roadId: ''
+                                            s: 6
+                                        tolerance: 0.3
+                                    TriggeringEntities:
+                                      EntityRef:
+                                        - entityRef: Pedestrian1
+                                      triggeringEntitiesRule: any
+                                  conditionEdge: none
+                                  delay: 0
+                                  name: ''
+                        name: ped_stop
+                        priority: parallel
+                    name: ''
+                maximumExecutionCount: 1
+                name: act_ped_stop
+            StartTrigger:
+              ConditionGroup:
+                - Condition:
+                    - ByValueCondition:
+                        StoryboardElementStateCondition:
+                          state: completeState
+                          storyboardElementRef: act_ped_start
+                          storyboardElementType: act
+                      conditionEdge: none
+                      delay: 0
+                      name: ''
+            name: act_ped_stop
+          - ManeuverGroup:
+              - Actors:
+                  EntityRef: []
+                  selectTriggeringEntities: false
+                Maneuver:
+                  - Event:
+                      - Action:
+                          - UserDefinedAction:
+                              CustomCommandAction:
+                                type: ':'
+                            name: ''
+                        StartTrigger:
+                          ConditionGroup:
+                            - Condition:
+                                - ByEntityCondition:
+                                    EntityCondition:
+                                      DistanceCondition:
+                                        Position:
+                                          LanePosition:
+                                            Orientation:
+                                              h: 0
+                                              p: 0
+                                              r: 0
+                                              type: relative
+                                            laneId: '3840'
+                                            offset: 0
+                                            roadId: ''
+                                            s: 260
+                                        coordinateSystem: lane
+                                        freespace: false
+                                        relativeDistanceType: longitudinal
+                                        rule: greaterThan
+                                        value: 0
+                                    TriggeringEntities:
+                                      EntityRef:
+                                        - entityRef: ego
+                                      triggeringEntitiesRule: any
+                                  conditionEdge: none
+                                  delay: 0
+                                  name: ''
+                                - ByEntityCondition:
+                                    EntityCondition:
+                                      SpeedCondition:
+                                        rule: greaterThan
+                                        value: ${$ego_speed*0.95}
+                                    TriggeringEntities:
+                                      EntityRef:
+                                        - entityRef: ego
+                                      triggeringEntitiesRule: any
+                                  conditionEdge: sticky
+                                  delay: 0
+                                  name: ''
+                        name: ego_speed_check
+                        priority: parallel
+                    name: ''
+                maximumExecutionCount: 1
+                name: act_ego_speed_check
+            StartTrigger:
+              ConditionGroup:
+                - Condition:
+                    - ByValueCondition:
+                        SimulationTimeCondition:
+                          rule: greaterThan
+                          value: 0
+                      conditionEdge: none
+                      delay: 0
+                      name: ''
+            name: act_ego_speed_check
+          - ManeuverGroup:
+              - Actors:
+                  EntityRef:
+                    - entityRef: ego
+                  selectTriggeringEntities: false
+                Maneuver:
+                  - Event:
+                      - Action:
+                          - UserDefinedAction:
+                              CustomCommandAction:
+                                type: exitSuccess
+                            name: ''
+                        StartTrigger:
+                          ConditionGroup:
+                            - Condition:
+                                - ByEntityCondition:
+                                    EntityCondition:
+                                      ReachPositionCondition:
+                                        Position:
+                                          LanePosition:
+                                            Orientation:
+                                              h: 0
+                                              p: 0
+                                              r: 0
+                                              type: relative
+                                            laneId: '3842'
+                                            offset: 0
+                                            roadId: ''
+                                            s: ${$ego_speed*12}
+                                        tolerance: 1
+                                    TriggeringEntities:
+                                      EntityRef:
+                                        - entityRef: ego
+                                      triggeringEntitiesRule: any
+                                  conditionEdge: none
+                                  delay: 0
+                                  name: ''
+                                - ByValueCondition:
+                                    StoryboardElementStateCondition:
+                                      state: completeState
+                                      storyboardElementRef: act_ped_start
+                                      storyboardElementType: act
+                                  conditionEdge: none
+                                  delay: 0
+                                  name: ''
+                                - ByValueCondition:
+                                    StoryboardElementStateCondition:
+                                      state: completeState
+                                      storyboardElementRef: act_ego_speed_check
+                                      storyboardElementType: act
+                                  conditionEdge: none
+                                  delay: 0
+                                  name: ''
+                        name: ''
+                        priority: parallel
+                      - Action:
+                          - UserDefinedAction:
+                              CustomCommandAction:
+                                type: exitFailure
+                            name: ''
+                        StartTrigger:
+                          ConditionGroup:
+                            - Condition:
+                                - ByValueCondition:
+                                    SimulationTimeCondition:
+                                      rule: greaterThan
+                                      value: 120
+                                  conditionEdge: none
+                                  delay: 0
+                                  name: ''
+                            - Condition:
+                                - ByEntityCondition:
+                                    EntityCondition:
+                                      CollisionCondition:
+                                        EntityRef:
+                                          entityRef: Pedestrian2
+                                    TriggeringEntities:
+                                      EntityRef:
+                                        - entityRef: ego
+                                      triggeringEntitiesRule: any
+                                  conditionEdge: none
+                                  delay: 0
+                                  name: ''
+                            - Condition:
+                                - ByEntityCondition:
+                                    EntityCondition:
+                                      CollisionCondition:
+                                        EntityRef:
+                                          entityRef: Bicycle0
+                                    TriggeringEntities:
+                                      EntityRef:
+                                        - entityRef: ego
+                                      triggeringEntitiesRule: any
+                                  conditionEdge: none
+                                  delay: 0
+                                  name: ''
+                            - Condition:
+                                - ByValueCondition:
+                                    StoryboardElementStateCondition:
+                                      state: completeState
+                                      storyboardElementRef: act_check_ego_decel
+                                      storyboardElementType: act
+                                  conditionEdge: none
+                                  delay: 0
+                                  name: ''
+                            - Condition:
+                                - ByEntityCondition:
+                                    EntityCondition:
+                                      CollisionCondition:
+                                        EntityRef:
+                                          entityRef: Pedestrian1
+                                    TriggeringEntities:
+                                      EntityRef:
+                                        - entityRef: ego
+                                      triggeringEntitiesRule: any
+                                  conditionEdge: none
+                                  delay: 0
+                                  name: ''
+                            - Condition:
+                                - ByEntityCondition:
+                                    EntityCondition:
+                                      RelativeDistanceCondition:
+                                        coordinateSystem: entity
+                                        entityRef: Bicycle0
+                                        freespace: true
+                                        relativeDistanceType: euclidianDistance
+                                        rule: lessThan
+                                        value: 0.5
+                                    TriggeringEntities:
+                                      EntityRef:
+                                        - entityRef: ego
+                                      triggeringEntitiesRule: any
+                                  conditionEdge: none
+                                  delay: 0
+                                  name: min_distance_condition.Bicycle0.distance<0.5
+                                - ByEntityCondition:
+                                    EntityCondition:
+                                      SpeedCondition:
+                                        rule: greaterThan
+                                        value: 0.1
+                                    TriggeringEntities:
+                                      EntityRef:
+                                        - entityRef: ego
+                                      triggeringEntitiesRule: any
+                                  conditionEdge: none
+                                  delay: 0
+                                  name: min_distance_condition.min_speed>0.1
+                            - Condition:
+                                - ByEntityCondition:
+                                    EntityCondition:
+                                      RelativeDistanceCondition:
+                                        coordinateSystem: entity
+                                        entityRef: Pedestrian2
+                                        freespace: true
+                                        relativeDistanceType: euclidianDistance
+                                        rule: lessThan
+                                        value: 0.5
+                                    TriggeringEntities:
+                                      EntityRef:
+                                        - entityRef: ego
+                                      triggeringEntitiesRule: any
+                                  conditionEdge: none
+                                  delay: 0
+                                  name: >-
+                                    min_distance_condition.Pedestrian2.distance<0.5
+                                - ByEntityCondition:
+                                    EntityCondition:
+                                      SpeedCondition:
+                                        rule: greaterThan
+                                        value: 0.1
+                                    TriggeringEntities:
+                                      EntityRef:
+                                        - entityRef: ego
+                                      triggeringEntitiesRule: any
+                                  conditionEdge: none
+                                  delay: 0
+                                  name: min_distance_condition.min_speed>0.1
+                            - Condition:
+                                - ByEntityCondition:
+                                    EntityCondition:
+                                      RelativeDistanceCondition:
+                                        coordinateSystem: entity
+                                        entityRef: Pedestrian1
+                                        freespace: true
+                                        relativeDistanceType: euclidianDistance
+                                        rule: lessThan
+                                        value: 0.5
+                                    TriggeringEntities:
+                                      EntityRef:
+                                        - entityRef: ego
+                                      triggeringEntitiesRule: any
+                                  conditionEdge: none
+                                  delay: 0
+                                  name: >-
+                                    min_distance_condition.Pedestrian1.distance<0.5
+                                - ByEntityCondition:
+                                    EntityCondition:
+                                      SpeedCondition:
+                                        rule: greaterThan
+                                        value: 0.1
+                                    TriggeringEntities:
+                                      EntityRef:
+                                        - entityRef: ego
+                                      triggeringEntitiesRule: any
+                                  conditionEdge: none
+                                  delay: 0
+                                  name: min_distance_condition.min_speed>0.1
+                            - Condition:
+                                - ByEntityCondition:
+                                    EntityCondition:
+                                      RelativeDistanceCondition:
+                                        coordinateSystem: entity
+                                        entityRef: Bicycle0
+                                        freespace: true
+                                        relativeDistanceType: euclidianDistance
+                                        rule: lessThan
+                                        value: 1.5
+                                    TriggeringEntities:
+                                      EntityRef:
+                                        - entityRef: ego
+                                      triggeringEntitiesRule: any
+                                  conditionEdge: none
+                                  delay: 0
+                                  name: >-
+                                    min_longitudinal_distance_condition.Bicycle0.distance<1.5
+                                - ByEntityCondition:
+                                    EntityCondition:
+                                      RelativeDistanceCondition:
+                                        coordinateSystem: entity
+                                        entityRef: Bicycle0
+                                        freespace: true
+                                        relativeDistanceType: lateral
+                                        rule: lessThan
+                                        value: 0.2
+                                    TriggeringEntities:
+                                      EntityRef:
+                                        - entityRef: ego
+                                      triggeringEntitiesRule: any
+                                  conditionEdge: none
+                                  delay: 0
+                                  name: >-
+                                    min_longitudinal_distance_condition.Bicycle0.lateral_distance<0.2
+                                - ByEntityCondition:
+                                    EntityCondition:
+                                      SpeedCondition:
+                                        rule: greaterThan
+                                        value: 0.1
+                                    TriggeringEntities:
+                                      EntityRef:
+                                        - entityRef: ego
+                                      triggeringEntitiesRule: any
+                                  conditionEdge: none
+                                  delay: 0
+                                  name: >-
+                                    min_longitudinal_distance_condition.min_speed>0.1
+                            - Condition:
+                                - ByEntityCondition:
+                                    EntityCondition:
+                                      RelativeDistanceCondition:
+                                        coordinateSystem: entity
+                                        entityRef: Pedestrian2
+                                        freespace: true
+                                        relativeDistanceType: euclidianDistance
+                                        rule: lessThan
+                                        value: 1.5
+                                    TriggeringEntities:
+                                      EntityRef:
+                                        - entityRef: ego
+                                      triggeringEntitiesRule: any
+                                  conditionEdge: none
+                                  delay: 0
+                                  name: >-
+                                    min_longitudinal_distance_condition.Pedestrian2.distance<1.5
+                                - ByEntityCondition:
+                                    EntityCondition:
+                                      RelativeDistanceCondition:
+                                        coordinateSystem: entity
+                                        entityRef: Pedestrian2
+                                        freespace: true
+                                        relativeDistanceType: lateral
+                                        rule: lessThan
+                                        value: 0.2
+                                    TriggeringEntities:
+                                      EntityRef:
+                                        - entityRef: ego
+                                      triggeringEntitiesRule: any
+                                  conditionEdge: none
+                                  delay: 0
+                                  name: >-
+                                    min_longitudinal_distance_condition.Pedestrian2.lateral_distance<0.2
+                                - ByEntityCondition:
+                                    EntityCondition:
+                                      SpeedCondition:
+                                        rule: greaterThan
+                                        value: 0.1
+                                    TriggeringEntities:
+                                      EntityRef:
+                                        - entityRef: ego
+                                      triggeringEntitiesRule: any
+                                  conditionEdge: none
+                                  delay: 0
+                                  name: >-
+                                    min_longitudinal_distance_condition.min_speed>0.1
+                            - Condition:
+                                - ByEntityCondition:
+                                    EntityCondition:
+                                      RelativeDistanceCondition:
+                                        coordinateSystem: entity
+                                        entityRef: Pedestrian1
+                                        freespace: true
+                                        relativeDistanceType: euclidianDistance
+                                        rule: lessThan
+                                        value: 1.5
+                                    TriggeringEntities:
+                                      EntityRef:
+                                        - entityRef: ego
+                                      triggeringEntitiesRule: any
+                                  conditionEdge: none
+                                  delay: 0
+                                  name: >-
+                                    min_longitudinal_distance_condition.Pedestrian1.distance<1.5
+                                - ByEntityCondition:
+                                    EntityCondition:
+                                      RelativeDistanceCondition:
+                                        coordinateSystem: entity
+                                        entityRef: Pedestrian1
+                                        freespace: true
+                                        relativeDistanceType: lateral
+                                        rule: lessThan
+                                        value: 0.2
+                                    TriggeringEntities:
+                                      EntityRef:
+                                        - entityRef: ego
+                                      triggeringEntitiesRule: any
+                                  conditionEdge: none
+                                  delay: 0
+                                  name: >-
+                                    min_longitudinal_distance_condition.Pedestrian1.lateral_distance<0.2
+                                - ByEntityCondition:
+                                    EntityCondition:
+                                      SpeedCondition:
+                                        rule: greaterThan
+                                        value: 0.1
+                                    TriggeringEntities:
+                                      EntityRef:
+                                        - entityRef: ego
+                                      triggeringEntitiesRule: any
+                                  conditionEdge: none
+                                  delay: 0
+                                  name: >-
+                                    min_longitudinal_distance_condition.min_speed>0.1
+                        name: ''
+                        priority: parallel
+                    name: ''
+                maximumExecutionCount: 1
+                name: ''
+            StartTrigger:
+              ConditionGroup:
+                - Condition:
+                    - ByValueCondition:
+                        SimulationTimeCondition:
+                          rule: greaterThan
+                          value: 0
+                      conditionEdge: none
+                      delay: 0
+                      name: ''
+            name: _EndCondition
+        name: ''
+ScenarioModifiers:
+  ScenarioModifier:
+    - list:
+        - 1.3889
+        - 2.7778
+        - 5.5556
+        - 8.3333
+        - 11.1111
+      name: __tier4_modifier_ego_speed
