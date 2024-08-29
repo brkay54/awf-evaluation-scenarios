@@ -1,47 +1,53 @@
 ScenarioModifiers:
   ScenarioModifier:
+    - name: __tier4_modifier_npc_trigger_dist
+      type: double
+      list:
+        - 7
     - name: __tier4_modifier_Vn
       type: double
       list:
-        - 8.333333
-        - 5.555556
-    - name: __tier4_modifier_npc_lc_dist
+        - 2.22222
+    - name: __tier4_modifier_min_acc
       type: double
       list:
-        - 1
+        - -2.499
 OpenSCENARIO:
   FileHeader:
     revMajor: 1
     revMinor: 1
-    date: '2024-08-29T11:41:15.258Z'
+    date: '2024-08-29T11:51:00.353Z'
     description: ''
-    author: ''
+    author: Berkay Karaman
   ParameterDeclarations:
     ParameterDeclaration:
       - name: __ego_dimensions_length__
         parameterType: double
-        value: '4.89'
+        value: '0'
       - name: __ego_dimensions_width__
         parameterType: double
-        value: '1.896'
+        value: '0'
       - name: __ego_dimensions_height__
         parameterType: double
-        value: '2.5'
+        value: '0'
       - name: __ego_center_x__
         parameterType: double
-        value: '1.345'
+        value: '0'
       - name: __ego_center_y__
         parameterType: double
         value: '0'
       - name: __ego_center_z__
         parameterType: double
-        value: '1.25'
+        value: '0'
+      - name: npc_trigger_dist
+        parameterType: double
+        value: __tier4_modifier_npc_trigger_dist
       - name: Vn
         parameterType: double
         value: __tier4_modifier_Vn
-      - name: npc_lc_dist
+      - name: min_acc
         parameterType: double
-        value: __tier4_modifier_npc_lc_dist
+        value: __tier4_modifier_min_acc
   CatalogLocations:
     CatalogLocation: []
   RoadNetwork:
@@ -59,13 +65,13 @@ OpenSCENARIO:
           vehicleCategory: car
           BoundingBox:
             Center:
-              x: $__ego_center_x__
-              y: $__ego_center_y__
-              z: $__ego_center_z__
+              x: 1.355
+              y: 0
+              z: 1.25
             Dimensions:
-              length: $__ego_dimensions_length__
-              width: $__ego_dimensions_width__
-              height: $__ego_dimensions_height__
+              length: 4.77
+              width: 1.83
+              height: 2.5
           Performance:
             maxSpeed: 50
             maxAcceleration: INF
@@ -73,16 +79,16 @@ OpenSCENARIO:
           Axles:
             FrontAxle:
               maxSteering: 0.5236
-              wheelDiameter: 0.766
-              trackWidth: 1.64
-              positionX: 1.445
-              positionZ: 0.383
+              wheelDiameter: 0.78
+              trackWidth: 1.63
+              positionX: 1.385
+              positionZ: 0.39
             RearAxle:
               maxSteering: 0.5236
-              wheelDiameter: 0.766
-              trackWidth: 1.64
+              wheelDiameter: 0.78
+              trackWidth: 1.63
               positionX: 0
-              positionZ: 0.383
+              positionZ: 0.39
           Properties:
             Property: []
         ObjectController:
@@ -140,7 +146,7 @@ OpenSCENARIO:
                     LanePosition:
                       roadId: ''
                       laneId: '298'
-                      s: 30
+                      s: 20
                       offset: 0
                       Orientation:
                         type: relative
@@ -153,7 +159,7 @@ OpenSCENARIO:
                       LanePosition:
                         roadId: ''
                         laneId: '298'
-                        s: 200
+                        s: 140
                         offset: 0
                         Orientation:
                           type: relative
@@ -167,8 +173,8 @@ OpenSCENARIO:
                     LanePosition:
                       roadId: ''
                       laneId: '297'
-                      s: 25
-                      offset: 0
+                      s: 80
+                      offset: 1.5
                       Orientation:
                         type: relative
                         h: 0
@@ -186,10 +192,10 @@ OpenSCENARIO:
     Story:
       - name: ''
         Act:
-          - name: act_start_npc0
+          - name: act_start_npc
             ManeuverGroup:
               - maximumExecutionCount: 1
-                name: act_start_npc0
+                name: act_start_npc
                 Actors:
                   selectTriggeringEntities: false
                   EntityRef:
@@ -211,6 +217,58 @@ OpenSCENARIO:
                                   SpeedActionTarget:
                                     AbsoluteTargetSpeed:
                                       value: $Vn
+                          - name: ''
+                            PrivateAction:
+                              RoutingAction:
+                                FollowTrajectoryAction:
+                                  initialDistanceOffset: 1
+                                  TimeReference:
+                                    Timing:
+                                      domainAbsoluteRelative: relative
+                                      offset: 0
+                                      scale: 1
+                                  TrajectoryFollowingMode:
+                                    followingMode: position
+                                  TrajectoryRef:
+                                    Trajectory:
+                                      closed: false
+                                      name: npc_free
+                                      Shape:
+                                        Polyline:
+                                          Vertex:
+                                            - Position:
+                                                LanePosition:
+                                                  roadId: ''
+                                                  laneId: '297'
+                                                  s: 85
+                                                  offset: 0
+                                                  Orientation:
+                                                    type: relative
+                                                    h: 0
+                                                    p: -0.0
+                                                    r: 0
+                                            - Position:
+                                                LanePosition:
+                                                  roadId: ''
+                                                  laneId: '298'
+                                                  s: 95
+                                                  offset: 0
+                                                  Orientation:
+                                                    type: relative
+                                                    h: 0
+                                                    p: -0.0
+                                                    r: 0
+                                            - Position:
+                                                LanePosition:
+                                                  roadId: ''
+                                                  laneId: '298'
+                                                  s: 150
+                                                  offset: 0
+                                                  Orientation:
+                                                    type: relative
+                                                    h: 0
+                                                    p: -0.0
+                                                    r: 0
                         StartTrigger:
                           ConditionGroup:
                             - Condition:
@@ -220,7 +278,7 @@ OpenSCENARIO:
                                   ByValueCondition:
                                     SimulationTimeCondition:
                                       value: 0
-                                      rule: greaterThan
+                                      rule: greaterOrEqual
             StartTrigger:
               ConditionGroup:
                 - Condition:
@@ -233,97 +291,24 @@ OpenSCENARIO:
                           EntityRef:
                             - entityRef: ego
                         EntityCondition:
-                          DistanceCondition:
-                            Position:
-                              LanePosition:
-                                roadId: ''
-                                laneId: '298'
-                                s: 40
-                                offset: 0
-                                Orientation:
-                                  type: relative
-                                  h: 0
-                                  p: -0.0
-                                  r: 0
-                            value: 0
-                            freespace: true
-                            relativeDistanceType: longitudinal
-                            coordinateSystem: lane
-                            rule: lessOrEqual
-          - name: act_lc_npc0
-            ManeuverGroup:
-              - maximumExecutionCount: 1
-                name: act_lc_npc0
-                Actors:
-                  selectTriggeringEntities: false
-                  EntityRef:
-                    - entityRef: Npc1
-                Maneuver:
-                  - name: ''
-                    Event:
-                      - name: start_lc_npc0
-                        priority: parallel
-                        Action:
-                          - name: ''
-                            PrivateAction:
-                              LateralAction:
-                                LaneChangeAction:
-                                  LaneChangeActionDynamics:
-                                    dynamicsDimension: time
-                                    value: 3
-                                    dynamicsShape: cubic
-                                  LaneChangeTarget:
-                                    AbsoluteTargetLane:
-                                      value: '298'
-                        StartTrigger:
-                          ConditionGroup:
-                            - Condition:
-                                - name: ''
-                                  delay: 0
-                                  conditionEdge: none
-                                  ByEntityCondition:
-                                    TriggeringEntities:
-                                      triggeringEntitiesRule: any
-                                      EntityRef:
-                                        - entityRef: Npc1
-                                    EntityCondition:
-                                      RelativeDistanceCondition:
-                                        entityRef: ego
-                                        relativeDistanceType: longitudinal
-                                        coordinateSystem: entity
-                                        value: $npc_lc_dist
-                                        freespace: true
-                                        rule: greaterThan
-            StartTrigger:
-              ConditionGroup:
-                - Condition:
-                    - name: ''
-                      delay: 0
-                      conditionEdge: none
-                      ByEntityCondition:
-                        TriggeringEntities:
-                          triggeringEntitiesRule: any
-                          EntityRef:
-                            - entityRef: Npc1
-                        EntityCondition:
                           RelativeDistanceCondition:
-                            entityRef: ego
+                            entityRef: Npc1
                             relativeDistanceType: longitudinal
                             coordinateSystem: entity
-                            value: 0.5
+                            value: $npc_trigger_dist
                             freespace: true
                             rule: lessOrEqual
-          - name: act_check_ego_brake
+          - name: act_check_ego_speed
             ManeuverGroup:
               - maximumExecutionCount: 1
-                name: act_check_ego_brake
+                name: act_check_ego_speed
                 Actors:
                   selectTriggeringEntities: false
                   EntityRef: []
                 Maneuver:
                   - name: ''
                     Event:
-                      - name: check_ego_brake
+                      - name: check_ego_speed
                         priority: parallel
                         Action:
                           - name: ''
@@ -342,23 +327,9 @@ OpenSCENARIO:
                                       EntityRef:
                                         - entityRef: ego
                                     EntityCondition:
-                                      DistanceCondition:
-                                        Position:
-                                          LanePosition:
-                                            roadId: ''
-                                            laneId: '298'
-                                            s: 200
-                                            offset: 0
-                                            Orientation:
-                                              type: relative
-                                              h: 0
-                                              p: -0.0
-                                              r: 0
-                                        value: 25
-                                        freespace: true
-                                        relativeDistanceType: longitudinal
-                                        coordinateSystem: lane
-                                        rule: greaterThan
+                                      SpeedCondition:
+                                        rule: lessThan
+                                        value: ${$Vn*0.8}
                                 - name: ''
                                   delay: 0
                                   conditionEdge: none
@@ -368,9 +339,23 @@ OpenSCENARIO:
                                       EntityRef:
                                         - entityRef: ego
                                     EntityCondition:
-                                      AccelerationCondition:
-                                        rule: lessThan
-                                        value: -0.05
+                                      DistanceCondition:
+                                        Position:
+                                          LanePosition:
+                                            roadId: ''
+                                            laneId: '298'
+                                            s: 140
+                                            offset: 0
+                                            Orientation:
+                                              type: relative
+                                              h: 0
+                                              p: -0.0
+                                              r: 0
+                                        value: 5
+                                        freespace: true
+                                        relativeDistanceType: longitudinal
+                                        coordinateSystem: lane
+                                        rule: greaterThan
             StartTrigger:
               ConditionGroup:
                 - Condition:
@@ -381,7 +366,7 @@ OpenSCENARIO:
                         StoryboardElementStateCondition:
                           state: runningState
                           storyboardElementType: act
-                          storyboardElementRef: act_lc_npc0
+                          storyboardElementRef: act_start_npc
           - name: _EndCondition
             ManeuverGroup:
               - maximumExecutionCount: 1
@@ -401,41 +386,9 @@ OpenSCENARIO:
                                 - name: ''
                                   delay: 0
                                   conditionEdge: none
-                                  ByEntityCondition:
-                                    TriggeringEntities:
-                                      triggeringEntitiesRule: any
-                                      EntityRef:
-                                        - entityRef: ego
-                                    EntityCondition:
-                                      ReachPositionCondition:
-                                        Position:
-                                          LanePosition:
-                                            roadId: ''
-                                            laneId: '298'
-                                            s: 200
-                                            offset: 0
-                                            Orientation:
-                                              type: relative
-                                              h: 0
-                                              p: -0.0
-                                              r: 0
-                                        tolerance: 0.1
-                        Action:
-                          - name: ''
-                            UserDefinedAction:
-                              CustomCommandAction:
-                                type: exitSuccess
-                      - name: ''
-                        priority: parallel
-                        StartTrigger:
-                          ConditionGroup:
-                            - Condition:
-                                - name: ''
-                                  delay: 0
-                                  conditionEdge: none
                                   ByValueCondition:
                                     SimulationTimeCondition:
-                                      value: 60
+                                      value: 180
                                       rule: greaterThan
                             - Condition:
                                 - name: ''
@@ -458,7 +411,20 @@ OpenSCENARIO:
                                     StoryboardElementStateCondition:
                                       state: completeState
                                       storyboardElementType: act
-                                      storyboardElementRef: act_check_ego_brake
+                                      storyboardElementRef: act_check_ego_speed
+                            - Condition:
+                                - name: ''
+                                  delay: 0
+                                  conditionEdge: none
+                                  ByEntityCondition:
+                                    TriggeringEntities:
+                                      triggeringEntitiesRule: any
+                                      EntityRef:
+                                        - entityRef: ego
+                                    EntityCondition:
+                                      AccelerationCondition:
+                                        rule: lessThan
+                                        value: $min_acc
                         Action:
                           - name: ''
                             UserDefinedAction:

@@ -1,27 +1,32 @@
 ScenarioModifiers:
   ScenarioModifier:
     - name: __tier4_modifier_Vn
+      type: double
       list:
         - 5.555556
     - name: __tier4_modifier_min_acc
+      type: double
       list:
-        - -2.45
+        - -2.49
     - name: __tier4_modifier_npc_lc_dist
+      type: double
       list:
         - 1
     - name: __tier4_modifier_Vslow
+      type: double
       list:
         - 4.166667
         - 3.472222
         - 2.777778
     - name: __tier4_modifier_AccSlow
+      type: double
       list:
         - -1
 OpenSCENARIO:
   FileHeader:
     revMajor: 1
     revMinor: 1
-    date: '2024-05-27T06:03:56.867Z'
+    date: '2024-08-29T11:45:04.144Z'
     description: ''
     author: ''
   ParameterDeclarations:
@@ -394,7 +399,7 @@ OpenSCENARIO:
                                               h: 0
                                               p: -0.0
                                               r: 0
-                                        value: 10
+                                        value: 25
                                         freespace: true
                                         relativeDistanceType: longitudinal
                                         coordinateSystem: lane
