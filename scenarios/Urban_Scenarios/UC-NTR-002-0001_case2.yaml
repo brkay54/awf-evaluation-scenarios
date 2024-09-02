@@ -14,7 +14,7 @@ OpenSCENARIO:
   FileHeader:
     revMajor: 1
     revMinor: 1
-    date: '2024-08-29T12:49:21.079Z'
+    date: '2024-09-02T09:41:40.172Z'
     description: ''
     author: ''
   ParameterDeclarations:
@@ -200,24 +200,6 @@ OpenSCENARIO:
                 Maneuver:
                   - name: ''
                     Event:
-                      - name: check_right_blinker
-                        priority: parallel
-                        Action:
-                          - name: ''
-                            UserDefinedAction:
-                              CustomCommandAction:
-                                type: ':'
-                        StartTrigger:
-                          ConditionGroup:
-                            - Condition:
-                                - name: ego.currentTurnIndicatorsState
-                                  delay: 0
-                                  conditionEdge: none
-                                  ByValueCondition:
-                                    UserDefinedValueCondition:
-                                      value: ENABLE_RIGHT
-                                      name: ego.currentTurnIndicatorsState
-                                      rule: equalTo
                       - name: check_overtake
                         priority: parallel
                         Action:

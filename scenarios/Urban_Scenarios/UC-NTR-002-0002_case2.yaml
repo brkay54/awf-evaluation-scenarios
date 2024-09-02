@@ -1,9 +1,11 @@
 ScenarioModifiers:
   ScenarioModifier:
     - name: __tier4_modifier_min_acc
+      type: double
       list:
         - -2.499
     - name: __tier4_modifier_D
+      type: double
       list:
         - 25
         - 20
@@ -12,7 +14,7 @@ OpenSCENARIO:
   FileHeader:
     revMajor: 1
     revMinor: 1
-    date: '2024-06-04T09:13:03.959Z'
+    date: '2024-09-02T09:43:30.847Z'
     description: ''
     author: ''
   ParameterDeclarations:
@@ -192,7 +194,7 @@ OpenSCENARIO:
                       LanePosition:
                         roadId: ''
                         laneId: '45'
-                        s: 100
+                        s: 150
                         offset: 0
                         Orientation:
                           type: relative
@@ -365,7 +367,7 @@ OpenSCENARIO:
                                           LanePosition:
                                             roadId: ''
                                             laneId: '45'
-                                            s: 100
+                                            s: 150
                                             offset: 0
                                             Orientation:
                                               type: relative

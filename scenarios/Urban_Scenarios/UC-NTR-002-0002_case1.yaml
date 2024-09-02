@@ -14,7 +14,7 @@ OpenSCENARIO:
   FileHeader:
     revMajor: 1
     revMinor: 1
-    date: '2024-08-29T13:37:16.451Z'
+    date: '2024-09-02T09:43:02.122Z'
     description: ''
     author: ''
   ParameterDeclarations:
@@ -194,7 +194,7 @@ OpenSCENARIO:
                       LanePosition:
                         roadId: ''
                         laneId: '45'
-                        s: 100
+                        s: 150
                         offset: 0
                         Orientation:
                           type: relative
@@ -367,7 +367,7 @@ OpenSCENARIO:
                                           LanePosition:
                                             roadId: ''
                                             laneId: '45'
-                                            s: 100
+                                            s: 150
                                             offset: 0
                                             Orientation:
                                               type: relative
