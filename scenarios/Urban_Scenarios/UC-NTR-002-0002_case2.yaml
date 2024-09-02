@@ -2,7 +2,7 @@ ScenarioModifiers:
   ScenarioModifier:
     - name: __tier4_modifier_min_acc
       list:
-        - -2.45
+        - -2.499
     - name: __tier4_modifier_D
       list:
         - 25

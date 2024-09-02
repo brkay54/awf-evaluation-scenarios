@@ -1,18 +1,20 @@
 ScenarioModifiers:
   ScenarioModifier:
     - name: __tier4_modifier_Vn
+      type: double
       list:
         - 0
         - 1.388889
         - 2.777778
     - name: __tier4_modifier_min_acc
+      type: double
       list:
-        - -2.45
+        - -2.499
 OpenSCENARIO:
   FileHeader:
     revMajor: 1
     revMinor: 1
-    date: '2024-05-27T11:59:16.159Z'
+    date: '2024-08-29T12:49:21.079Z'
     description: ''
     author: ''
   ParameterDeclarations:
@@ -142,7 +144,7 @@ OpenSCENARIO:
                     LanePosition:
                       roadId: ''
                       laneId: '45'
-                      s: 30
+                      s: 5
                       offset: 0
                       Orientation:
                         type: relative
@@ -184,7 +186,7 @@ OpenSCENARIO:
                       dynamicsShape: step
                     SpeedActionTarget:
                       AbsoluteTargetSpeed:
-                        value: $Vn
+                        value: 0
     Story:
       - name: ''
         Act:
@@ -208,7 +210,7 @@ OpenSCENARIO:
                         StartTrigger:
                           ConditionGroup:
                             - Condition:
-                                - name: ''
+                                - name: ego.currentTurnIndicatorsState
                                   delay: 0
                                   conditionEdge: none
                                   ByValueCondition:
@@ -268,6 +270,60 @@ OpenSCENARIO:
                         SimulationTimeCondition:
                           value: 0
                           rule: greaterThan
+          - name: act_move_npc
+            ManeuverGroup:
+              - maximumExecutionCount: 1
+                name: act_move_npc
+                Actors:
+                  selectTriggeringEntities: false
+                  EntityRef:
+                    - entityRef: Npc1
+                Maneuver:
+                  - name: ''
+                    Event:
+                      - name: move_npc
+                        priority: parallel
+                        Action:
+                          - name: ''
+                            PrivateAction:
+                              LongitudinalAction:
+                                SpeedAction:
+                                  SpeedActionDynamics:
+                                    dynamicsDimension: time
+                                    value: 0
+                                    dynamicsShape: step
+                                  SpeedActionTarget:
+                                    AbsoluteTargetSpeed:
+                                      value: $Vn
+                        StartTrigger:
+                          ConditionGroup:
+                            - Condition:
+                                - name: ''
+                                  delay: 0
+                                  conditionEdge: none
+                                  ByValueCondition:
+                                    SimulationTimeCondition:
+                                      value: 0
+                                      rule: greaterThan
+            StartTrigger:
+              ConditionGroup:
+                - Condition:
+                    - name: ''
+                      delay: 0
+                      conditionEdge: none
+                      ByEntityCondition:
+                        TriggeringEntities:
+                          triggeringEntitiesRule: any
+                          EntityRef:
+                            - entityRef: ego
+                        EntityCondition:
+                          RelativeDistanceCondition:
+                            entityRef: Npc1
+                            relativeDistanceType: longitudinal
+                            coordinateSystem: entity
+                            value: 10
+                            freespace: true
+                            rule: lessOrEqual
           - name: _EndCondition
             ManeuverGroup:
               - maximumExecutionCount: 1
