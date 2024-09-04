@@ -1,19 +1,22 @@
 ScenarioModifiers:
   ScenarioModifier:
     - name: __tier4_modifier_trigger_dist
+      type: double
       list:
-        - 30
+        - 50
     - name: __tier4_modifier_Vn2
+      type: double
       list:
         - 4.16667
     - name: __tier4_modifier_min_acc
+      type: double
       list:
         - -2.499
 OpenSCENARIO:
   FileHeader:
     revMajor: 1
     revMinor: 1
-    date: '2024-06-04T12:22:04.461Z'
+    date: '2024-09-03T08:52:05.721Z'
     description: ''
     author: ''
   ParameterDeclarations:
@@ -230,7 +233,7 @@ OpenSCENARIO:
                     LanePosition:
                       roadId: ''
                       laneId: '297'
-                      s: 910
+                      s: 900
                       offset: 0
                       Orientation:
                         type: relative
@@ -298,17 +301,6 @@ OpenSCENARIO:
                                                   roadId: ''
                                                   laneId: '297'
                                                   s: 910
-                                                  offset: 0
-                                                  Orientation:
-                                                    type: relative
-                                                    h: 0
-                                                    p: -0.0
-                                                    r: 0
-                                            - Position:
-                                                LanePosition:
-                                                  roadId: ''
-                                                  laneId: '297'
-                                                  s: 915
                                                   offset: 0
                                                   Orientation:
                                                     type: relative
@@ -388,6 +380,74 @@ OpenSCENARIO:
                             value: $trigger_dist
                             freespace: true
                             rule: lessOrEqual
+          - name: act_check_ego_brake
+            ManeuverGroup:
+              - maximumExecutionCount: 1
+                name: act_check_ego_brake
+                Actors:
+                  selectTriggeringEntities: false
+                  EntityRef: []
+                Maneuver:
+                  - name: ''
+                    Event:
+                      - name: dummy
+                        priority: parallel
+                        Action:
+                          - name: ''
+                            UserDefinedAction:
+                              CustomCommandAction:
+                                type: ':'
+                        StartTrigger:
+                          ConditionGroup:
+                            - Condition:
+                                - name: ''
+                                  delay: 0
+                                  conditionEdge: none
+                                  ByValueCondition:
+                                    SimulationTimeCondition:
+                                      value: 0
+                                      rule: greaterThan
+            StartTrigger:
+              ConditionGroup:
+                - Condition:
+                    - name: ''
+                      delay: 0
+                      conditionEdge: none
+                      ByEntityCondition:
+                        TriggeringEntities:
+                          triggeringEntitiesRule: any
+                          EntityRef:
+                            - entityRef: Npc2
+                        EntityCondition:
+                          DistanceCondition:
+                            Position:
+                              LanePosition:
+                                roadId: ''
+                                laneId: '297'
+                                s: 913
+                                offset: 0
+                                Orientation:
+                                  type: relative
+                                  h: 0
+                                  p: -0.0
+                                  r: 0
+                            value: 0.1
+                            freespace: true
+                            relativeDistanceType: longitudinal
+                            coordinateSystem: lane
+                            rule: lessThan
+                    - name: ''
+                      delay: 0
+                      conditionEdge: none
+                      ByEntityCondition:
+                        TriggeringEntities:
+                          triggeringEntitiesRule: any
+                          EntityRef:
+                            - entityRef: ego
+                        EntityCondition:
+                          AccelerationCondition:
+                            rule: lessThan
+                            value: -0.1
           - name: _EndCondition
             ManeuverGroup:
               - maximumExecutionCount: 1
@@ -426,6 +486,14 @@ OpenSCENARIO:
                                               p: -0.0
                                               r: 0
                                         tolerance: 1
+                                - name: ''
+                                  delay: 0
+                                  conditionEdge: none
+                                  ByValueCondition:
+                                    StoryboardElementStateCondition:
+                                      state: completeState
+                                      storyboardElementType: act
+                                      storyboardElementRef: act_check_ego_brake
                         Action:
                           - name: ''
                             UserDefinedAction:

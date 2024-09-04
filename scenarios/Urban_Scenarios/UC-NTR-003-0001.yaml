@@ -1,22 +1,22 @@
 ScenarioModifiers:
   ScenarioModifier:
     - name: __tier4_modifier_Vn
+      type: double
       list:
         - 5.555556
     - name: __tier4_modifier_an
+      type: double
       list:
         - 1.5
     - name: __tier4_modifier_D
+      type: double
       list:
         - 5
-    - name: __tier4_modifier_min_acc
-      list:
-        - -2.45
 OpenSCENARIO:
   FileHeader:
     revMajor: 1
     revMinor: 1
-    date: '2024-05-10T14:19:51.897Z'
+    date: '2024-09-04T11:48:52.255Z'
     description: ''
     author: Berkay Karaman
   ParameterDeclarations:
@@ -48,9 +48,6 @@ OpenSCENARIO:
       - name: D
         parameterType: double
         value: __tier4_modifier_D
-      - name: min_acc
-        parameterType: double
-        value: __tier4_modifier_min_acc
   CatalogLocations:
     CatalogLocation: []
   RoadNetwork:
@@ -344,6 +341,66 @@ OpenSCENARIO:
                         SimulationTimeCondition:
                           value: 0
                           rule: greaterThan
+          - name: act_check_ego_restart_time
+            ManeuverGroup:
+              - maximumExecutionCount: 1
+                name: act_check_ego_restart_time
+                Actors:
+                  selectTriggeringEntities: false
+                  EntityRef: []
+                Maneuver:
+                  - name: ''
+                    Event:
+                      - name: check_ego_stopped_time
+                        priority: parallel
+                        Action:
+                          - name: ''
+                            UserDefinedAction:
+                              CustomCommandAction:
+                                type: ':'
+                        StartTrigger:
+                          ConditionGroup:
+                            - Condition:
+                                - name: ''
+                                  delay: 0
+                                  conditionEdge: none
+                                  ByEntityCondition:
+                                    TriggeringEntities:
+                                      triggeringEntitiesRule: any
+                                      EntityRef:
+                                        - entityRef: ego
+                                    EntityCondition:
+                                      StandStillCondition:
+                                        duration: 1
+            StartTrigger:
+              ConditionGroup:
+                - Condition:
+                    - name: ''
+                      delay: 0
+                      conditionEdge: none
+                      ByEntityCondition:
+                        TriggeringEntities:
+                          triggeringEntitiesRule: any
+                          EntityRef:
+                            - entityRef: Npc1
+                        EntityCondition:
+                          DistanceCondition:
+                            Position:
+                              LanePosition:
+                                roadId: ''
+                                laneId: '516'
+                                s: 23.3729
+                                offset: -1.3265
+                                Orientation:
+                                  type: relative
+                                  h: 0
+                                  p: -0.0
+                                  r: 0
+                            value: 0.1
+                            freespace: true
+                            relativeDistanceType: longitudinal
+                            coordinateSystem: entity
+                            rule: lessThan
           - name: _EndCondition
             ManeuverGroup:
               - maximumExecutionCount: 1
@@ -416,15 +473,11 @@ OpenSCENARIO:
                                 - name: ''
                                   delay: 0
                                   conditionEdge: none
-                                  ByEntityCondition:
-                                    TriggeringEntities:
-                                      triggeringEntitiesRule: any
-                                      EntityRef:
-                                        - entityRef: ego
-                                    EntityCondition:
-                                      AccelerationCondition:
-                                        rule: lessThan
-                                        value: $min_acc
+                                  ByValueCondition:
+                                    StoryboardElementStateCondition:
+                                      state: completeState
+                                      storyboardElementType: act
+                                      storyboardElementRef: act_check_ego_restart_time
                         Action:
                           - name: ''
                             UserDefinedAction:
