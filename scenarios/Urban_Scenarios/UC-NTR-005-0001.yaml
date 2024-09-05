@@ -1,19 +1,40 @@
 ScenarioModifiers:
   ScenarioModifier:
     - name: __tier4_modifier_Vn
+      type: double
       list:
         - 3.88889
     - name: __tier4_modifier_Vs
+      type: double
       list:
         - 3.333333
     - name: __tier4_modifier_As
+      type: double
       list:
         - -0.5
+        - -1
+        - -1.5
+    - name: __tier4_modifier_cruising_dist
+      type: double
+      list:
+        - 11.67
+    - name: __tier4_modifier_d_min_before_sd
+      type: double
+      list:
+        - 1.54
+    - name: __tier4_modifier_d_min_after_sd
+      type: double
+      list:
+        - 2.16
+    - name: __tier4_modifier_min_acc
+      type: double
+      list:
+        - -2.49
 OpenSCENARIO:
   FileHeader:
     revMajor: 1
     revMinor: 1
-    date: '2024-06-11T09:12:35.063Z'
+    date: '2024-09-05T11:35:20.393Z'
     description: ''
     author: ''
   ParameterDeclarations:
@@ -45,6 +66,18 @@ OpenSCENARIO:
       - name: As
         parameterType: double
         value: __tier4_modifier_As
+      - name: cruising_dist
+        parameterType: double
+        value: __tier4_modifier_cruising_dist
+      - name: d_min_before_sd
+        parameterType: double
+        value: __tier4_modifier_d_min_before_sd
+      - name: d_min_after_sd
+        parameterType: double
+        value: __tier4_modifier_d_min_after_sd
+      - name: min_acc
+        parameterType: double
+        value: __tier4_modifier_min_acc
   CatalogLocations:
     CatalogLocation: []
   RoadNetwork:
@@ -275,7 +308,7 @@ OpenSCENARIO:
                                         entityRef: Npc1
                                         relativeDistanceType: longitudinal
                                         coordinateSystem: lane
-                                        value: 12.5
+                                        value: $cruising_dist
                                         freespace: true
                                         rule: lessOrEqual
             StartTrigger:
@@ -334,6 +367,111 @@ OpenSCENARIO:
                       ByValueCondition:
                         StoryboardElementStateCondition:
                           state: runningState
+                          storyboardElementType: act
+                          storyboardElementRef: act_slow_down_npc
+          - name: act_check_min_following_dist_before_sd
+            ManeuverGroup:
+              - maximumExecutionCount: 1
+                name: act_check_min_following_dist_before_sd
+                Actors:
+                  selectTriggeringEntities: false
+                  EntityRef: []
+                Maneuver:
+                  - name: ''
+                    Event:
+                      - name: min_following_dist_before_sd
+                        priority: parallel
+                        Action:
+                          - name: ''
+                            UserDefinedAction:
+                              CustomCommandAction:
+                                type: ':'
+                        StartTrigger:
+                          ConditionGroup:
+                            - Condition:
+                                - name: ''
+                                  delay: 0
+                                  conditionEdge: none
+                                  ByEntityCondition:
+                                    TriggeringEntities:
+                                      triggeringEntitiesRule: any
+                                      EntityRef:
+                                        - entityRef: Npc1
+                                    EntityCondition:
+                                      SpeedCondition:
+                                        rule: greaterThan
+                                        value: ${$Vn-0.5}
+                                - name: ''
+                                  delay: 0
+                                  conditionEdge: none
+                                  ByEntityCondition:
+                                    TriggeringEntities:
+                                      triggeringEntitiesRule: any
+                                      EntityRef:
+                                        - entityRef: ego
+                                    EntityCondition:
+                                      RelativeDistanceCondition:
+                                        entityRef: Npc1
+                                        relativeDistanceType: longitudinal
+                                        coordinateSystem: entity
+                                        value: $d_min_before_sd
+                                        freespace: true
+                                        rule: lessThan
+            StartTrigger:
+              ConditionGroup:
+                - Condition:
+                    - name: ''
+                      delay: 0
+                      conditionEdge: none
+                      ByValueCondition:
+                        SimulationTimeCondition:
+                          value: 0
+                          rule: greaterOrEqual
+          - name: act_check_min_following_dist_after_sd
+            ManeuverGroup:
+              - maximumExecutionCount: 1
+                name: act_check_min_following_dist_after_sd
+                Actors:
+                  selectTriggeringEntities: false
+                  EntityRef: []
+                Maneuver:
+                  - name: ''
+                    Event:
+                      - name: check_following_dist_after_sd
+                        priority: parallel
+                        Action:
+                          - name: ''
+                            UserDefinedAction:
+                              CustomCommandAction:
+                                type: ':'
+                        StartTrigger:
+                          ConditionGroup:
+                            - Condition:
+                                - name: ''
+                                  delay: 0
+                                  conditionEdge: none
+                                  ByEntityCondition:
+                                    TriggeringEntities:
+                                      triggeringEntitiesRule: any
+                                      EntityRef:
+                                        - entityRef: ego
+                                    EntityCondition:
+                                      RelativeDistanceCondition:
+                                        entityRef: Npc1
+                                        relativeDistanceType: longitudinal
+                                        coordinateSystem: entity
+                                        value: $d_min_after_sd
+                                        freespace: true
+                                        rule: lessThan
+            StartTrigger:
+              ConditionGroup:
+                - Condition:
+                    - name: ''
+                      delay: 0
+                      conditionEdge: none
+                      ByValueCondition:
+                        StoryboardElementStateCondition:
+                          state: completeState
                           storyboardElementType: act
                           storyboardElementRef: act_slow_down_npc
           - name: _EndCondition
@@ -412,6 +550,46 @@ OpenSCENARIO:
                                       CollisionCondition:
                                         EntityRef:
                                           entityRef: Npc1
+                            - Condition:
+                                - name: ''
+                                  delay: 0
+                                  conditionEdge: none
+                                  ByValueCondition:
+                                    StoryboardElementStateCondition:
+                                      state: completeState
+                                      storyboardElementType: act
+                                      storyboardElementRef: act_check_min_following_dist_before_sd
+                            - Condition:
+                                - name: ''
+                                  delay: 0
+                                  conditionEdge: none
+                                  ByValueCondition:
+                                    StoryboardElementStateCondition:
+                                      state: completeState
+                                      storyboardElementType: act
+                                      storyboardElementRef: act_check_min_following_dist_after_sd
+                            - Condition:
+                                - name: ''
+                                  delay: 0
+                                  conditionEdge: none
+                                  ByValueCondition:
+                                    StoryboardElementStateCondition:
+                                      state: completeState
+                                      storyboardElementType: act
+                                      storyboardElementRef: act_check_ego_velocity
+                            - Condition:
+                                - name: ''
+                                  delay: 0
+                                  conditionEdge: none
+                                  ByEntityCondition:
+                                    TriggeringEntities:
+                                      triggeringEntitiesRule: any
+                                      EntityRef:
+                                        - entityRef: ego
+                                    EntityCondition:
+                                      AccelerationCondition:
+                                        rule: lessThan
+                                        value: $min_acc
                         Action:
                           - name: ''
                             UserDefinedAction:

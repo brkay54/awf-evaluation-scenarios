@@ -9,7 +9,7 @@ ScenarioModifiers:
         - 7
     - name: __tier4_modifier_max_negative_acc
       list:
-        - -1.5
+        - -2.49
     - name: __tier4_modifier_bicycle_side_offset
       list:
         - 1.5

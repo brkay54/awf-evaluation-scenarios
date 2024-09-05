@@ -8,7 +8,7 @@ ScenarioModifiers:
         - 12
     - name: __tier4_modifier_max_negative_acc
       list:
-        - -1.5
+        - -2.49
 OpenSCENARIO:
   FileHeader:
     revMajor: 1
