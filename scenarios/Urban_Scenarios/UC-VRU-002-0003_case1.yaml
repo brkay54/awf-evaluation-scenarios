@@ -1,48 +1,79 @@
 ScenarioModifiers:
   ScenarioModifier:
     - name: __tier4_modifier_Vn
+      type: double
       list:
         - 2.222222
         - 3.33333
     - name: __tier4_modifier_D
+      type: double
       list:
         - 7
     - name: __tier4_modifier_max_negative_acc
+      type: double
       list:
-        - -2.49
+        - -2.499
     - name: __tier4_modifier_bicycle_side_offset
+      type: double
       list:
-        - 1.5
+        - 2
     - name: __tier4_modifier_lateral_slip
+      type: double
       list:
         - 0.5
 OpenSCENARIO:
   FileHeader:
     revMajor: 1
     revMinor: 1
-    date: '2024-05-13T11:36:56.764Z'
-    description: ''
-    author: ''
+    date: '2024-09-08T16:21:08.992Z'
+    description: >+
+      ■Initial condition
+
+      ・EGO is driving at Ve and a bicycle is stopping side of the road.
+
+      ■Action
+
+      (1) When the longitudinal distance between Ego and the bicycle is below D,
+      the bicycle starts to drive through the Ego's trajectory with Vn.
+
+      (2) Because the bicycle and Ego can fit in lane, ego does not slow-down
+      and overtakes the bicycle.
+
+      ■Success condition
+
+      ・Ego reaches the destination
+
+      ・Ego overtakes the bicycle
+
+      ■Failure condition 
+
+      ・Ego slow-downs with high acceleration.
+
+      ・Collide with any of the Npcs
+
+      ・Timeout T
+
+    author: 'Berkay Karaman (last modified by: Hiroshi Igata)'
   ParameterDeclarations:
     ParameterDeclaration:
       - name: __ego_dimensions_length__
         parameterType: double
-        value: '0'
+        value: '4.89'
       - name: __ego_dimensions_width__
         parameterType: double
-        value: '0'
+        value: '1.896'
       - name: __ego_dimensions_height__
         parameterType: double
-        value: '0'
+        value: '2.5'
       - name: __ego_center_x__
         parameterType: double
-        value: '0'
+        value: '1.345'
       - name: __ego_center_y__
         parameterType: double
         value: '0'
       - name: __ego_center_z__
         parameterType: double
-        value: '0'
+        value: '1.25'
       - name: Vn
         parameterType: double
         value: __tier4_modifier_Vn
@@ -75,13 +106,13 @@ OpenSCENARIO:
           vehicleCategory: car
           BoundingBox:
             Center:
-              x: 1.355
-              y: 0
-              z: 1.25
+              x: $__ego_center_x__
+              y: $__ego_center_y__
+              z: $__ego_center_z__
             Dimensions:
-              length: 4.77
-              width: 1.83
-              height: 2.5
+              length: $__ego_dimensions_length__
+              width: $__ego_dimensions_width__
+              height: $__ego_dimensions_height__
           Performance:
             maxSpeed: 50
             maxAcceleration: INF
@@ -89,16 +120,16 @@ OpenSCENARIO:
           Axles:
             FrontAxle:
               maxSteering: 0.5236
-              wheelDiameter: 0.78
-              trackWidth: 1.63
-              positionX: 1.385
-              positionZ: 0.39
+              wheelDiameter: 0.766
+              trackWidth: 1.64
+              positionX: 1.445
+              positionZ: 0.383
             RearAxle:
               maxSteering: 0.5236
-              wheelDiameter: 0.78
-              trackWidth: 1.63
+              wheelDiameter: 0.766
+              trackWidth: 1.64
               positionX: 0
-              positionZ: 0.39
+              positionZ: 0.383
           Properties:
             Property: []
         ObjectController:
@@ -255,7 +286,7 @@ OpenSCENARIO:
                                                   Orientation:
                                                     type: relative
                                                     h: 0
-                                                    p: -0.0
+                                                    p: 0
                                                     r: 0
                                             - Position:
                                                 LanePosition:
@@ -266,7 +297,7 @@ OpenSCENARIO:
                                                   Orientation:
                                                     type: relative
                                                     h: 0
-                                                    p: -0.0
+                                                    p: 0
                                                     r: 0
                                             - Position:
                                                 LanePosition:
@@ -277,7 +308,7 @@ OpenSCENARIO:
                                                   Orientation:
                                                     type: relative
                                                     h: 0
-                                                    p: -0.0
+                                                    p: 0
                                                     r: 0
                                             - Position:
                                                 LanePosition:
@@ -288,7 +319,7 @@ OpenSCENARIO:
                                                   Orientation:
                                                     type: relative
                                                     h: 0
-                                                    p: -0.0
+                                                    p: 0
                                                     r: 0
                         StartTrigger:
                           ConditionGroup:
@@ -359,7 +390,7 @@ OpenSCENARIO:
                                         tolerance: 1
                                 - name: ''
                                   delay: 0
-                                  conditionEdge: none
+                                  conditionEdge: sticky
                                   ByEntityCondition:
                                     TriggeringEntities:
                                       triggeringEntitiesRule: any

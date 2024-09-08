@@ -15,7 +15,7 @@ ScenarioModifiers:
         - 0.8333333
     - name: __tier4_modifier_min_acc
       list:
-        - -2.49
+        - -2.499
 OpenSCENARIO:
   FileHeader:
     revMajor: 1

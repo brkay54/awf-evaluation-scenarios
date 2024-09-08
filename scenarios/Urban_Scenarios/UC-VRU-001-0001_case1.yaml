@@ -1,48 +1,78 @@
 ScenarioModifiers:
   ScenarioModifier:
     - name: __tier4_modifier_Vp1
+      type: double
       list:
         - 0.555555555556
     - name: __tier4_modifier_D
+      type: double
       list:
         - 15
     - name: __tier4_modifier_offset
+      type: double
       list:
         - 2
     - name: __tier4_modifier_Vp2
+      type: double
       list:
         - 0
         - 0.2777778
     - name: __tier4_modifier_min_acc
+      type: double
       list:
-        - -2.49
+        - -2.499
 OpenSCENARIO:
   FileHeader:
     revMajor: 1
     revMinor: 1
-    date: '2024-06-05T08:33:07.367Z'
-    description: ''
+    date: '2024-09-08T14:57:48.040Z'
+    description: >
+      ■Initial condition
+
+      ・EGO is driving at Ve, two pedestrian groups are stopping side of the
+      road. Distance between each pedestrian in the group is 0.3 meters.
+
+      ■Action
+
+      (1) While the ego overtakes the first group (P1), both Group1 and Group2
+      start to walk side of the lanelet.
+
+      ■Success condition
+
+      ・Ego should pass the gap while it is closing.
+
+      ・Ego reaches the destination
+
+      ■Failure condition 
+
+      ・Ego stops while overtaking
+
+      ・Ego stops with high negative acceleration
+
+      ・Collide with any of the Npcs
+
+      ・Timeout T
     author: ''
   ParameterDeclarations:
     ParameterDeclaration:
       - name: __ego_dimensions_length__
         parameterType: double
-        value: '4.44'
+        value: '4.89'
       - name: __ego_dimensions_width__
         parameterType: double
-        value: '2.03'
+        value: '1.896'
       - name: __ego_dimensions_height__
         parameterType: double
-        value: '1.86'
+        value: '2.5'
       - name: __ego_center_x__
         parameterType: double
-        value: '1.41'
+        value: '1.345'
       - name: __ego_center_y__
         parameterType: double
         value: '0'
       - name: __ego_center_z__
         parameterType: double
-        value: '0.93'
+        value: '1.25'
       - name: Vp1
         parameterType: double
         value: __tier4_modifier_Vp1
@@ -89,16 +119,16 @@ OpenSCENARIO:
           Axles:
             FrontAxle:
               maxSteering: 0.5236
-              wheelDiameter: 0.63
-              trackWidth: 1.75
-              positionX: 1.23
-              positionZ: 0.315
+              wheelDiameter: 0.766
+              trackWidth: 1.64
+              positionX: 1.445
+              positionZ: 0.383
             RearAxle:
               maxSteering: 0.5236
-              wheelDiameter: 0.63
-              trackWidth: 1.75
+              wheelDiameter: 0.766
+              trackWidth: 1.64
               positionX: 0
-              positionZ: 0.315
+              positionZ: 0.383
           Properties:
             Property: []
         ObjectController:
@@ -125,6 +155,11 @@ OpenSCENARIO:
               height: 2
           Properties:
             Property: []
+        ObjectController:
+          Controller:
+            name: ''
+            Properties:
+              Property: []
       - name: Pedestrian1
         Pedestrian:
           name: Pedestrian
@@ -142,6 +177,11 @@ OpenSCENARIO:
               height: 2
           Properties:
             Property: []
+        ObjectController:
+          Controller:
+            name: ''
+            Properties:
+              Property: []
       - name: Pedestrian2
         Pedestrian:
           name: Pedestrian
@@ -159,6 +199,11 @@ OpenSCENARIO:
               height: 2
           Properties:
             Property: []
+        ObjectController:
+          Controller:
+            name: ''
+            Properties:
+              Property: []
       - name: Pedestrian3
         Pedestrian:
           name: Pedestrian
@@ -176,6 +221,11 @@ OpenSCENARIO:
               height: 2
           Properties:
             Property: []
+        ObjectController:
+          Controller:
+            name: ''
+            Properties:
+              Property: []
       - name: Pedestrian4
         Pedestrian:
           name: Pedestrian
@@ -193,6 +243,11 @@ OpenSCENARIO:
               height: 2
           Properties:
             Property: []
+        ObjectController:
+          Controller:
+            name: ''
+            Properties:
+              Property: []
       - name: Pedestrian5
         Pedestrian:
           name: Pedestrian
@@ -210,6 +265,11 @@ OpenSCENARIO:
               height: 2
           Properties:
             Property: []
+        ObjectController:
+          Controller:
+            name: ''
+            Properties:
+              Property: []
   Storyboard:
     Init:
       Actions:

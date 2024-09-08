@@ -1,46 +1,73 @@
 ScenarioModifiers:
   ScenarioModifier:
     - name: __tier4_modifier_Vn2
+      type: double
       list:
         - 1.38888888889
     - name: __tier4_modifier_D
+      type: double
       list:
         - 12
         - 15
         - 18
     - name: __tier4_modifier_park_offset
+      type: double
       list:
-        - 2
+        - 2.5
     - name: __tier4_modifier_min_acc
+      type: double
       list:
-        - -2.49
+        - -2.499
 OpenSCENARIO:
   FileHeader:
     revMajor: 1
     revMinor: 1
-    date: '2024-05-13T05:30:05.173Z'
-    description: ''
-    author: ''
+    date: '2024-09-08T16:13:44.609Z'
+    description: >
+      ■Initial condition
+
+      ・EGO is driving at Ve. There is a parked vehicle side of the road and a
+      bicycle trying to pass the parked vehicle from opposite direction.
+
+      ■Action
+
+      (1) When the ego reaches the P1, the bicycle starts to follow its
+      trajectory.
+
+      ■Success condition
+
+      ・Ego stops and waits until bicycle goes.
+
+      ・Ego reaches the destination
+
+      ■Failure condition 
+
+      ・Collide with any of the Npcs
+
+      ・High negative acceleration
+
+      ・Timeout T
+    author: 'Berkay Karaman (last modified by: Hiroshi Igata)'
   ParameterDeclarations:
     ParameterDeclaration:
       - name: __ego_dimensions_length__
         parameterType: double
-        value: '4.44'
+        value: '4.89'
       - name: __ego_dimensions_width__
         parameterType: double
-        value: '2.03'
+        value: '1.896'
       - name: __ego_dimensions_height__
         parameterType: double
-        value: '1.86'
+        value: '2.5'
       - name: __ego_center_x__
         parameterType: double
-        value: '1.41'
+        value: '1.345'
       - name: __ego_center_y__
         parameterType: double
         value: '0'
       - name: __ego_center_z__
         parameterType: double
-        value: '0.93'
+        value: '1.25'
       - name: Vn2
         parameterType: double
         value: __tier4_modifier_Vn2
@@ -84,16 +111,16 @@ OpenSCENARIO:
           Axles:
             FrontAxle:
               maxSteering: 0.5236
-              wheelDiameter: 0.63
-              trackWidth: 1.75
-              positionX: 1.23
-              positionZ: 0.315
+              wheelDiameter: 0.766
+              trackWidth: 1.64
+              positionX: 1.445
+              positionZ: 0.383
             RearAxle:
               maxSteering: 0.5236
-              wheelDiameter: 0.63
-              trackWidth: 1.75
+              wheelDiameter: 0.766
+              trackWidth: 1.64
               positionX: 0
-              positionZ: 0.315
+              positionZ: 0.383
           Properties:
             Property: []
         ObjectController:
@@ -310,7 +337,7 @@ OpenSCENARIO:
                                                   Orientation:
                                                     type: relative
                                                     h: 2.618
-                                                    p: -0.0
+                                                    p: 0
                                                     r: 0
                                             - Position:
                                                 LanePosition:
@@ -321,7 +348,7 @@ OpenSCENARIO:
                                                   Orientation:
                                                     type: relative
                                                     h: 3.1416
-                                                    p: -0.0
+                                                    p: 0
                                                     r: 0
                                             - Position:
                                                 LanePosition:
@@ -332,7 +359,7 @@ OpenSCENARIO:
                                                   Orientation:
                                                     type: relative
                                                     h: 3.1416
-                                                    p: -0.0
+                                                    p: 0
                                                     r: 0
                                             - Position:
                                                 LanePosition:
@@ -343,7 +370,18 @@ OpenSCENARIO:
                                                   Orientation:
                                                     type: relative
                                                     h: 3.1416
-                                                    p: -0.0
+                                                    p: 0
+                                                    r: 0
+                                            - Position:
+                                                LanePosition:
+                                                  roadId: ''
+                                                  laneId: '45'
+                                                  s: 10
+                                                  offset: -2
+                                                  Orientation:
+                                                    type: relative
+                                                    h: 3.1416
+                                                    p: 0
                                                     r: 0
                         StartTrigger:
                           ConditionGroup:
@@ -351,39 +389,35 @@ OpenSCENARIO:
                                 - name: ''
                                   delay: 0
                                   conditionEdge: none
-                                  ByValueCondition:
-                                    SimulationTimeCondition:
-                                      value: 0
-                                      rule: greaterThan
+                                  ByEntityCondition:
+                                    TriggeringEntities:
+                                      triggeringEntitiesRule: any
+                                      EntityRef:
+                                        - entityRef: ego
+                                    EntityCondition:
+                                      ReachPositionCondition:
+                                        Position:
+                                          LanePosition:
+                                            roadId: ''
+                                            laneId: '45'
+                                            s: ${32-$D}
+                                            offset: 0
+                                            Orientation:
+                                              type: relative
+                                              h: 0
+                                              p: -0.0
+                                              r: 0
+                                        tolerance: 1
             StartTrigger:
               ConditionGroup:
                 - Condition:
                     - name: ''
                       delay: 0
                       conditionEdge: none
-                      ByEntityCondition:
-                        TriggeringEntities:
-                          triggeringEntitiesRule: any
-                          EntityRef:
-                            - entityRef: ego
-                        EntityCondition:
-                          DistanceCondition:
-                            Position:
-                              LanePosition:
-                                roadId: ''
-                                laneId: '45'
-                                s: ${32-$D}
-                                offset: 0
-                                Orientation:
-                                  type: relative
-                                  h: 0
-                                  p: -0.0
-                                  r: 0
-                            value: 0.1
-                            freespace: false
-                            relativeDistanceType: longitudinal
-                            coordinateSystem: entity
-                            rule: lessOrEqual
+                      ByValueCondition:
+                        SimulationTimeCondition:
+                          value: 0
+                          rule: greaterThan
           - name: _EndCondition
             ManeuverGroup:
               - maximumExecutionCount: 1
