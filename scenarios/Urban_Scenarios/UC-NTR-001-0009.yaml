@@ -23,22 +23,22 @@ OpenSCENARIO:
     ParameterDeclaration:
       - name: __ego_dimensions_length__
         parameterType: double
-        value: '0'
+        value: '4.89'
       - name: __ego_dimensions_width__
         parameterType: double
-        value: '0'
+        value: '1.896'
       - name: __ego_dimensions_height__
         parameterType: double
-        value: '0'
+        value: '2.5'
       - name: __ego_center_x__
         parameterType: double
-        value: '0'
+        value: '1.345'
       - name: __ego_center_y__
         parameterType: double
         value: '0'
       - name: __ego_center_z__
         parameterType: double
-        value: '0'
+        value: '1.25'
       - name: npc_trigger_dist
         parameterType: double
         value: __tier4_modifier_npc_trigger_dist

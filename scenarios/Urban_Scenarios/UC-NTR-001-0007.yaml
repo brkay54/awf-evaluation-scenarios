@@ -5,6 +5,7 @@ ScenarioModifiers:
       list:
         - 8.333333
         - 5.555556
+        - 5.0
     - name: __tier4_modifier_npc_lc_dist
       type: double
       list:
