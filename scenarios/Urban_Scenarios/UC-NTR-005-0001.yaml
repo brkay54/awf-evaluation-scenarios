@@ -34,7 +34,7 @@ OpenSCENARIO:
   FileHeader:
     revMajor: 1
     revMinor: 1
-    date: '2024-09-08T16:35:49.130Z'
+    date: '2024-09-10T08:51:33.681Z'
     description: >-
       ■Initial condition
 
@@ -63,7 +63,7 @@ OpenSCENARIO:
       ・High negative acceleration
 
       ・Timeout T
-    author: Berkay Karaman
+    author: 'Berkay Karaman (last modified by: Berkay Karaman)'
   ParameterDeclarations:
     ParameterDeclaration:
       - name: __ego_dimensions_length__
@@ -385,6 +385,32 @@ OpenSCENARIO:
                                       SpeedCondition:
                                         rule: lessThan
                                         value: ${$Vs*0.8}
+                                - name: ''
+                                  delay: 0
+                                  conditionEdge: none
+                                  ByEntityCondition:
+                                    TriggeringEntities:
+                                      triggeringEntitiesRule: any
+                                      EntityRef:
+                                        - entityRef: ego
+                                    EntityCondition:
+                                      DistanceCondition:
+                                        Position:
+                                          LanePosition:
+                                            roadId: ''
+                                            laneId: '45'
+                                            s: 215
+                                            offset: 0
+                                            Orientation:
+                                              type: relative
+                                              h: 0
+                                              p: -0.0
+                                              r: 0
+                                        value: 20
+                                        freespace: true
+                                        relativeDistanceType: longitudinal
+                                        coordinateSystem: lane
+                                        rule: greaterThan
             StartTrigger:
               ConditionGroup:
                 - Condition:

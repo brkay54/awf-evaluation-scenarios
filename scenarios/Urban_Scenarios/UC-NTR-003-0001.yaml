@@ -371,7 +371,7 @@ OpenSCENARIO:
                                         - entityRef: ego
                                     EntityCondition:
                                       StandStillCondition:
-                                        duration: 1
+                                        duration: 1.5
             StartTrigger:
               ConditionGroup:
                 - Condition:
