@@ -1,40 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <osm generator="VMB">
-  <MetaInfo format_version="1" map_version="10"/>
-  <node id="289" lat="35.22312719883533" lon="138.80252536114912">
-    <tag k="mgrs_code" v="54SUE000000"/>
-    <tag k="local_x" v="6.0"/>
-    <tag k="local_y" v="0.0"/>
+  <MetaInfo format_version="1" map_version="12"/>
+  <node id="289" lat="35.22312715252" lon="138.80258011795">
+    <tag k="local_x" v="11.0898"/>
+    <tag k="local_y" v="0"/>
     <tag k="ele" v="100"/>
   </node>
-  <node id="290" lat="35.23213766480551" lon="138.80228229043632">
-    <tag k="mgrs_code" v="54SUE000010"/>
-    <tag k="local_x" v="6.0"/>
-    <tag k="local_y" v="1000.0"/>
+  <node id="290" lat="35.2321376035" lon="138.8023370537">
+    <tag k="local_x" v="11.0898"/>
+    <tag k="local_y" v="1000"/>
     <tag k="ele" v="100"/>
   </node>
-  <node id="291" lat="35.22312600232205" lon="138.80245947807452">
-    <tag k="mgrs_code" v="54SUE000000"/>
-    <tag k="local_x" v="0.0"/>
-    <tag k="local_y" v="0.0"/>
+  <node id="291" lat="35.22312595604" lon="138.80251423487">
+    <tag k="local_x" v="5.0898"/>
+    <tag k="local_y" v="0"/>
     <tag k="ele" v="100"/>
   </node>
-  <node id="292" lat="35.232136467895195" lon="138.80221640008847">
-    <tag k="mgrs_code" v="54SUE000010"/>
-    <tag k="local_x" v="0.0"/>
-    <tag k="local_y" v="1000.0"/>
+  <node id="292" lat="35.23213640662" lon="138.80227116335">
+    <tag k="local_x" v="5.0898"/>
+    <tag k="local_y" v="1000"/>
     <tag k="ele" v="100"/>
   </node>
-  <node id="1347" lat="35.223126600583164" lon="138.80249241961135">
-    <tag k="mgrs_code" v="54SUE000000"/>
-    <tag k="local_x" v="3.0"/>
-    <tag k="local_y" v="0.0"/>
+  <node id="1347" lat="35.22312655428" lon="138.80254717641">
+    <tag k="local_x" v="8.0898"/>
+    <tag k="local_y" v="0"/>
     <tag k="ele" v="100"/>
   </node>
-  <node id="1348" lat="35.23213706635484" lon="138.8022493452619">
-    <tag k="mgrs_code" v="54SUE000010"/>
-    <tag k="local_x" v="3.0"/>
-    <tag k="local_y" v="1000.0"/>
+  <node id="1348" lat="35.23213700507" lon="138.80230410853">
+    <tag k="local_x" v="8.0898"/>
+    <tag k="local_y" v="1000"/>
     <tag k="ele" v="100"/>
   </node>
   <way id="294">
