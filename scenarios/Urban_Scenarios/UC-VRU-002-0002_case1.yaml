@@ -15,7 +15,7 @@ ScenarioModifiers:
     - name: __tier4_modifier_bicycle_side_offset
       type: double
       list:
-        - 1.7
+        - 2
     - name: __tier4_modifier_lateral_slip
       type: double
       list:
@@ -24,7 +24,7 @@ OpenSCENARIO:
   FileHeader:
     revMajor: 1
     revMinor: 1
-    date: '2024-09-08T16:18:21.846Z'
+    date: '2024-09-20T10:19:29.604Z'
     description: >+
       ■Initial condition
 
@@ -56,7 +56,7 @@ OpenSCENARIO:
       ・Timeout T
 
 
-    author: 'Berkay Karaman (last modified by: Hiroshi Igata)'
+    author: 'Berkay Karaman (last modified by: Berkay Karaman)'
   ParameterDeclarations:
     ParameterDeclaration:
       - name: __ego_dimensions_length__
@@ -96,9 +96,9 @@ OpenSCENARIO:
     CatalogLocation: []
   RoadNetwork:
     LogicFile:
-      filepath: /home/berkay/projects/awf-evaluation-scenarios/maps/LEO-VM-00001/lanelet2_map.osm
+      filepath: /home/berkay/projects/awf-evaluation-scenarios/maps/LEO-VM-00008/lanelet2_map.osm
     SceneGraphFile:
-      filepath: /home/berkay/projects/awf-evaluation-scenarios/maps/LEO-VM-00001/pointcloud_map.pcd
+      filepath: /home/berkay/projects/awf-evaluation-scenarios/maps/LEO-VM-00008/pointcloud_map.pcd
     TrafficSignals:
       TrafficSignalController: []
   Entities:
