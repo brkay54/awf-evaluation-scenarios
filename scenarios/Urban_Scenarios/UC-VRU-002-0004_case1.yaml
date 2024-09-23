@@ -7,16 +7,16 @@ ScenarioModifiers:
     - name: __tier4_modifier_D
       type: double
       list:
-        - 12
+        - 17
     - name: __tier4_modifier_max_negative_acc
       type: double
       list:
-        - -1.5
+        - -2.499
 OpenSCENARIO:
   FileHeader:
     revMajor: 1
     revMinor: 1
-    date: '2024-09-08T16:23:34.994Z'
+    date: '2024-09-23T11:27:09.289Z'
     description: >+
       ■Initial condition
 
@@ -41,7 +41,7 @@ OpenSCENARIO:
 
       ・Timeout T
 
-    author: 'Berkay Karaman (last modified by: Hiroshi Igata)'
+    author: Berkay Karaman
   ParameterDeclarations:
     ParameterDeclaration:
       - name: __ego_dimensions_length__
@@ -306,7 +306,7 @@ OpenSCENARIO:
                                     EntityCondition:
                                       RelativeDistanceCondition:
                                         entityRef: Bicycle0
-                                        relativeDistanceType: euclidianDistance
+                                        relativeDistanceType: longitudinal
                                         coordinateSystem: entity
                                         value: $D
                                         freespace: false

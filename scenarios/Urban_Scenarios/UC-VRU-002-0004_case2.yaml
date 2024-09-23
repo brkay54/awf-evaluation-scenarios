@@ -7,7 +7,7 @@ ScenarioModifiers:
     - name: __tier4_modifier_D
       type: double
       list:
-        - 12
+        - 17
     - name: __tier4_modifier_max_negative_acc
       type: double
       list:
