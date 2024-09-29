@@ -16,9 +16,29 @@ OpenSCENARIO:
   FileHeader:
     revMajor: 1
     revMinor: 1
-    date: '2024-08-29T11:51:00.353Z'
-    description: ''
-    author: Berkay Karaman
+    date: '2024-09-25T03:20:25.874Z'
+    description: >-
+      ■Initial condition
+
+      ・EGO is driving at Ve, Npc0 is stopping side of the road
+
+      ■Action
+
+      (1) When the longitudinal distance between Npc0 and Ego less than
+      npc_trigger_dist, Npc0 starts to follow its trajectory with velocity Vn.
+
+      ■Success condition
+
+      ・Ego reaches the destination.
+
+      ■Failure condition
+
+      ・High negative acceleration
+
+      ・Collide with any of the Npcs
+
+      ・Timeout T
+    author: 'Berkay Karaman (last modified by: Hiroshi Igata)'
   ParameterDeclarations:
     ParameterDeclaration:
       - name: __ego_dimensions_length__
@@ -166,6 +186,14 @@ OpenSCENARIO:
                           h: 0
                           p: -0.0
                           r: 0
+              - ControllerAction:
+                  AssignControllerAction:
+                    Controller:
+                      name: ''
+                      Properties:
+                        Property:
+                          - name: maxSpeed
+                            value: '4.2'
           - entityRef: Npc1
             PrivateAction:
               - TeleportAction:
@@ -245,7 +273,7 @@ OpenSCENARIO:
                                                   Orientation:
                                                     type: relative
                                                     h: 0
-                                                    p: -0.0
+                                                    p: 0
                                                     r: 0
                                             - Position:
                                                 LanePosition:
@@ -256,7 +284,7 @@ OpenSCENARIO:
                                                   Orientation:
                                                     type: relative
                                                     h: 0
-                                                    p: -0.0
+                                                    p: 0
                                                     r: 0
                                             - Position:
                                                 LanePosition:
@@ -267,7 +295,7 @@ OpenSCENARIO:
                                                   Orientation:
                                                     type: relative
                                                     h: 0
-                                                    p: -0.0
+                                                    p: 0
                                                     r: 0
                         StartTrigger:
                           ConditionGroup:
@@ -298,23 +326,19 @@ OpenSCENARIO:
                             value: $npc_trigger_dist
                             freespace: true
                             rule: lessOrEqual
-          - name: act_check_ego_speed
+          - name: _EndCondition
             ManeuverGroup:
               - maximumExecutionCount: 1
-                name: act_check_ego_speed
+                name: ''
                 Actors:
                   selectTriggeringEntities: false
-                  EntityRef: []
+                  EntityRef:
+                    - entityRef: ego
                 Maneuver:
                   - name: ''
                     Event:
-                      - name: check_ego_speed
+                      - name: ''
                         priority: parallel
-                        Action:
-                          - name: ''
-                            UserDefinedAction:
-                              CustomCommandAction:
-                                type: ':'
                         StartTrigger:
                           ConditionGroup:
                             - Condition:
@@ -327,19 +351,7 @@ OpenSCENARIO:
                                       EntityRef:
                                         - entityRef: ego
                                     EntityCondition:
-                                      SpeedCondition:
-                                        rule: lessThan
-                                        value: ${$Vn*0.8}
-                                - name: ''
-                                  delay: 0
-                                  conditionEdge: none
-                                  ByEntityCondition:
-                                    TriggeringEntities:
-                                      triggeringEntitiesRule: any
-                                      EntityRef:
-                                        - entityRef: ego
-                                    EntityCondition:
-                                      DistanceCondition:
+                                      ReachPositionCondition:
                                         Position:
                                           LanePosition:
                                             roadId: ''
@@ -351,33 +363,12 @@ OpenSCENARIO:
                                               h: 0
                                               p: -0.0
                                               r: 0
-                                        value: 5
-                                        freespace: true
-                                        relativeDistanceType: longitudinal
-                                        coordinateSystem: lane
-                                        rule: greaterThan
-            StartTrigger:
-              ConditionGroup:
-                - Condition:
-                    - name: ''
-                      delay: 0
-                      conditionEdge: none
-                      ByValueCondition:
-                        StoryboardElementStateCondition:
-                          state: runningState
-                          storyboardElementType: act
-                          storyboardElementRef: act_start_npc
-          - name: _EndCondition
-            ManeuverGroup:
-              - maximumExecutionCount: 1
-                name: ''
-                Actors:
-                  selectTriggeringEntities: false
-                  EntityRef:
-                    - entityRef: ego
-                Maneuver:
-                  - name: ''
-                    Event:
+                                        tolerance: 1
+                        Action:
+                          - name: ''
+                            UserDefinedAction:
+                              CustomCommandAction:
+                                type: exitSuccess
                       - name: ''
                         priority: parallel
                         StartTrigger:
@@ -403,15 +394,6 @@ OpenSCENARIO:
                                       CollisionCondition:
                                         EntityRef:
                                           entityRef: Npc1
-                            - Condition:
-                                - name: ''
-                                  delay: 0
-                                  conditionEdge: none
-                                  ByValueCondition:
-                                    StoryboardElementStateCondition:
-                                      state: completeState
-                                      storyboardElementType: act
-                                      storyboardElementRef: act_check_ego_speed
                             - Condition:
                                 - name: ''
                                   delay: 0
