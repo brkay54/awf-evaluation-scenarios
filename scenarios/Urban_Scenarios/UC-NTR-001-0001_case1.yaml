@@ -9,20 +9,20 @@ ScenarioModifiers:
     - name: __tier4_modifier_min_acc
       type: double
       list:
-        - -2.45
+        - -2.499
     - name: __tier4_modifier_long_offset
       type: double
       list:
-        - 0
+        - -2.0
     - name: __tier4_modifier_front_dist
       type: double
       list:
-        - 5
+        - 2.5
 OpenSCENARIO:
   FileHeader:
     revMajor: 1
     revMinor: 1
-    date: '2024-09-29T18:08:00.874Z'
+    date: '2024-09-29T20:00:45.587Z'
     description: ''
     author: ''
   ParameterDeclarations:
@@ -53,7 +53,7 @@ OpenSCENARIO:
         value: __tier4_modifier_min_acc
       - name: overtake_offset
         parameterType: double
-        value: '2.5'
+        value: '2.0'
       - name: long_offset
         parameterType: double
         value: __tier4_modifier_long_offset
@@ -185,7 +185,7 @@ OpenSCENARIO:
                     LanePosition:
                       roadId: ''
                       laneId: '45'
-                      s: ${30 - $long_offset}
+                      s: ${30 + $long_offset}
                       offset: $overtake_offset
                       Orientation:
                         type: relative
@@ -252,7 +252,7 @@ OpenSCENARIO:
                                                 LanePosition:
                                                   roadId: ''
                                                   laneId: '45'
-                                                  s: ${30 - $long_offset}
+                                                  s: ${30 + $long_offset}
                                                   offset: $overtake_offset
                                                   Orientation:
                                                     type: relative
@@ -342,38 +342,52 @@ OpenSCENARIO:
                                       EntityRef:
                                         - entityRef: ego
                                     EntityCondition:
-                                      SpeedCondition:
-                                        rule: lessThan
-                                        value: 0.01
+                                      ReachPositionCondition:
+                                        Position:
+                                          LanePosition:
+                                            roadId: ''
+                                            laneId: '45'
+                                            s: 30
+                                            offset: 0
+                                            Orientation:
+                                              type: relative
+                                              h: 0
+                                              p: -0.0
+                                              r: 0
+                                        tolerance: 0.0001
+                                - name: ''
+                                  delay: 0
+                                  conditionEdge: none
+                                  ByEntityCondition:
+                                    TriggeringEntities:
+                                      triggeringEntitiesRule: any
+                                      EntityRef:
+                                        - entityRef: Npc1
+                                    EntityCondition:
+                                      ReachPositionCondition:
+                                        Position:
+                                          LanePosition:
+                                            roadId: ''
+                                            laneId: '45'
+                                            s: >-
+                                              ${30+$__ego_dimensions_length__+$front_dist}
+                                            offset: 0
+                                            Orientation:
+                                              type: relative
+                                              h: 0
+                                              p: -0.0
+                                              r: 0
+                                        tolerance: 0.1
             StartTrigger:
               ConditionGroup:
                 - Condition:
                     - name: ''
                       delay: 0
                       conditionEdge: none
-                      ByEntityCondition:
-                        TriggeringEntities:
-                          triggeringEntitiesRule: any
-                          EntityRef:
-                            - entityRef: Npc1
-                        EntityCondition:
-                          DistanceCondition:
-                            Position:
-                              LanePosition:
-                                roadId: ''
-                                laneId: '45'
-                                s: 37
-                                offset: 0
-                                Orientation:
-                                  type: relative
-                                  h: 0
-                                  p: -0.0
-                                  r: 0
-                            value: 0.1
-                            freespace: true
-                            relativeDistanceType: longitudinal
-                            coordinateSystem: entity
-                            rule: lessOrEqual
+                      ByValueCondition:
+                        SimulationTimeCondition:
+                          value: 0
+                          rule: greaterOrEqual
           - name: _EndCondition
             ManeuverGroup:
               - maximumExecutionCount: 1
@@ -436,7 +450,7 @@ OpenSCENARIO:
                                   conditionEdge: none
                                   ByValueCondition:
                                     SimulationTimeCondition:
-                                      value: 30
+                                      value: 3333
                                       rule: greaterThan
                             - Condition:
                                 - name: ''
