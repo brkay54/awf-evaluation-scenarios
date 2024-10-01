@@ -45,7 +45,7 @@ OpenSCENARIO:
         value: __tier4_modifier_min_acc
       - name: parking_offset
         parameterType: double
-        value: '2.1'
+        value: '2.5'
   CatalogLocations:
     CatalogLocation: []
   RoadNetwork:
